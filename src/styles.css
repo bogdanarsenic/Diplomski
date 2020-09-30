@@ -1,0 +1,10 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+body{    
+    background-image:url('/assets/bus.jpg') ;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-size: cover;
+    max-width: 100%; 
+    height: auto; 
+  }

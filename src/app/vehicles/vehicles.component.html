@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <label style="color:#f4f4f4">
+    Lines:
+  </label>
+  <div *ngFor="let line of lineNames">
+    <ul>
+
+      <input type="radio" id="one" [(ngModel)]="radioSelected" name="lineCity" value="{{line}}" (click)="onItemChange(line)" />
+      <label for="radio1" style="color:#f4f4f4;margin-left:5px">{{line}}</label>
+
+    </ul>
+  </div>
+    <div style="margin-top: 50px; margin-left:20px;display: flex">
+      <!-- Kreiramo mapu -->
+      <agm-map id="map" [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="15">
+  
+        <agm-marker  latitude="{{latMarker}}" longitude="{{longMarker}}" [iconUrl]="polyline.icon">
+        
+      </agm-marker>
+  
+      </agm-map>
+  
+      </div>
+  
+  </div>
