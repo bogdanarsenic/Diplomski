@@ -6,6 +6,8 @@ import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
 import { CustomValidators } from '../validator/customValidator';
 import { MatchPassword } from '../MatchPassword';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-register',

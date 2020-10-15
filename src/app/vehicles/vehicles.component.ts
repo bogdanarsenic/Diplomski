@@ -7,6 +7,7 @@ import { HttpClickService } from '../services/click-http.service';
 import { NotificationService } from '../services/notification.service';
 import { Station } from '../classes/Station';
 import { ServicesService } from '../services/services.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vehicles',

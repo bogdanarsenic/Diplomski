@@ -5,6 +5,7 @@ import { Line } from '../classes/Line';
 import { FormBuilder, FormGroup, FormControlName } from '@angular/forms';
 import { TimeTable } from '../classes/TimeTable';
 import { isNgTemplate } from '@angular/compiler';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-timetable',

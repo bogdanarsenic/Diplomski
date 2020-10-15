@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
-import { Ticket } from '../classes/Ticket';
+import { Ticket } from 'src/app/classes/Ticket';
+import { ServicesService } from 'src/app/services/services.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-validate',

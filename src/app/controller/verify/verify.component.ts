@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-verify',

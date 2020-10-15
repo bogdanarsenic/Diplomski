@@ -4,7 +4,7 @@ import {FormGroup,FormBuilder, Validators} from '@angular/forms';
 import { Login } from '../classes/Login';
 import {ServicesService} from '../services/services.service';
 
-
+import { CommonModule } from '@angular/common';
 
 
 @Component({

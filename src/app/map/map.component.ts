@@ -11,7 +11,7 @@ import { ModalService } from '../services/modal.service';
 import { MatDialog } from '@angular/material/dialog';
 import { StationLine } from '../classes/StationLine';
 import { TimeTable } from '../classes/TimeTable';
-
+import { CommonModule } from '@angular/common';
 
 
 @Component({

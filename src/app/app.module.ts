@@ -1,77 +1,69 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import {Routes, RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+
 import { NavigationComponent } from './navigation/navigation.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import {ServicesService} from './services/services.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-import { TimetableComponent } from './timetable/timetable.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
-import { ValidateComponent } from './validate/validate.component';
-import { VerifyComponent } from './verify/verify.component';
 
 import {CanActivateViaAdminGuard} from './guards/admin.guard';
 import {CanActivateViaUserGuard} from './guards/user.guard';
 import {CanActivateViaControllerGuard} from './guards/controller.guard';
-import { EditprofileComponent } from './editprofile/editprofile.component';
-import { PricelistComponent } from './pricelist/pricelist.component';
-import { MapComponent } from './map/map.component';
 import {AgmCoreModule} from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ModalComponent } from './modal/modal.component';
 import { NotificationService } from './services/notification.service';
 import { HttpClickService } from './services/click-http.service';
+import { EditTimetableComponent } from './admin/edit-timetable/edit-timetable.component';
+import { AddTimetableComponent } from './admin/add-timetable/add-timetable.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
+import { EditTicketComponent } from './admin/edit-ticket/edit-ticket.component';
+import { ModalComponent } from './admin/modal/modal.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ValidateComponent } from './controller/validate/validate.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { LoginComponent } from './login/login.component';
+import { MapComponent } from './map/map.component';
+import { PricelistComponent } from './pricelist/pricelist.component';
+import { RegisterComponent } from './register/register.component';
+import { TimetableComponent } from './timetable/timetable.component';
+import { VehiclesComponent } from './vehicles/vehicles.component';
 
-const appRoutes:Routes=[
-  { path: 'register',component:RegisterComponent},
-  { path: 'login',component:LoginComponent},
-  { path: 'timetable',component:TimetableComponent},
-  { path: 'vehicles',component:VehiclesComponent},
-  { path: 'verify',component:VerifyComponent},
-  { path: 'validate',component:ValidateComponent},
-  { path: 'pricelist',component:PricelistComponent},
-  { path: 'editprofile',component:EditprofileComponent},
-  { path: 'lines', component:MapComponent}
-
-
-];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     NavigationComponent,
-    TimetableComponent,
-    VehiclesComponent,
+
+    ModalComponent,
+    EditTicketComponent,
+    EditTimetableComponent,
+    AddTimetableComponent,
+    ImageUploadComponent,
     ValidateComponent,
-    VerifyComponent,
     EditprofileComponent,
+    LoginComponent,
     MapComponent,
     PricelistComponent,
-    ModalComponent
-    
+    RegisterComponent,
+    TimetableComponent,
+    VehiclesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'}),
     BrowserAnimationsModule,
     MatButtonModule,
     MatDialogModule,
-
+    AppRoutingModule,
 
   ],
   providers: [

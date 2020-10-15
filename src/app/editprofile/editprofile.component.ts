@@ -3,9 +3,9 @@ import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { User } from '../classes/User';
-import { Login } from '../classes/Login';
 import { CustomValidators } from '../validator/customValidator';
 import { MatchPassword } from '../MatchPassword';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-editprofile',
