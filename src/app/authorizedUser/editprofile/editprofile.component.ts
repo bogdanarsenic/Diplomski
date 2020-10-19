@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { User } from '../classes/User';
-import { CustomValidators } from '../validator/customValidator';
-import { MatchPassword } from '../MatchPassword';
+
 import { CommonModule } from '@angular/common';
+import { User } from 'src/app/classes/User';
+import { CustomValidators } from 'src/app/validator/customValidator';
+import { MatchPassword } from 'src/app/validator/MatchPassword';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-editprofile',

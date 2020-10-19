@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../classes/User';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Login } from '../classes/Login';
-import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
-import { CustomValidators } from '../validator/customValidator';
-import { MatchPassword } from '../MatchPassword';
+
 import { CommonModule } from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
+import { User } from 'src/app/classes/User';
+import { CustomValidators } from 'src/app/validator/customValidator';
+import { Login } from 'src/app/classes/Login';
+import { MatchPassword } from 'src/app/validator/MatchPassword';
 
 
 @Component({
@@ -17,19 +18,12 @@ import { CommonModule } from '@angular/common';
 })
 export class RegisterComponent {
 
-  
   korisnik:User;
   registerUserForm:FormGroup;
   user:User;
   currentUser:Login;
-  image:any;
   validationMessage:string="";
   errors: any[] = [];
-  
-
-  selectedFile :any;
-  localUrl: any[];
-  imageShow : any;
   
   constructor (private fb:FormBuilder,private registerService:ServicesService, private router:Router){
     this.createForm();
@@ -51,7 +45,6 @@ export class RegisterComponent {
         Validators.minLength(8)
       ]],
       ConfirmPassword:["",[Validators.required]],
-      ImageUrl:[""],
       Type:["", [Validators.required]]
     },
     {
@@ -59,17 +52,6 @@ export class RegisterComponent {
     });
 
   }
-
-  onFileChanged(event)
-  {
-    //this.selectedFile = event.target.value;
-    this.selectedFile = event.target.files[0]
-    var reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = (event) => {
-     this.imageShow = (<FileReader>event.target).result;
-  }
-}
 
   onSubmit()
   {
@@ -83,7 +65,6 @@ export class RegisterComponent {
       this.user.Password = this.registerUserForm.value.Password;
       this.user.ConfirmPassword = this.registerUserForm.value.ConfirmPassword;
       this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
-      this.user.ImageUrl = this.image;
       this.user.Type = this.registerUserForm.value.Type;
       this.user.Status="InProgress";
 
@@ -118,8 +99,11 @@ export class RegisterComponent {
 
                 localStorage.setItem('jwt', jwt)
                 localStorage.setItem('role', role)
-                
-                this.router.navigate(['']).then(()=>window.location.reload());
+
+                if(user.Type!='Regular')
+                   this.router.navigateByUrl('image-upload');
+                else
+                    this.router.navigate(['']).then(()=>window.location.reload());
                 
             },err => {
               this.validationMessage = err.error.error_description;
@@ -140,11 +124,7 @@ export class RegisterComponent {
     )
     this.registerUserForm.reset();
   }
-    
-  
-    
-    
-  }
+}
 
 
 

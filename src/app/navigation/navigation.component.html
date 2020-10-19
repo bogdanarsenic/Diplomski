@@ -3,9 +3,18 @@
 
   <div id="navb" class="navbar-collapse collapse hide">
       <ul class="navbar-nav" style="margin-left: 180px; font-size: 20px">
-        <li class="nav-item">
-          <a style="color: rgb(236, 238, 238)" routerLink="/timetable" class="nav-link" >Time Table</a>
-        </li>
+        
+        <div *ngIf="isAdmin()">
+          <li class="nav-item">
+            <a style="color: rgb(236, 238, 238)" routerLink="/addtimetable" class="nav-link" >Time Table</a>
+          </li>
+         </div>
+
+         <div *ngIf="!isAdmin()">
+          <li class="nav-item">
+            <a style="color: rgb(236, 238, 238)" routerLink="/timetable" class="nav-link" >Time Table</a>
+          </li>
+         </div>
         <li class="nav-item ">
           <a routerLink="/lines" style="margin-left: 40px;color: rgb(236, 238, 238) " class="nav-link">Lines</a>
         </li>
@@ -16,16 +25,14 @@
           <a routerLink="/pricelist" style="margin-left: 40px;color: rgb(236, 238, 238)" class="nav-link">Pricelist</a>
         </li>
 
-        <div *ngIf="Controler">
+        <div *ngIf="isController()">
             <li class="nav-item">
                 <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/verify" class="nav-link" >Verify</a>
             </li>
-        </div>
-        <div *ngIf="Controler">
+
             <li class="nav-item">
-                <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/validate" class="nav-link" >Validate</a>
-            </li>
-          
+              <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/validate" class="nav-link" >Validate</a>
+          </li>
         </div>
       </ul>
 

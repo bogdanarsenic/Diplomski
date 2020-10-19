@@ -6,11 +6,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './interceptors/token.interceptor';
 
-import {CanActivateViaAdminGuard} from './guards/admin.guard';
-import {CanActivateViaUserGuard} from './guards/user.guard';
-import {CanActivateViaControllerGuard} from './guards/controller.guard';
 import {AgmCoreModule} from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,21 +14,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationService } from './services/notification.service';
 import { HttpClickService } from './services/click-http.service';
-import { EditTimetableComponent } from './admin/edit-timetable/edit-timetable.component';
-import { AddTimetableComponent } from './admin/add-timetable/add-timetable.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
 
-import { EditTicketComponent } from './admin/edit-ticket/edit-ticket.component';
-import { ModalComponent } from './admin/modal/modal.component';
+
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { ValidateComponent } from './controller/validate/validate.component';
-import { EditprofileComponent } from './editprofile/editprofile.component';
-import { LoginComponent } from './login/login.component';
+
 import { MapComponent } from './map/map.component';
 import { PricelistComponent } from './pricelist/pricelist.component';
-import { RegisterComponent } from './register/register.component';
 import { TimetableComponent } from './timetable/timetable.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
+import { ModalComponent } from './authorizedUser/admin/modal/modal.component';
+import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
+import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
+import { CanActivateViaUserGuard } from './auth/guards/user.guard';
+import { TokenInterceptor } from './auth/interceptors/token.interceptor';
+import { AddTimetableComponent } from './authorizedUser/admin/add-timetable/add-timetable.component';
+import { EditTicketComponent } from './authorizedUser/admin/edit-ticket/edit-ticket.component';
+import { EditTimetableComponent } from './authorizedUser/admin/edit-timetable/edit-timetable.component';
+import { ValidateComponent } from './authorizedUser/controller/validate/validate.component';
+import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.component';
+import { AddTicketComponent } from './authorizedUser/user/add-ticket/add-ticket.component';
+import { ImageUploadComponent } from './authorizedUser/user/image-upload/image-upload.component';
+import { RegisterComponent } from './unauthorizedUser/register/register.component';
+import { LoginComponent } from './unauthorizedUser/login/login.component';
 
 
 @NgModule({
@@ -52,7 +55,8 @@ import { VehiclesComponent } from './vehicles/vehicles.component';
     PricelistComponent,
     RegisterComponent,
     TimetableComponent,
-    VehiclesComponent
+    VehiclesComponent,
+    AddTicketComponent
   ],
   imports: [
     BrowserModule,

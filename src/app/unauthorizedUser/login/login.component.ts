@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
 import {FormGroup,FormBuilder, Validators} from '@angular/forms';
-import { Login } from '../classes/Login';
-import {ServicesService} from '../services/services.service';
+
 
 import { CommonModule } from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
+import { Login } from 'src/app/classes/Login';
 
 
 @Component({

@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import { ServicesService } from '../services/services.service';
 
 
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -12,16 +13,27 @@ export class NavigationComponent implements OnInit {
 
   constructor(private serverService: ServicesService, private router: Router){}
 
-  Controler:boolean;
   ngOnInit(){
     this.router.navigate([this.router.url]);
-    if(localStorage.role=="Controller"){
-      this.Controler = true;
-    }else{
-      this.Controler = false;
-    }
+    this.isAdmin();
+    this.isController();
   }
 
+  isAdmin()
+  {
+    if(localStorage.role=="Admin")
+         return true;
+    else
+         return false;
+  }
+
+  isController()
+  {
+    if(localStorage.role=="Controller")
+         return true;
+    else
+        return false;
+  }
   public showLogIn(){
     if(!localStorage.jwt){
         return true;
@@ -43,7 +55,6 @@ export class NavigationComponent implements OnInit {
     this.serverService.logOut()
     .subscribe(
       data => {
-        this.Controler = false;
         localStorage.clear();
         this.router.navigate(['/login']);     
       },

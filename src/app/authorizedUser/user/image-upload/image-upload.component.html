@@ -1,0 +1,19 @@
+<div class="booking-form">
+    <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
+
+        <div class="form-group">
+            <span class="form-label">Image: </span>
+            <input type="file" id="ImageUrl" (change) = "onFileChanged($event)" formControlName="ImageUrl">
+        </div>
+
+        <div class="form-btn">
+            <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Upload proof
+            </button>
+        </div>
+       
+        <div class="form-btn">
+            <a routerLink=""> Next </a>
+        </div>
+    </form>
+</div>
+
