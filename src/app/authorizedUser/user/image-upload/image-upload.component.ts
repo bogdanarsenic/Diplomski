@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/classes/User';
 import { ServicesService } from 'src/app/services/services.service';
+import { User } from 'src/app/shared/classes/User';
 
 @Component({
   selector: 'app-image-upload',

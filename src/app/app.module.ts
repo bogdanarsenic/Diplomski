@@ -18,10 +18,6 @@ import { HttpClickService } from './services/click-http.service';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
-import { MapComponent } from './map/map.component';
-import { PricelistComponent } from './pricelist/pricelist.component';
-import { TimetableComponent } from './timetable/timetable.component';
-import { VehiclesComponent } from './vehicles/vehicles.component';
 import { ModalComponent } from './authorizedUser/admin/modal/modal.component';
 import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
 import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
@@ -29,13 +25,17 @@ import { CanActivateViaUserGuard } from './auth/guards/user.guard';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { AddTimetableComponent } from './authorizedUser/admin/add-timetable/add-timetable.component';
 import { EditTicketComponent } from './authorizedUser/admin/edit-ticket/edit-ticket.component';
-import { EditTimetableComponent } from './authorizedUser/admin/edit-timetable/edit-timetable.component';
 import { ValidateComponent } from './authorizedUser/controller/validate/validate.component';
 import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.component';
 import { AddTicketComponent } from './authorizedUser/user/add-ticket/add-ticket.component';
 import { ImageUploadComponent } from './authorizedUser/user/image-upload/image-upload.component';
 import { RegisterComponent } from './unauthorizedUser/register/register.component';
 import { LoginComponent } from './unauthorizedUser/login/login.component';
+import { VehiclesComponent } from './shared/vehicles/vehicles.component';
+import { TimetableComponent } from './shared/timetable/timetable.component';
+import { PricelistComponent } from './shared/pricelist/pricelist.component';
+import { MapComponent } from './shared/map/map.component';
+
 
 
 @NgModule({
@@ -45,7 +45,6 @@ import { LoginComponent } from './unauthorizedUser/login/login.component';
 
     ModalComponent,
     EditTicketComponent,
-    EditTimetableComponent,
     AddTimetableComponent,
     ImageUploadComponent,
     ValidateComponent,

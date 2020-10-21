@@ -1,13 +1,9 @@
 table {
-    margin: auto;
-    width: 20% !important;
-    background-color:beige;
-    
+    background-color:beige;    
 }
 
 .boldovan {
     margin: auto;
-    width: 20% !important;
     background-color:beige;
 }
 
@@ -17,6 +13,5 @@ table {
 
 button
 {
-
     background-color:burlywood;
 }

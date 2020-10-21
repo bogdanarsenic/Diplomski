@@ -3,10 +3,12 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
-import { User } from 'src/app/classes/User';
-import { CustomValidators } from 'src/app/validator/customValidator';
-import { MatchPassword } from 'src/app/validator/MatchPassword';
+
 import { ServicesService } from 'src/app/services/services.service';
+import { User } from 'src/app/shared/classes/User';
+import { CustomValidators } from 'src/app/shared/validator/customValidator';
+import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
+
 
 @Component({
   selector: 'app-editprofile',
@@ -43,7 +45,6 @@ export class EditprofileComponent implements OnInit {
         Validators.minLength(8)
       ]],
       ConfirmPassword:["",[Validators.required]],
-      ImageUrl:[""],
       Type:["", [Validators.required]]
     },
     {
@@ -70,7 +71,6 @@ export class EditprofileComponent implements OnInit {
           this.registerUserForm.value.Address=this.user.Address;
           this.registerUserForm.value.DateOfBirth=this.user.DateOfBirth;
           this.registerUserForm.value.ConfirmPassword=this.user.ConfirmPassword;
-          this.registerUserForm.value.ImageUrl=this.user.ImageUrl;
           this.registerUserForm.value.Type=this.user.Type;
           this.status=this.user.Status;
 
@@ -100,7 +100,6 @@ export class EditprofileComponent implements OnInit {
     this.user.Password = this.registerUserForm.value.Password;
     this.user.ConfirmPassword = this.registerUserForm.value.ConfirmPassword;
     this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
-    this.user.ImageUrl = this.registerUserForm.value.ImageUrl;
     this.user.Type = this.registerUserForm.value.Type;
     
     var u = this.user;
@@ -121,10 +120,6 @@ export class EditprofileComponent implements OnInit {
               
               alert("Username doesn't exist. Usernames needs to match!")
             }
-          )
-    
+          )  
   }
-
-
-
 }

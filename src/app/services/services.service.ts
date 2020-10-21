@@ -1,15 +1,15 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
-import { Login } from '../classes/Login';
 import { Observable } from 'rxjs';
-import { User } from '../classes/User';
+import { Line } from '../shared/classes/Line';
+import { Login } from '../shared/classes/Login';
+import { PriceList } from '../shared/classes/PriceList';
+import { Station } from '../shared/classes/Station';
+import { StationLine } from '../shared/classes/StationLine';
+import { Ticket } from '../shared/classes/Ticket';
+import { TimeTable } from '../shared/classes/TimeTable';
+import { User } from '../shared/classes/User';
 
-import { Station } from '../classes/Station';
-import {Line} from '../classes/Line';
-import { TimeTable } from '../classes/TimeTable';
-import { StationLine } from '../classes/StationLine';
-import { PriceList } from '../classes/PriceList';
-import { Ticket } from '../classes/Ticket';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { User } from 'src/app/classes/User';
-import { CustomValidators } from 'src/app/validator/customValidator';
-import { Login } from 'src/app/classes/Login';
-import { MatchPassword } from 'src/app/validator/MatchPassword';
+
+import { User } from 'src/app/shared/classes/User';
+import { Login } from 'src/app/shared/classes/Login';
+import { CustomValidators } from 'src/app/shared/validator/customValidator';
+import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
+
 
 
 @Component({
@@ -76,26 +78,20 @@ export class RegisterComponent {
 
   Registrate(user:User)
     {
-
-
     this.registerService.RegistrationGuest(user).subscribe(
       data=>{
 
-        
-              
         this.registerService.getTheToken(new Login(user.Email,user.Password))
           .subscribe(
             res=>
             {
               
-              let jwt=res.access_token;
-
-              let jwtData = jwt.split('.')[1]
+                let jwt=res.access_token;
+                let jwtData = jwt.split('.')[1]
                 let decodedJwtJsonData = window.atob(jwtData)
                 let decodedJwtData = JSON.parse(decodedJwtJsonData)
 
                 let role = decodedJwtData.role
-                console.log(role);
 
                 localStorage.setItem('jwt', jwt)
                 localStorage.setItem('role', role)

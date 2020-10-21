@@ -35,20 +35,18 @@ export class NavigationComponent implements OnInit {
         return false;
   }
   public showLogIn(){
-    if(!localStorage.jwt){
+    if(!localStorage.jwt)
         return true;
-    }else{
-      return false;
-    }
+    else
+      return false;  
   }
 
   public showLogOut(){
     
-    if(localStorage.jwt){
+    if(localStorage.jwt)
         return true;
-    }else{
-      return false;
-    }
+    else
+      return false;   
   }
 
   public callLogout(){

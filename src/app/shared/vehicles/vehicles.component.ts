@@ -1,13 +1,14 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import { MarkerInfo } from '../map/model/marker-info.model';
-import { Polyline } from '../map/model/polyline';
-import { GeoLocation } from '../map/model/geolocation';
-import { HttpClickService } from '../services/click-http.service';
-import { NotificationService } from '../services/notification.service';
-import { Station } from '../classes/Station';
-import { ServicesService } from '../services/services.service';
+
 import { CommonModule } from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
+import { Polyline } from '../map/model/polyline';
+import { MarkerInfo } from '../map/model/marker-info.model';
+import { GeoLocation } from '../map/model/geolocation';
+import { Station } from '../classes/Station';
+import { NotificationService } from 'src/app/services/notification.service';
+import { HttpClickService } from 'src/app/services/click-http.service';
 
 @Component({
   selector: 'app-vehicles',

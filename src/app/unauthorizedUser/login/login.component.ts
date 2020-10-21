@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
+import {Router} from '@angular/router';
 import {FormGroup,FormBuilder, Validators} from '@angular/forms';
-
-
 import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { Login } from 'src/app/classes/Login';
-
+import { Login } from 'src/app/shared/classes/Login';
 
 @Component({
   selector: 'app-login',
@@ -35,11 +32,10 @@ export class LoginComponent implements OnInit {
       }
     );
    }
+
   ngOnInit() {
     localStorage.clear();
     this.login=new Login("","");
-    localStorage.setItem('CurrentComponent','LoginComponent');
-
   }
 
   onSubmit()
@@ -55,25 +51,18 @@ export class LoginComponent implements OnInit {
           let decodedJwtData=JSON.parse(decodedJwtJsonData)
 
           let role=decodedJwtData.role
-          console.log(role);
+
           localStorage.setItem('jwt',jwt);
           localStorage.setItem('role',role);
-          localStorage.setItem('currentId',this.login.Username);
-          this.router.navigate(['']).then(()=>window.location.reload());
 
+          this.router.navigate(['']).then(()=>window.location.reload());
 
         },error=>
         {
           alert("Invalid Username or Password!")
           console.log(error);
         }
-
-      )   
-
-      
-      
+      )        
       this.loginUserForm.reset();
-
-    }
-   
-  }
+    } 
+}

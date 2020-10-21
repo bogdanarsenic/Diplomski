@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ServicesService } from '../services/services.service';
 import { Router } from '@angular/router';
 import { User } from '../classes/User';
 import { PriceList } from '../classes/PriceList';
 import { Ticket } from '../classes/Ticket';
 import { async } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
 
 declare var paypal;
 

@@ -2,16 +2,18 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { MarkerInfo } from './model/marker-info.model';
 import { GeoLocation } from './model/geolocation';
 import { Polyline } from './model/polyline';
-import { ServicesService } from '../services/services.service';
 import { MapsAPILoader } from '@agm/core';
-import { Station } from '../classes/Station';
 import { Router } from '@angular/router';
-import { Line } from '../classes/Line';
-import { ModalService } from '../services/modal.service';
+
 import { MatDialog } from '@angular/material/dialog';
-import { StationLine } from '../classes/StationLine';
-import { TimeTable } from '../classes/TimeTable';
+
 import { CommonModule } from '@angular/common';
+import { ServicesService } from 'src/app/services/services.service';
+import { Station } from '../classes/Station';
+import { Line } from '../classes/Line';
+import { TimeTable } from '../classes/TimeTable';
+import { StationLine } from '../classes/StationLine';
+import { ModalService } from 'src/app/services/modal.service';
 
 
 @Component({
