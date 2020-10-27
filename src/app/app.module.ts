@@ -23,7 +23,6 @@ import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
 import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
 import { CanActivateViaUserGuard } from './auth/guards/user.guard';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
-import { AddTimetableComponent } from './authorizedUser/admin/add-timetable/add-timetable.component';
 import { EditTicketComponent } from './authorizedUser/admin/edit-ticket/edit-ticket.component';
 import { ValidateComponent } from './authorizedUser/controller/validate/validate.component';
 import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.component';
@@ -35,6 +34,12 @@ import { VehiclesComponent } from './shared/vehicles/vehicles.component';
 import { TimetableComponent } from './shared/timetable/timetable.component';
 import { PricelistComponent } from './shared/pricelist/pricelist.component';
 import { MapComponent } from './shared/map/map.component';
+import { ShowTimetableComponent } from './shared/timetable/show-timetable/show-timetable.component';
+
+import { TimetableAdminComponent } from './authorizedUser/admin/timetable-admin/timetable-admin.component';
+import { EditTimetableComponent } from './authorizedUser/admin/timetable-admin/edit-timetable/edit-timetable.component';
+import { AddTimetableComponent } from './authorizedUser/admin/timetable-admin/add-timetable/add-timetable.component';
+import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/form-timetable/form-timetable.component';
 
 
 
@@ -45,7 +50,6 @@ import { MapComponent } from './shared/map/map.component';
 
     ModalComponent,
     EditTicketComponent,
-    AddTimetableComponent,
     ImageUploadComponent,
     ValidateComponent,
     EditprofileComponent,
@@ -55,7 +59,12 @@ import { MapComponent } from './shared/map/map.component';
     RegisterComponent,
     TimetableComponent,
     VehiclesComponent,
-    AddTicketComponent
+    AddTicketComponent,
+    ShowTimetableComponent,
+    AddTimetableComponent,
+    EditTimetableComponent,
+    TimetableAdminComponent,
+    FormTimetableComponent,
   ],
   imports: [
     BrowserModule,

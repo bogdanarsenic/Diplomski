@@ -1,0 +1,17 @@
+<app-timetable >
+
+</app-timetable> 
+
+<app-form-timetable *ngIf="show">
+
+</app-form-timetable>
+
+
+<app-add-timetable  *ngIf="add && show" [timetable]="timetable" [times]="times">
+
+</app-add-timetable>
+
+
+<app-edit-timetable  *ngIf="!add && show" [timetable]="timetable" [times]="times">
+
+</app-edit-timetable>

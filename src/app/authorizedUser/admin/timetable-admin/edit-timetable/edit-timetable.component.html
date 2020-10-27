@@ -1,0 +1,7 @@
+<div class="col text-center">
+    <button class="btn btn-default" (click)="Delete()" type="submit"> Delete timetable for this line
+    </button>
+    <button class="btn btn-default"  (click)="onSubmit()" [disabled]="times=='' || times==undefined"> Edit timetable for this line
+    </button>
+</div>
+<app-show-timetable [timetable]="timetable"> </app-show-timetable>

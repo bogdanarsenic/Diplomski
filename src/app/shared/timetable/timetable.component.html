@@ -14,7 +14,7 @@
                 
                 <tr>
                     <td >        
-                        <select *ngIf="suburban || city" (click)="checkDay($event.target.value)">
+                        <select *ngIf="suburban || city" (change)="checkDay($event.target.value)">
                             <option *ngFor="let day of days" > {{day}} </option>
                         </select>
                     </td>
@@ -23,14 +23,14 @@
             <div *ngIf="city || suburban"> 
                 <tr>    
                     <td >       
-                            <select *ngIf="city" (click)="onItemChange($event.target.value)">
+                            <select *ngIf="city" (change)="onItemChange($event.target.value)">
                                     <option disabled selected value> -- select a line -- </option>
-                                    <option *ngFor="let line of cityLines" > {{line.LineId}} </option>
+                                    <option *ngFor="let line of cityLines" > {{line.Name}} </option>
                             </select>
                  
-                            <select *ngIf="suburban" (click)="onItemChange($event.target.value)">
+                            <select *ngIf="suburban" (change)="onItemChange($event.target.value)">
                                 <option disabled selected value> -- select a line -- </option>
-                                <option *ngFor="let line of subLines" > {{line.LineId}} </option>
+                                <option *ngFor="let line of subLines" > {{line.Name}} </option>
                             </select>      
                          
                      </td>
@@ -40,33 +40,12 @@
         </table>    
     </div>       
         
-        <div class="col text-center">     
-            <button class="btn btn-default" (click)="Show()"> Show timetable</button>
-         </div>
-
-        <div class="boldovan" *ngIf="showTT">
-            <b> Line: {{line}} </b>
-                <table>
-
-                    <th>
-                        Hours
-                    </th>
-
-                    <th>
-                        Minutes
-                    </th>
-                    
-                   <tr *ngFor="let h of hours ; let i = index">
-                       <td>
-                          {{hours[i]}}
-                       </td>
-                       <td>
-                           {{minutes[i]}}
-                       </td>
-                   </tr>
-           
-                </table>
+        <div *ngIf="!isAdmin()">
+            <div class="col text-center">     
+                <button class="btn btn-default" (click)="Show()" [hidden]="showTT"> Show timetable</button>
+            </div>
+            
+            <div *ngIf="showTT">
+                    <app-show-timetable [timetable]="timetable"> </app-show-timetable>
+            </div>
         </div>
-
-
-    

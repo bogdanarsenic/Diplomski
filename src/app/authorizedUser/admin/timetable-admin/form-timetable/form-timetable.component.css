@@ -1,0 +1,23 @@
+table {
+  margin: auto;
+  width: 20% !important;
+  background-color: beige;
+  height: 20px;
+}
+
+.boldovan {
+  margin: auto;
+  width: 20% !important;
+  background-color: beige;
+}
+
+.redvoznje {
+  border-collapse: collapse;
+}
+
+body {
+  background-color: beige;
+}
+button {
+  background-color: burlywood;
+}

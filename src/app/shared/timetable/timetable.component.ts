@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TimeTable } from '../classes/TimeTable';
+import { TimetableService } from './timetable.service';
 import { ServicesService } from 'src/app/services/services.service';
+import { Line } from '../classes/Line';
 
 @Component({
   selector: 'app-timetable',
@@ -14,52 +15,55 @@ export class TimetableComponent implements OnInit {
 
   cityLines: any[]
   subLines:any[]
-  times:string;
   timetables:TimeTable []
+  timetable:TimeTable
+  timetablesTemp:TimeTable[]
   days: Array<string> = ["Weekday", "Saturday", "Sunday"];
   day:string;
   suburban:boolean;
   city : boolean;
   showTT:boolean;
-  hours:string[];
-  minutes:string[];
   line:string;
+  lines:Line[];
 
-  constructor(private serverService:ServicesService,private router:Router) 
+  constructor(private serverService:TimetableService,private lineService:ServicesService,private router:Router) 
   {
   }
-
 
   ngOnInit(){
 
     this.callGetTimetables();
+    this.callGetLines();
     this.timetables=[];
+    this.timetable=new TimeTable();
     this.city=false;
     this.suburban=false;
     this.showTT=false;
     this.day="Weekday";
-    this.hours=[];
-    this.minutes=[];
     this.cityLines=[];
     this.subLines=[];
-    this.times=""; 
-    this.line=""; 
   }
 
   onCity()
   {
       this.city=true;
       this.suburban=false;
-      this.showTT=false;
-      this.times="";
+      this.AfterCityorSuburban();
   }
 
   onSuburban()
   {
-    this.times="";
     this.city=false;
     this.suburban=true;
+    this.AfterCityorSuburban();
+  }
+
+  AfterCityorSuburban()
+  {
     this.showTT=false;
+    this.line="";
+    this.timetable.Id="";
+    this.checkEmit()
   }
 
   callGetTimetables()
@@ -68,31 +72,43 @@ export class TimetableComponent implements OnInit {
       data=>
       {
           this.timetables=data;
-          this.subOrCity(this.timetables);
       }
-     )
+  )
 
   }
 
-  subOrCity(timetables:TimeTable[])
+  callGetLines()
   {
-    timetables.forEach(x=>{
-      if(x.Type=="City")
+    this.lineService.getAllLines().subscribe(
+      data=>
+      {
+        this.lines=data;
+        this.subOrCity(this.lines);
+      }    
+      
+    )
+  }
+
+  subOrCity(lines:Line[])
+  {
+      lines.forEach(x=>{
+    
+        if((Number)(x.Name)<30)
         {
-            if(this.cityLines.findIndex(y=>x.LineId==y.LineId)!=0)
+            if(this.cityLines.findIndex(y=>x.Name==y.LineId)!=0)
             {
                 this.cityLines.push(x);
                 this.cityLines.sort((function(a, b){return a-b}));   
             }
         }
       else
-      {     
-        if(this.subLines.findIndex(y=>x.LineId==y.LineId)!=0)
-        {
-            this.subLines.push(x);
-            this.subLines.sort((function(a, b){return a-b}));
+        {     
+          if(this.subLines.findIndex(y=>x.Name==y.LineId)!=0)
+          {
+              this.subLines.push(x);
+              this.subLines.sort((function(a, b){return a-b}));
+          }
         }
-      }
     })
   }
 
@@ -116,37 +132,57 @@ export class TimetableComponent implements OnInit {
   findTimeForTimetable()
   {
     var t;
-    this.times="";
     t=this.timetables.findIndex(item=>item.Day==this.day && item.LineId==this.line)
+    this.timetablesTemp=this.timetables.map((x)=>{ return {...x}})
 
-    if(t!=-1)
-        this.times=this.timetables[t].Times;
+    if(t!=-1) 
+        {
+          this.timetable=this.timetablesTemp[t]
+          if(this.isAdmin())
+              this.checkEmit()
+        }
     else
-        this.times="";
+    { 
+        this.timetable.Id="";
+        if(this.isAdmin()) 
+        {
+          this.timetable.Day=this.day;
+          this.timetable.LineId=this.line;
+          this.timetable.Type=(Number(this.line)>30)?"Suburban":"City"  
+          this.checkEmit();
+        } 
+    }
+  }
+
+  checkEmit()
+  {
+      if(this.line!="")
+      {
+        this.showTT=true;
+        this.serverService.Show.emit(this.showTT);
+        this.serverService.AddorEdit.emit(this.timetable);
+      }
+      else
+      {
+        this.serverService.Show.emit(this.showTT);
+      }
   }
 
   Show()
   {
-      this.showTT=true;
-      var times2=[];
-      this.hours=[];
-      this.minutes=[];
-
-      if(this.times=="")
+      if(this.timetable.Id=="" || this.timetable.Id==undefined)
       {
         alert("There is no timetable for this day and line yet")
         this.showTT=false;
       }
       else
-      {       
-         times2=this.times.split(';');  
-         times2.forEach(
-            x=>
-            {
-                this.hours.push(x.split(':')[0]);
-                this.minutes.push(x.split(':')[1]);
-            }
-         )
+      {    
+        this.showTT=true;
       }
+  }
+
+  isAdmin()
+  {
+   return localStorage.getItem('role')=="Admin"? true : false
   }
 }

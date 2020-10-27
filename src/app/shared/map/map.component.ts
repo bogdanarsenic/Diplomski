@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { MarkerInfo } from './model/marker-info.model';
 import { GeoLocation } from './model/geolocation';
 import { Polyline } from './model/polyline';
 import { MapsAPILoader } from '@agm/core';
 import { Router } from '@angular/router';
-
-import { MatDialog } from '@angular/material/dialog';
 
 import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
@@ -14,6 +12,7 @@ import { Line } from '../classes/Line';
 import { TimeTable } from '../classes/TimeTable';
 import { StationLine } from '../classes/StationLine';
 import { ModalService } from 'src/app/services/modal.service';
+import { TimetableService } from '../timetable/timetable.service';
 
 
 @Component({
@@ -84,7 +83,7 @@ export class MapComponent implements OnInit {
  stationLine:StationLine;
   check:string;
 
-  constructor(private ngZone: NgZone,private serverService:ServicesService,private modalService:ModalService,private mapsAPILoader:MapsAPILoader,private router:Router){
+  constructor(private ngZone: NgZone,private serverService:ServicesService,private timetableServer:TimetableService,private modalService:ModalService,private mapsAPILoader:MapsAPILoader,private router:Router){
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), 
     "assets/ftn.png",
     "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
@@ -387,7 +386,7 @@ UpdateTimetable()
 {
 
     this.check=this.radioSelected;
-    this.serverService.getTimetablebyLineid(this.check).subscribe(
+    this.timetableServer.getTimetablebyLineid(this.check).subscribe(
       data=>
       {
             this.timetables=data;
@@ -408,7 +407,7 @@ UpdateTimetable()
       
       this.timetables.forEach(
         x=>
-          this.serverService.putTimeTable(x.Id,x).subscribe(
+          this.timetableServer.putTimeTable(x.Id,x).subscribe(
             data=>
           {
 

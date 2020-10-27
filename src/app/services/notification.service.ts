@@ -10,7 +10,7 @@ export class NotificationService {
   private proxyName: string = 'notifications';  
   private connection: any;  
   public connectionExists: Boolean; 
-    public connectionEstablished = new EventEmitter<boolean>();
+  public connectionEstablished = new EventEmitter<boolean>();
   public notificationReceived: EventEmitter <string>;  
 
   constructor() {  

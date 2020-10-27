@@ -1,0 +1,13 @@
+<form [formGroup]="timetableForm" (change)="onChange()">
+
+    <table>
+        <tr *ngFor="let j of broj">
+            <td>
+                {{j}}h
+            </td>
+            <td>
+                <input style="height:20px" type="text" formControlName="{{j}}"/>
+            </td>
+        </tr>
+    </table>
+</form>

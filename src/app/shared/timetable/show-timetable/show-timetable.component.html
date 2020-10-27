@@ -1,0 +1,15 @@
+<div class="boldovan">
+
+   <b> Line: {{timetable.LineId}} </b>
+        <table>
+           <tr *ngFor="let h of hours ; let i = index">
+               <td>
+                {{hours[i]}}
+                <sup>{{minutes[i]}} </sup> 
+               </td>
+               <hr>
+           </tr>
+   
+        </table>   
+    
+</div>

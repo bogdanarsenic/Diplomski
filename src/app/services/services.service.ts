@@ -7,7 +7,6 @@ import { PriceList } from '../shared/classes/PriceList';
 import { Station } from '../shared/classes/Station';
 import { StationLine } from '../shared/classes/StationLine';
 import { Ticket } from '../shared/classes/Ticket';
-import { TimeTable } from '../shared/classes/TimeTable';
 import { User } from '../shared/classes/User';
 
 
@@ -79,15 +78,6 @@ export class ServicesService {
     return this.httpClient.get("http://localhost:52295/api/PriceList");
   }
 
-  getAllTimetables():any{
-    return this.httpClient.get("http://localhost:52295/api/Timetable");
-  }
-
-  getTimetablebyLineid(lineId:string):Observable<any>
-  {
-    return this.httpClient.get<any>("http://localhost:52295/api/Timetables/GetTimetablebyLineId",{params:{lineId}});
-  }
-
   getAllStations():any{
     return this.httpClient.get("http://localhost:52295/api/Station");
   }
@@ -108,17 +98,9 @@ export class ServicesService {
     return this.httpClient.post("http://localhost:52295/api/StationLine", stationLine);
   }
 
-  postTimetable(timetable:TimeTable){
-    return this.httpClient.post("http://localhost:52295/api/Timetable", timetable);
-  }
-
   postPriceList(pricelist:PriceList){
     return this.httpClient.post("http://localhost:52295/api/PriceList", pricelist);
   }
-
-  putTimeTable(id:string, timeTiable: TimeTable): any{
-    return this.httpClient.put(`http://localhost:52295/api/Timetable/${id}`, timeTiable);}
-
 
   putLine(LineId : number, line: Line): Observable<any>{
       return this.httpClient.put(`http://localhost:52295/api/Line/${LineId}`, line );
@@ -131,9 +113,7 @@ export class ServicesService {
   putStation(StationId : number, station: Station): Observable<any>{
       return this.httpClient.put(`http://localhost:52295/api/Station/${StationId}`, station );
     }
-  deleteTime(id :string) :any{
-      return this.httpClient.delete(`http://localhost:52295/api/Timetable/${id}`);
-    }
+
 
   deleteStation(id :number) :any{
       return this.httpClient.delete(`http://localhost:52295/api/Station/${id}`);
