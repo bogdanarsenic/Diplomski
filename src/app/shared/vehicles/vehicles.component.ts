@@ -3,12 +3,14 @@ import { MapsAPILoader } from '@agm/core';
 
 import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { Polyline } from '../map/model/polyline';
-import { MarkerInfo } from '../map/model/marker-info.model';
-import { GeoLocation } from '../map/model/geolocation';
+
 import { Station } from '../classes/Station';
 import { NotificationService } from 'src/app/services/notification.service';
 import { HttpClickService } from 'src/app/services/click-http.service';
+import { MarkerInfo } from '../lines/map/model/marker-info.model';
+import { Polyline } from '../lines/map/model/polyline';
+import { GeoLocation } from '../lines/map/model/geolocation';
+import { LinesService } from '../lines/lines.service';
 
 @Component({
   selector: 'app-vehicles',
@@ -42,7 +44,7 @@ export class VehiclesComponent implements OnInit {
   notifications: string[];
   time: string;
   
-  constructor(private ngZone: NgZone, private serverService:ServicesService, private mapsAPILoader: MapsAPILoader,private notifService: NotificationService, private http: HttpClickService) { 
+  constructor(private ngZone: NgZone, private lineService:LinesService, private mapsAPILoader: MapsAPILoader,private notifService: NotificationService, private http: HttpClickService) { 
 
     this.isConnected = false;
     this.notifications = [];
@@ -77,7 +79,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   callGetLines(){
-    this.serverService.getAllLines()
+    this.lineService.getAllLines()
       .subscribe(
         data => {
           this.lines = data;  
@@ -92,7 +94,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   callGetStationLine(){
-    this.serverService.getAllStationLines()
+    this.lineService.getAllStationLines()
       .subscribe(
         data => {
           this.stationLines = data;  
@@ -105,7 +107,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   callGetStations(){
-    this.serverService.getAllStations()
+    this.lineService.getAllStations()
       .subscribe(
         data => {
           this.stations = data;        

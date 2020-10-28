@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { ServicesService } from '../services/services.service';
 
-
-
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -21,32 +19,20 @@ export class NavigationComponent implements OnInit {
 
   isAdmin()
   {
-    if(localStorage.role=="Admin")
-         return true;
-    else
-         return false;
+    return localStorage.role=="Admin"? true : false
   }
 
   isController()
-  {
-    if(localStorage.role=="Controller")
-         return true;
-    else
-        return false;
+  { 
+    return localStorage.role=="Controller"? true : false
   }
+  
   public showLogIn(){
-    if(!localStorage.jwt)
-        return true;
-    else
-      return false;  
+    return localStorage.jwt ? false:true  
   }
 
-  public showLogOut(){
-    
-    if(localStorage.jwt)
-        return true;
-    else
-      return false;   
+  public showLogOut(){   
+    return localStorage.jwt ? true:false  
   }
 
   public callLogout(){

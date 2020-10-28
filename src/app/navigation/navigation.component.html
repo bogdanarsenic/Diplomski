@@ -1,37 +1,37 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top" style="height: 50px">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top" style="height: 40px">
    
 
   <div id="navb" class="navbar-collapse collapse hide">
-      <ul class="navbar-nav" style="margin-left: 180px; font-size: 20px">
+      <ul class="nav navbar-nav ml-auto" style="font-size: 15px ">
         
         <div *ngIf="isAdmin()">
           <li class="nav-item">
-            <a style="color: rgb(236, 238, 238)" routerLink="/timetable-admin" class="nav-link" >Time Table</a>
+            <a routerLink="/timetable-admin" class="nav-link" >Time Table</a>
           </li>
          </div>
 
          <div *ngIf="!isAdmin()">
           <li class="nav-item">
-            <a style="color: rgb(236, 238, 238)" routerLink="/timetable" class="nav-link" >Time Table</a>
+            <a routerLink="/timetable" class="nav-link" >Time Table</a>
           </li>
          </div>
         <li class="nav-item ">
-          <a routerLink="/lines" style="margin-left: 40px;color: rgb(236, 238, 238) " class="nav-link">Lines</a>
+          <a routerLink="/lines" class="nav-link">Lines</a>
         </li>
         <li class="nav-item">
-          <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/vehicles" class="nav-link" >Current vehicles</a>
+          <a routerLink="/vehicles" class="nav-link" >Current vehicles</a>
         </li>
         <li class="nav-item">
-          <a routerLink="/pricelist" style="margin-left: 40px;color: rgb(236, 238, 238)" class="nav-link">Pricelist</a>
+          <a routerLink="/pricelist" class="nav-link">Pricelist</a>
         </li>
 
         <div *ngIf="isController()">
             <li class="nav-item">
-                <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/verify" class="nav-link" >Verify</a>
+                <a routerLink="/verify" class="nav-link" >Verify</a>
             </li>
 
             <li class="nav-item">
-              <a style="margin-left: 40px;color: rgb(236, 238, 238) " routerLink="/validate" class="nav-link" >Validate</a>
+              <a routerLink="/validate" class="nav-link" >Validate</a>
           </li>
         </div>
       </ul>

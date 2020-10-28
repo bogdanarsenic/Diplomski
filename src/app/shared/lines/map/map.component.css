@@ -1,0 +1,13 @@
+ul {
+  float: left;
+}
+
+button {
+  background-color: burlywood;
+}
+
+agm-map {
+  margin-top: 50px;
+  margin-left: 20px;
+  display: flex;
+}

@@ -3,8 +3,12 @@ table {
   width: 20% !important;
   background-color: beige;
   height: 20px;
+  font-size: medium;
 }
 
+td {
+  font-size: small;
+}
 .boldovan {
   margin: auto;
   width: 20% !important;

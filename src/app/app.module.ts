@@ -33,13 +33,17 @@ import { LoginComponent } from './unauthorizedUser/login/login.component';
 import { VehiclesComponent } from './shared/vehicles/vehicles.component';
 import { TimetableComponent } from './shared/timetable/timetable.component';
 import { PricelistComponent } from './shared/pricelist/pricelist.component';
-import { MapComponent } from './shared/map/map.component';
 import { ShowTimetableComponent } from './shared/timetable/show-timetable/show-timetable.component';
 
 import { TimetableAdminComponent } from './authorizedUser/admin/timetable-admin/timetable-admin.component';
 import { EditTimetableComponent } from './authorizedUser/admin/timetable-admin/edit-timetable/edit-timetable.component';
 import { AddTimetableComponent } from './authorizedUser/admin/timetable-admin/add-timetable/add-timetable.component';
 import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/form-timetable/form-timetable.component';
+import { MapComponent } from './shared/lines/map/map.component';
+import { LinesComponent } from './shared/lines/lines.component';
+import { LineListComponent } from './shared/lines/line-list/line-list.component';
+import { AddLinesComponent } from './authorizedUser/admin/lines/add-lines/add-lines.component';
+import { EditLinesComponent } from './authorizedUser/admin/lines/edit-lines/edit-lines.component';
 
 
 
@@ -65,6 +69,10 @@ import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/f
     EditTimetableComponent,
     TimetableAdminComponent,
     FormTimetableComponent,
+    LinesComponent,
+    LineListComponent,
+    AddLinesComponent,
+    EditLinesComponent
   ],
   imports: [
     BrowserModule,

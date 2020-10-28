@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
-import { ServicesService } from 'src/app/services/services.service';
 import { Line } from '../classes/Line';
+import { LinesService } from '../lines/lines.service';
 
 @Component({
   selector: 'app-timetable',
@@ -26,7 +26,7 @@ export class TimetableComponent implements OnInit {
   line:string;
   lines:Line[];
 
-  constructor(private serverService:TimetableService,private lineService:ServicesService,private router:Router) 
+  constructor(private serverService:TimetableService,private lineService:LinesService,private router:Router) 
   {
   }
 
@@ -84,8 +84,7 @@ export class TimetableComponent implements OnInit {
       {
         this.lines=data;
         this.subOrCity(this.lines);
-      }    
-      
+      }      
     )
   }
 

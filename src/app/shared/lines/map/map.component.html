@@ -1,61 +1,15 @@
 
-<div class="container-fluid">
+<!--
+  <div class="container-fluid">
 
-
-      
-      <label style="color:#f4f4f4">
-        Lines:
-      </label>
-      <div *ngFor="let line of lineNames">
-        <ul>
-
-          <input type="radio" id="one" [(ngModel)]="radioSelected" name="lineCity" value="{{line}}" (click)="onItemChange(line)" />
-          <label for="radio1" style="color:#f4f4f4;margin-left:5px">{{line}}</label>
-
-        </ul>
-      </div>
 
       <div style="margin-top: 50px; margin-left:20px;display: flex">
-        <!-- Kreiramo mapu -->
-        <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="15" (mapClick)="placeMarker($event)" >  
+
+        OVDE AGM-MAP
 
 
-          <agm-marker [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [title]="markerInfo.title"
-          [label]="markerInfo.label" [iconUrl]="markerInfo.iconUrl">
-      
-            <!-- Svakom markeru dodajemo info-window (Nije obavezno!)-->
-            <agm-info-window [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" >
-      
-              <!-- U info-window stavljamo html -->
-              <span style="font-size: 16px;font-family:'Times New Roman'"></span>
-              <br/>
-              <span style="font-family:'Times New Roman'; color:gray;"><strong></strong></span>
-              <span style="font-family:'Times New Roman'; color:gray;"></span>
-              <a [href]="markerInfo.link"> </a>
-            </agm-info-window>
-      
-          </agm-marker>
-      
-          <agm-polyline [strokeColor]="polyline.color">
-              <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
-              </agm-polyline-point>
-          </agm-polyline>
-      
-          <agm-marker (markerClick)="clickedMarker(point)" *ngFor="let point of polyline.path" [latitude]="point.latitude"
-          [longitude]="point.longitude" [iconUrl]="polyline.icon">
-          <agm-info-window [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude">
-  
-            <!-- U info-window stavljamo html -->
-            <span style="font-size: 16px;font-family:'Times New Roman'">Address : {{stationClicked.Address}}</span>
-            <br />
-            <span style="font-family:'Times New Roman'; color:gray;">Lines: {{stationClicked.LineId}}</span>
-          </agm-info-window>
-          </agm-marker>
-      
-        </agm-map>
 
-
-          <div *ngIf="edit" style="background-color: ivory;">
+         <div *ngIf="edit" style="background-color: ivory;">
             <form #f="ngForm" enctype="multipart/form-data" (ngSubmit)="UpdateLine()" ngNativeValidate>
               <label style="text-align:center; font-size: 16px">Line</label><br />
               <i style="font-size: 15px;">Name:</i>
@@ -123,3 +77,42 @@
 
 
 </div>
+
+-->
+        <!-- Kreiramo mapu -->
+        <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="15" (mapClick)="placeMarker($event)" >  
+
+
+          <agm-marker [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [title]="markerInfo.title"
+          [label]="markerInfo.label" [iconUrl]="markerInfo.iconUrl">
+      
+            <!-- Svakom markeru dodajemo info-window (Nije obavezno!)-->
+            <agm-info-window [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" >
+      
+              <!-- U info-window stavljamo html -->
+              <span style="font-size: 16px;font-family:'Times New Roman'"></span>
+              <br/>
+              <span style="font-family:'Times New Roman'; color:gray;"><strong></strong></span>
+              <span style="font-family:'Times New Roman'; color:gray;"></span>
+              <a [href]="markerInfo.link"> </a>
+            </agm-info-window>
+      
+          </agm-marker>
+      
+          <agm-polyline [strokeColor]="polyline.color">
+              <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+              </agm-polyline-point>
+          </agm-polyline>
+      
+          <agm-marker (markerClick)="clickedMarker(point)" *ngFor="let point of polyline.path" [latitude]="point.latitude"
+          [longitude]="point.longitude" [iconUrl]="polyline.icon">
+          <agm-info-window [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude">
+  
+            <!-- U info-window stavljamo html -->
+            <span style="font-size: 16px;font-family:'Times New Roman'">Address : {{stationClicked.Address}}</span>
+            <br />
+            <span style="font-family:'Times New Roman'; color:gray;">Lines: {{stationClicked.LineId}}</span>
+          </agm-info-window>
+          </agm-marker>
+      
+        </agm-map>

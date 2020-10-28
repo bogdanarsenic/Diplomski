@@ -35,6 +35,11 @@
                          
                      </td>
                  </tr>
+                 <tr *ngIf="showTT && !isAdmin()">    
+                    <td>
+                            <app-show-timetable [timetable]="timetable"> </app-show-timetable>
+                    </td>
+                 </tr>
             </div>
 
         </table>    
@@ -43,9 +48,5 @@
         <div *ngIf="!isAdmin()">
             <div class="col text-center">     
                 <button class="btn btn-default" (click)="Show()" [hidden]="showTT"> Show timetable</button>
-            </div>
-            
-            <div *ngIf="showTT">
-                    <app-show-timetable [timetable]="timetable"> </app-show-timetable>
             </div>
         </div>
