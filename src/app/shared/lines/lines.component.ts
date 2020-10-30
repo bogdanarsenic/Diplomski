@@ -14,38 +14,65 @@ export class LinesComponent implements OnInit {
 
   @ViewChild(MapComponent, { static: false }) childC: MapComponent
 
-  selectedLine:string;
   allStations:Station[];
   allStationLines:StationLine[]
   lines:Line[]
+  vehicle:boolean
+
   constructor(private lineService:LinesService) { }
 
   ngOnInit(){
+    
+    this.vehicle=false;
+    this.TakeSelectedLine();
+    this.TakeLines();
+    this.TakeStationLines();
+    this.TakeStations();
+  }
+
+  onVehicle()
+  {
+    this.vehicle=true;
+  }
+
+  Marker(latMarker:number,longMarker:number)
+  {
+    this.childC.setVehicleMarker(latMarker,longMarker)
+  }
+
+  TakeSelectedLine(){
     this.lineService.TakeSelectedLine.subscribe(
       data=>
         {
-            this.selectedLine=data;
-            if(this.selectedLine!=undefined)
+            if(data!=undefined)
             {
-                this.childC.onItemChange(this.selectedLine);
+                this.childC.onItemChange(data);
             }
         }
     )
+  }
 
+  TakeLines(){
     this.lineService.TakeLines.subscribe(
       data=>
         {
             this.lines=data;
         }
     )
+  }
 
+  TakeStationLines()
+  {
     this.lineService.TakeStationLines.subscribe(
       data=>
         {
             this.allStationLines=data;
         }
     )
+  }
 
+  TakeStations(){
+    
     this.lineService.TakeStations.subscribe(
       data=>
         {
@@ -53,4 +80,5 @@ export class LinesComponent implements OnInit {
         }
     )
   }
+
 }

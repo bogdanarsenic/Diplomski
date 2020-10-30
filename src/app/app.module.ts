@@ -42,8 +42,10 @@ import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/f
 import { MapComponent } from './shared/lines/map/map.component';
 import { LinesComponent } from './shared/lines/lines.component';
 import { LineListComponent } from './shared/lines/line-list/line-list.component';
-import { AddLinesComponent } from './authorizedUser/admin/lines/add-lines/add-lines.component';
-import { EditLinesComponent } from './authorizedUser/admin/lines/edit-lines/edit-lines.component';
+
+import { LinesAdminComponent } from './authorizedUser/admin/lines-admin/lines-admin.component';
+import { AddLinesComponent } from './authorizedUser/admin/lines-admin/add-lines/add-lines.component';
+import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-lines/edit-lines.component';
 
 
 
@@ -51,7 +53,6 @@ import { EditLinesComponent } from './authorizedUser/admin/lines/edit-lines/edit
   declarations: [
     AppComponent,
     NavigationComponent,
-
     ModalComponent,
     EditTicketComponent,
     ImageUploadComponent,
@@ -72,7 +73,8 @@ import { EditLinesComponent } from './authorizedUser/admin/lines/edit-lines/edit
     LinesComponent,
     LineListComponent,
     AddLinesComponent,
-    EditLinesComponent
+    EditLinesComponent,
+    LinesAdminComponent
   ],
   imports: [
     BrowserModule,

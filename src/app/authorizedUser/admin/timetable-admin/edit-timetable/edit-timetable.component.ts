@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-edit-timetable',

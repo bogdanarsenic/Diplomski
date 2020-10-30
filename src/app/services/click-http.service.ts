@@ -7,11 +7,9 @@ import { Observable } from 'rxjs';
 export class HttpClickService{
 
     constructor (private http: HttpClient){
-
     }
-
-    click(): Observable<any> {
-        
+    
+    click(): Observable<any> {  
         return this.http.post("http://localhost:52295/api/Click", "", {headers:{"Accept": "text/plain"}});
     }
 }

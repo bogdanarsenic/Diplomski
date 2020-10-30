@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-form-timetable',

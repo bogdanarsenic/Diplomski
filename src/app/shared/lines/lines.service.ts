@@ -17,6 +17,9 @@ export class LinesService {
   TakeStationLines=new EventEmitter<StationLine[]>();
   TakeStations=new EventEmitter<Station[]>();
 
+  DrawedStations=new EventEmitter<Station[]>();
+
+
   constructor(private httpClient: HttpClient) { }
 
   getAllLines():any{

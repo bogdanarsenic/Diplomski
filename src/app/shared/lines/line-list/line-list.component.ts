@@ -21,6 +21,7 @@ export class LineListComponent implements OnInit {
   constructor(private lineService:LinesService) { }
 
   ngOnInit(){
+    this.lineNames=[];
     this.callGetLines();
     this.callGetStation();
     this.callGetStationLine();

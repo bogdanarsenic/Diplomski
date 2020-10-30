@@ -15,9 +15,19 @@
             <a routerLink="/timetable" class="nav-link" >Time Table</a>
           </li>
          </div>
-        <li class="nav-item ">
-          <a routerLink="/lines" class="nav-link">Lines</a>
-        </li>
+
+         <div *ngIf="isAdmin()">
+          <li class="nav-item ">
+            <a routerLink="/lines-admin" class="nav-link">Lines</a>
+          </li>
+         </div>
+
+         <div *ngIf="!isAdmin()">
+          <li class="nav-item ">
+            <a routerLink="/lines" class="nav-link">Lines</a>
+          </li>
+         </div>
+
         <li class="nav-item">
           <a routerLink="/vehicles" class="nav-link" >Current vehicles</a>
         </li>

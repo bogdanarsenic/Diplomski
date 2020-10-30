@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TimeTable } from '../../classes/TimeTable';
 
+
 @Component({
   selector: 'app-show-timetable',
   templateUrl: './show-timetable.component.html',
