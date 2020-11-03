@@ -8,9 +8,9 @@ import { CommonModule } from '@angular/common';
 import { Station } from '../../classes/Station';
 import { Line } from '../../classes/Line';
 import { StationLine } from '../../classes/StationLine';
-import { ModalService } from 'src/app/services/modal.service';
 import { Input } from '@angular/core';
 import { LinesService } from '../lines.service';
+import { LinesAdminService } from 'src/app/authorizedUser/admin/lines-admin/lines-admin.service';
 
 
 @Component({
@@ -22,32 +22,32 @@ import { LinesService } from '../lines.service';
 export class MapComponent implements OnInit {
 
   markerInfo: MarkerInfo;
-  @Input() polyline: Polyline;
+  polyline: Polyline;
   public zoom: number;
   showAdmin:boolean;  
   stationsDraw:Array<Station>=[];
   stationIds:Array<any>=[];
   private geoCoder;
-  address:string;
   stationClicked:Station;
   location:GeoLocation;
   previous
   latMarker:number;
   longMarker:number;
+  lineId:number;
 
-  @Input() vehicle:boolean
-
+  vehicle:boolean
   @Input() lines:Line[]
   @Input() allStationLines:StationLine[]
   @Input() allStations:Station[];
 
-constructor(private lineService:LinesService,private mapsAPILoader:MapsAPILoader,private router:Router){
-    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954), "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+constructor(private lineService:LinesService, private lineAdminService:LinesAdminService,private mapsAPILoader:MapsAPILoader,private router:Router){
+    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954,""), "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
     this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
   }
 
   ngOnInit() {
-
+    
+    this.vehicle=false;
     this.showAdmin=localStorage.role=="Admin"?true:false
     this.stationClicked=new Station();
 
@@ -61,27 +61,26 @@ constructor(private lineService:LinesService,private mapsAPILoader:MapsAPILoader
     this.latMarker=latMarker
     this.longMarker=longMarker;
   }
+  onVehicle()
+  {
+    this.vehicle=true;
+  }
 
   placeMarker($event){
 
-    if(this.showAdmin)
+    if(this.showAdmin && !this.vehicle && this.lineId!=undefined)
     {
       this.getAddress($event.coords.lat, $event.coords.lng);
-      this.location = new GeoLocation($event.coords.lat, $event.coords.lng);
-      this.markerInfo = new MarkerInfo(new GeoLocation($event.coords.lat, $event.coords.lng),
-        "assets/bg.png",
-        "Jugodrvo", "", "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
     }
   }
 
   getAddress(latitude, longitude) {
     this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
       if (status === 'OK') {
         if (results[0]) {
           this.zoom = 11;
-          this.address = results[0].formatted_address;
+          this.location = new GeoLocation(latitude, longitude, results[0].formatted_address);
+          this.lineAdminService.SendAddressLocation.emit(this.location);
         } else {
           window.alert('No results found');
         }
@@ -91,16 +90,25 @@ constructor(private lineService:LinesService,private mapsAPILoader:MapsAPILoader
     });
   }
 
+  addPolyline()
+  {
+    this.markerInfo = new MarkerInfo(this.location,
+    "assets/bg.png",
+    "Jugodrvo", "", "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+    this.polyline.addLocation(this.location);  
+  }
+  
   onItemChange(radioSelected:string)
   {
+        this.setVehicleMarker(0,0);
         this.polyline.path=[];
         this.stationsDraw = [];
         this.stationIds = [];
-  
-        var lineId = this.lines.find(Line => Line.Name == radioSelected).Id;
+        this.lineId = this.lines.find(Line => Line.Name == radioSelected).Id;
+        this.lineAdminService.TakeLineId.emit(this.lineId);
     
         this.allStationLines.forEach(sl=>{
-          if(sl.LineId==lineId)
+          if(sl.LineId==this.lineId)
             this.stationIds.push(sl.StationId);
         });
         
@@ -109,11 +117,11 @@ constructor(private lineService:LinesService,private mapsAPILoader:MapsAPILoader
         });
   
         this.stationsDraw.forEach(s=>{
-          this.polyline.addLocation(new GeoLocation(s.CoordinateX,s.CoordinateY));
+          this.polyline.addLocation(new GeoLocation(s.CoordinateX,s.CoordinateY,""));
         });
 
         if(this.vehicle)
-        this.lineService.DrawedStations.emit(this.stationsDraw)
+          this.lineService.DrawedStations.emit(this.stationsDraw)
 
         this.previous=undefined;
   }
@@ -122,15 +130,13 @@ constructor(private lineService:LinesService,private mapsAPILoader:MapsAPILoader
 
     this.allStations.forEach(x=>{
       if(x.CoordinateX==point.latitude && x.CoordinateY==point.longitude){
-        this.stationClicked = x;   
+        this.stationClicked = x;  
+        this.lineAdminService.GetStation.emit(this.stationClicked);
       }
     });
 
     if (this.previous)
-     {
-          this.previous.close();      
-     }
-     
+          this.previous.close();           
     this.previous = infowindow; 
   }
 

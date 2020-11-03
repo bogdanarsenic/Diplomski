@@ -68,14 +68,15 @@ export class NotificationService {
 
   public registerForTimerEvents() : Observable<string> {
       
-    return Observable.create((observer) => {
-
-        this.proxy.on('setRealTime', (data: string) => {  
-            console.log('received time: ' + data);  
-            observer.next(data);
-        });  
-    });      
-  }
+        return Observable.create((observer) => {
+        
+                this.proxy.on('setRealTime', (data: string) => {  
+                        console.log('received time: ' + data);  
+                        observer.next(data);
+                });             
+        }); 
+ 
+}
 
   public StopTimer() {
       this.proxy.invoke("StopTimeServerUpdates");

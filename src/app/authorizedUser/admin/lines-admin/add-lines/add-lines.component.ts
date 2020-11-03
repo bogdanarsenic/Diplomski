@@ -4,9 +4,8 @@ import { ModalService } from 'src/app/services/modal.service';
 import { Line } from 'src/app/shared/classes/Line';
 import { Station } from 'src/app/shared/classes/Station';
 import { StationLine } from 'src/app/shared/classes/StationLine';
-import { LinesService } from 'src/app/shared/lines/lines.service';
 import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
-import { Polyline } from 'src/app/shared/lines/map/model/polyline';
+import { LinesAdminService } from '../lines-admin.service';
 
 @Component({
   selector: 'app-add-lines',
@@ -17,53 +16,47 @@ export class AddLinesComponent implements OnInit {
 
   bodyText:string;
   bodyText1:string;
-  polyline:Polyline
   station:Station;
   stationLine:StationLine;
-  address:string;
-  location:GeoLocation;
-  lineId:number;
   stationId:string;
   line:Line;
   @Input() lines:Line[]
+  @Input() location:GeoLocation;
+  @Input() lineId:number;
 
+  constructor(private modalService: ModalService,private lineAdminService:LinesAdminService,private router:Router)
+  { }
 
-
-  constructor(private modalService: ModalService,private lineService:LinesService,private router:Router) { }
-
-  ngOnInit(){
-  }
+  ngOnInit(){}
 
   save()
   {
     if(this.bodyText!="")
     {
-
-        this.polyline.addLocation(this.location)
         this.station=new Station();
         this.stationLine = new StationLine();
         this.station.Name = this.bodyText;
-        this.station.Address = this.address;
+        this.station.Address = this.location.address;
         this.station.CoordinateX = this.location.latitude;
         this.station.CoordinateY = this.location.longitude;
-
+        this.station.LineId=String(this.lineId);
         this.modalService.close('custom-modal-1');
+        this.lineAdminService.TakePolyline.emit(true);
         this.bodyText = '';
         this.postStation();
-  }
+    }
   else{
     alert("You need to put station name");
   }
   }
 
   postStation(){
-    this.station.Address = this.address;
-    this.lineService.postStation(this.station)
+    this.station.Address = this.location.address;
+    this.lineAdminService.postStation(this.station)
         .subscribe(
           data =>{
             this.stationId = data.Id;
             this.postStationLine();
-           console.log("Poslata stanica.");
           },
           error => {
             console.log(error);
@@ -75,10 +68,9 @@ export class AddLinesComponent implements OnInit {
     
     this.stationLine.LineId = this.lineId;
     this.stationLine.StationId = this.stationId;
-    this.lineService.postStationLine(this.stationLine)
+    this.lineAdminService.postStationLine(this.stationLine)
         .subscribe(
           data =>{
-           console.log("Poslata stationline.");
           },
           error => {
             console.log(error);
@@ -87,12 +79,11 @@ export class AddLinesComponent implements OnInit {
   }
 
   postLine(){
-    this.lineService.postLine(this.line)
+    this.lineAdminService.postLine(this.line)
         .subscribe(
           data =>{
-            this.lineId = data.Id;
-           console.log("Poslata linija.");
-           this.router.navigate(['/lines-admin']).then(()=>window.location.reload()); 
+          this.lineId = data.Id;           
+          this.router.navigate(['/lines-admin']).then(()=>window.location.reload());        
           },
           error => {
             console.log(error);
@@ -100,7 +91,6 @@ export class AddLinesComponent implements OnInit {
         )
   }
   
-
   openModal(id: string) {
    this.modalService.open(id);
   }
@@ -109,8 +99,7 @@ export class AddLinesComponent implements OnInit {
   this.modalService.close(id);
   }
 
-    createLine(){
-
+  createLine(){
 
     var i=this.lines.findIndex(x=>x.Name===this.bodyText1);
 
@@ -126,10 +115,8 @@ export class AddLinesComponent implements OnInit {
       alert("There is already line with that name");
     }
     else
-     {
-       alert("You need to put the name of a line");
-     }
-
+    {
+      alert("You need to put the name of a line");
+    }
   }
-
 }

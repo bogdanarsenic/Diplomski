@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone,ViewChild, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Station } from '../classes/Station';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -16,7 +16,7 @@ import { LinesService } from '../lines/lines.service';
   styles: ['agm-map {height: 500px; width: 1000px;}'], //postavljamo sirinu i visinu mape
 })
 
-export class VehiclesComponent implements OnInit {
+export class VehiclesComponent implements OnInit, OnDestroy {
 
   @ViewChild(LinesComponent, { static: false }) childC:LinesComponent 
   markerInfo: MarkerInfo;
@@ -35,7 +35,7 @@ export class VehiclesComponent implements OnInit {
     this.isConnected = false;
     this.notifications = [];
 
-    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954),
+    this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954,""),
       "assets/ftn.png",
       "Jugodrvo", "", "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
 
@@ -54,6 +54,12 @@ export class VehiclesComponent implements OnInit {
       this.onItemChange();
     },1000)
 
+  }
+
+  ngOnDestroy()
+  {
+      this.stopTimer();
+      this.isConnected=false;
   }
 
   onItemChange(){
@@ -91,20 +97,24 @@ export class VehiclesComponent implements OnInit {
   }
 
   subscribeForTime() {
-    this.notifService.registerForTimerEvents().subscribe(e => this.onTimeEvent(e));
+    this.notifService.registerForTimerEvents().subscribe(e => 
+      {
+           this.onTimeEvent(e)
+      });
+
   }
 
   public onTimeEvent(time: string){
 
-    this.ngZone.run(() => { 
-    this.time = time;  
-    this.latMarker = this.stationsToDraw[this.num].CoordinateX;
-    this.longMarker = this.stationsToDraw[this.num].CoordinateY;
-    this.num = this.num + 1;
-    if(this.num>this.stationsToDraw.length -1)
-        this.num = 0;     
-        this.childC.Marker(this.latMarker,this.longMarker);
-    });  
+      this.ngZone.run(() => {      
+      this.time = time;  
+      this.latMarker = this.stationsToDraw[this.num].CoordinateX;
+      this.longMarker = this.stationsToDraw[this.num].CoordinateY;
+      this.num = this.num + 1;
+      if(this.num>this.stationsToDraw.length -1)
+          this.num = 0;     
+      this.childC.Marker(this.latMarker,this.longMarker);
+      });  
   }
 
   public onClick() {

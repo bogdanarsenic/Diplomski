@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Line } from 'src/app/shared/classes/Line';
 import { Station } from 'src/app/shared/classes/Station';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { LinesService } from 'src/app/shared/lines/lines.service';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { LinesAdminService } from '../lines-admin.service';
 
 @Component({
   selector: 'app-edit-lines',
@@ -13,33 +13,47 @@ import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 })
 export class EditLinesComponent implements OnInit {
 
-  lineNames:string[];
-  lineEdit:Line;
-  lineId:number;
-  check:string;
   radioSelected:string;
   timetables:TimeTable[];
-  stationEditID:number;
   stationEdit:Station;
   editStation:boolean;
   edit:boolean;
+  lineEdit:Line;
+  lineId:number;
 
+  @Input() lines:Line[];
+  @Input() station:Station;
+  
 
-  constructor(private lineService:LinesService,private timetableService:TimetableService,private router:Router) { }
+  constructor(private lineAdminService:LinesAdminService,private timetableService:TimetableService,private router:Router) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.editStation=false;
+
   }
 
+  TakeLine(lineId:number)
+  {
+    this.lineId=lineId;
+    this.lineEdit=this.lines.find(x=>x.Id==lineId);
+    this.editStation=false;
+  }
+
+  GetStation(station:Station)
+  {
+      this.editStation=true;
+      this.stationEdit=station;
+  }
+  
   UpdateLine()
   {
-    var i=this.lineNames.findIndex(x=>x===this.lineEdit.Name);
+    var i=this.lines.findIndex(x=>x.Id===this.lineId);
 
     if(i==-1 && this.lineEdit.Name!="")
     {
-        this.lineService.putLine(this.lineId, this.lineEdit)
+        this.lineAdminService.putLine(this.lineId, this.lineEdit)
         .subscribe(
           data => {
-            //this.stations = data;  
         
           },
           error => {
@@ -59,8 +73,7 @@ export class EditLinesComponent implements OnInit {
 UpdateTimetable()
 {
 
-    this.check=this.radioSelected;
-    this.timetableService.getTimetablebyLineid(this.check).subscribe(
+    this.timetableService.getTimetablebyLineid(String(this.lineId)).subscribe(
       data=>
       {
             this.timetables=data;
@@ -69,7 +82,6 @@ UpdateTimetable()
               {  
                   this.UpdateTimetable2();
               }
-
       }
     )
  }
@@ -91,7 +103,7 @@ UpdateTimetable()
  }
   UpdateStation()
   {
-    this.lineService.putStation(this.stationEditID, this.stationEdit)
+    this.lineAdminService.putStation(this.stationEdit.Id, this.stationEdit)
     .subscribe(
       data => {
         this.router.navigate(['/lines']).then(()=>window.location.reload());  
@@ -107,7 +119,7 @@ UpdateTimetable()
 
     if(this.radioSelected!="")
     {
-        this.lineService.deleteLine(this.lineId)
+        this.lineAdminService.deleteLine(this.lineId)
         .subscribe(
           data => {
             console.log("OK");  
@@ -125,7 +137,7 @@ UpdateTimetable()
   }
 
   deleteStation(){
-    this.lineService.deleteStation(this.stationEditID)
+    this.lineAdminService.deleteStation(this.stationEdit.Id)
     .subscribe(
       data => {
         this.router.navigate(['/lines']).then(()=>window.location.reload());  
@@ -137,17 +149,9 @@ UpdateTimetable()
     )
   }
   
-
   Edit()
   {
-    if(this.radioSelected!="")
-    {
-      this.edit=true;
-    }
-    else
-    {
-      alert("You need to check some line if you want to edit it")
-    }
+    this.edit=true;
   }
 
 }

@@ -18,12 +18,12 @@ export class LinesComponent implements OnInit {
   allStationLines:StationLine[]
   lines:Line[]
   vehicle:boolean
+  lineId:number;
 
   constructor(private lineService:LinesService) { }
 
   ngOnInit(){
     
-    this.vehicle=false;
     this.TakeSelectedLine();
     this.TakeLines();
     this.TakeStationLines();
@@ -32,13 +32,14 @@ export class LinesComponent implements OnInit {
 
   onVehicle()
   {
-    this.vehicle=true;
+    this.childC.onVehicle();
   }
 
   Marker(latMarker:number,longMarker:number)
   {
     this.childC.setVehicleMarker(latMarker,longMarker)
   }
+
 
   TakeSelectedLine(){
     this.lineService.TakeSelectedLine.subscribe(

@@ -1,23 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
-
 import { NavigationComponent } from './navigation/navigation.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import {AgmCoreModule} from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationService } from './services/notification.service';
 import { HttpClickService } from './services/click-http.service';
-
-
 import { AppRoutingModule } from './app-routing/app-routing.module';
-
 import { ModalComponent } from './authorizedUser/admin/modal/modal.component';
 import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
 import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
@@ -34,7 +27,6 @@ import { VehiclesComponent } from './shared/vehicles/vehicles.component';
 import { TimetableComponent } from './shared/timetable/timetable.component';
 import { PricelistComponent } from './shared/pricelist/pricelist.component';
 import { ShowTimetableComponent } from './shared/timetable/show-timetable/show-timetable.component';
-
 import { TimetableAdminComponent } from './authorizedUser/admin/timetable-admin/timetable-admin.component';
 import { EditTimetableComponent } from './authorizedUser/admin/timetable-admin/edit-timetable/edit-timetable.component';
 import { AddTimetableComponent } from './authorizedUser/admin/timetable-admin/add-timetable/add-timetable.component';
@@ -42,12 +34,9 @@ import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/f
 import { MapComponent } from './shared/lines/map/map.component';
 import { LinesComponent } from './shared/lines/lines.component';
 import { LineListComponent } from './shared/lines/line-list/line-list.component';
-
 import { LinesAdminComponent } from './authorizedUser/admin/lines-admin/lines-admin.component';
 import { AddLinesComponent } from './authorizedUser/admin/lines-admin/add-lines/add-lines.component';
 import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-lines/edit-lines.component';
-
-
 
 @NgModule({
   declarations: [

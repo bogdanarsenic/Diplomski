@@ -1,5 +1,13 @@
 <app-lines></app-lines>
 
-<app-add-lines [lines]="lines"></app-add-lines>
-
-<app-edit-lines></app-edit-lines>
+<div class="container">
+    <ul>
+            <li>
+                <app-add-lines [lines]="lines" [location]="location" [lineId]="lineId"></app-add-lines>
+            </li>
+            <li>
+                <app-edit-lines [lines]="lines" [station]="station"></app-edit-lines>
+            </li>
+                
+    </ul>
+</div>

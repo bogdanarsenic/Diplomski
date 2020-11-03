@@ -38,9 +38,6 @@
             </form>
            
           </div>
-    
-    <div style=" margin-top: 10px; margin-left: 20px">
 
-<button style="margin-left:10px" class="btn btn-default" (click)="Edit()" type="button">Edit</button>
-<button style="margin-left:10px" class="btn btn-default" (click)="deleteLine()" type="button"> Delete Line</button>
-</div>
+<button class="btn btn-default" [disabled]="lineId===undefined" (click)="Edit()" type="button">Edit Line</button>
+<button class="btn btn-default" [disabled]="lineId===undefined" (click)="deleteLine()" type="button"> Delete Line</button>
