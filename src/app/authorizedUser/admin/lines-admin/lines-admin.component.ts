@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { Line } from 'src/app/shared/classes/Line';
 import { Station } from 'src/app/shared/classes/Station';
 import { LinesComponent } from 'src/app/shared/lines/lines.component';
+import { LinesService } from 'src/app/shared/lines/lines.service';
 import { AddLinesComponent } from './add-lines/add-lines.component';
 import { EditLinesComponent } from './edit-lines/edit-lines.component';
 import { LinesAdminService } from './lines-admin.service';
@@ -16,7 +17,6 @@ export class LinesAdminComponent implements OnInit {
   lines:Line[];
   location:Geolocation;
   lineId:number;
-  sendPolyline:boolean=false;
   station:Station;
 
 
@@ -24,7 +24,7 @@ export class LinesAdminComponent implements OnInit {
   @ViewChild(AddLinesComponent,{static:false}) childAdd:AddLinesComponent
   @ViewChild(EditLinesComponent,{static:false}) childEdit:EditLinesComponent
 
-  constructor(private lineAdminService:LinesAdminService) { }
+  constructor(private lineAdminService:LinesAdminService, private lineService:LinesService) { }
 
   ngOnInit(){
     this.lineAdminService.SendAddressLocation.subscribe(
@@ -37,10 +37,12 @@ export class LinesAdminComponent implements OnInit {
         }
       });
 
-    setTimeout(()=>
-    {
-      this.lines=this.childC.lines
-    },1000);
+    this.lineService.TakeLines.subscribe(
+        data=>
+        {
+          this.lines=data;
+        }
+      )
 
     this.lineAdminService.TakeLineId.subscribe(
       data=>

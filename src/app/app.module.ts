@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AgmCoreModule} from '@agm/core';
@@ -19,7 +18,6 @@ import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { EditTicketComponent } from './authorizedUser/admin/edit-ticket/edit-ticket.component';
 import { ValidateComponent } from './authorizedUser/controller/validate/validate.component';
 import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.component';
-import { AddTicketComponent } from './authorizedUser/user/add-ticket/add-ticket.component';
 import { ImageUploadComponent } from './authorizedUser/user/image-upload/image-upload.component';
 import { RegisterComponent } from './unauthorizedUser/register/register.component';
 import { LoginComponent } from './unauthorizedUser/login/login.component';
@@ -37,6 +35,12 @@ import { LineListComponent } from './shared/lines/line-list/line-list.component'
 import { LinesAdminComponent } from './authorizedUser/admin/lines-admin/lines-admin.component';
 import { AddLinesComponent } from './authorizedUser/admin/lines-admin/add-lines/add-lines.component';
 import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-lines/edit-lines.component';
+import { TicketUserComponent } from './authorizedUser/user/ticket-user/ticket-user.component';
+import { ReserveComponent } from './authorizedUser/user/ticket-user/reserve/reserve.component';
+import { ShowComponent } from './authorizedUser/user/ticket-user/show/show.component';
+import { PaypalComponent } from './authorizedUser/user/ticket-user/paypal/paypal.component';
+import { TicketComponent } from './shared/pricelist/ticket/ticket.component';
+import { NavigationComponent } from './shared/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,6 @@ import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-line
     RegisterComponent,
     TimetableComponent,
     VehiclesComponent,
-    AddTicketComponent,
     ShowTimetableComponent,
     AddTimetableComponent,
     EditTimetableComponent,
@@ -63,7 +66,12 @@ import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-line
     LineListComponent,
     AddLinesComponent,
     EditLinesComponent,
-    LinesAdminComponent
+    LinesAdminComponent,
+    TicketUserComponent,
+    ReserveComponent,
+    ShowComponent,
+    PaypalComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,5 @@ export class TimeTable
     Times:string;
 
     constructor(){
-      
     }
 }

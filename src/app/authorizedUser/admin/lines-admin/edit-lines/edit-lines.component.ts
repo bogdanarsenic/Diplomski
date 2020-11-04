@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Line } from 'src/app/shared/classes/Line';
 import { Station } from 'src/app/shared/classes/Station';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import { LinesAdminService } from '../lines-admin.service';
 
 @Component({
@@ -20,22 +19,23 @@ export class EditLinesComponent implements OnInit {
   edit:boolean;
   lineEdit:Line;
   lineId:number;
+  linesTemp:Line[]
 
   @Input() lines:Line[];
   @Input() station:Station;
   
 
-  constructor(private lineAdminService:LinesAdminService,private timetableService:TimetableService,private router:Router) { }
+  constructor(private lineAdminService:LinesAdminService,private router:Router) { }
 
   ngOnInit() {
     this.editStation=false;
-
   }
 
   TakeLine(lineId:number)
   {
     this.lineId=lineId;
-    this.lineEdit=this.lines.find(x=>x.Id==lineId);
+    this.linesTemp=this.lines.map((x)=>{ return {...x}})
+    this.lineEdit=this.linesTemp.find(x=>x.Id==lineId);
     this.editStation=false;
   }
 
@@ -47,7 +47,7 @@ export class EditLinesComponent implements OnInit {
   
   UpdateLine()
   {
-    var i=this.lines.findIndex(x=>x.Id===this.lineId);
+    var i=this.lines.findIndex(x=>x.Name===this.lineEdit.Name);
 
     if(i==-1 && this.lineEdit.Name!="")
     {
@@ -60,47 +60,14 @@ export class EditLinesComponent implements OnInit {
             console.log(error);
           }
         )
-
-        this.UpdateTimetable();
         this.router.navigate(['/lines']).then(()=>window.location.reload());  
-        }
-    
+        }   
     else
     {
         alert("You need to pick another name.");
     }
   }
-UpdateTimetable()
-{
 
-    this.timetableService.getTimetablebyLineid(String(this.lineId)).subscribe(
-      data=>
-      {
-            this.timetables=data;
-
-            if(data!=null)
-              {  
-                  this.UpdateTimetable2();
-              }
-      }
-    )
- }
-
- UpdateTimetable2()
- {
-  
-      this.timetables.forEach(x=>x.LineId=this.lineEdit.Name);
-      
-      this.timetables.forEach(
-        x=>
-          this.timetableService.putTimeTable(x.Id,x).subscribe(
-            data=>
-          {
-
-          }
-          )         
-      )   
- }
   UpdateStation()
   {
     this.lineAdminService.putStation(this.stationEdit.Id, this.stationEdit)
@@ -122,7 +89,6 @@ UpdateTimetable()
         this.lineAdminService.deleteLine(this.lineId)
         .subscribe(
           data => {
-            console.log("OK");  
             this.router.navigate(['/lines']).then(()=>window.location.reload());   
           },
           error => {

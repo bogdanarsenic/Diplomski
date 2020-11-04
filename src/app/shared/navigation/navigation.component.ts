@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { ServicesService } from '../services/services.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-navigation',

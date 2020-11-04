@@ -7,6 +7,7 @@ import { EditprofileComponent } from '../authorizedUser/editprofile/editprofile.
 import { ImageUploadComponent } from '../authorizedUser/user/image-upload/image-upload.component';
 import { LinesComponent } from '../shared/lines/lines.component';
 import { PricelistComponent } from '../shared/pricelist/pricelist.component';
+import { TicketComponent } from '../shared/pricelist/ticket/ticket.component';
 import { TimetableComponent } from '../shared/timetable/timetable.component';
 import { VehiclesComponent } from '../shared/vehicles/vehicles.component';
 import { LoginComponent } from '../unauthorizedUser/login/login.component';
@@ -26,5 +27,6 @@ export const routes:Routes=[
     { path: 'timetable-admin', component:TimetableAdminComponent},
     { path: 'lines-admin', component:LinesAdminComponent},
     { path: 'image-upload', component:ImageUploadComponent},
+    { path: 'ticket-proba', component:TicketComponent}
 
 ]

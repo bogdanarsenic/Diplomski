@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Line } from '../../classes/Line';
 import { Station } from '../../classes/Station';
 import { StationLine } from '../../classes/StationLine';
@@ -16,8 +16,6 @@ export class LineListComponent implements OnInit {
   allStations:Station[];
   allStationLines:StationLine[];
 
-  @Output() line:EventEmitter<string>;
-
   constructor(private lineService:LinesService) { }
 
   ngOnInit(){
@@ -34,9 +32,9 @@ export class LineListComponent implements OnInit {
       data=>
       {
           this.lines=data; 
+          this.lineService.TakeLines.emit(this.lines);
           this.lineNames=this.lines.map((x)=>{ return x["Name"]});      
           this.lineNames.sort((function(a, b){return a-b}));
-          this.lineService.TakeLines.emit(this.lines);
       }
     )
   }

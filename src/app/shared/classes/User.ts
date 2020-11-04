@@ -13,6 +13,5 @@ export class  User{
     Status:string;
 
     constructor(){
-       
     }
 }

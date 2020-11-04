@@ -4,7 +4,5 @@ export class StationLine
     LineId : number;
 
 
-    constructor(){
-
-    }
+    constructor(){    }
 }

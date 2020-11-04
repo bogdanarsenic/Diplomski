@@ -7,10 +7,5 @@ export class Station
     Id:number;
     LineId:string;
 
-    constructor(){
-       /* this.Name = name;
-        this.Address = address;
-        this.CoordinateX = cooX;
-        this.CoordinateY = cooY;*/
-    }
+    constructor(){   }
 }

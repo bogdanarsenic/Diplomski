@@ -15,6 +15,5 @@ export class Ticket{
         this.IsValid = false;
         this.UserId = "";
         this.Price=0;
-       
     }
 }
