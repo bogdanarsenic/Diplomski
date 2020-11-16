@@ -15,5 +15,7 @@ namespace WebApp.Models
         public double CoordinateX { get; set; }
 
         public double CoordinateY { get; set; }
+
+		public string LineId { get; set; }
     }
 }

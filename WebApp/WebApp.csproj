@@ -253,6 +253,7 @@
     <Compile Include="Controllers\ApplicationUserController.cs" />
     <Compile Include="Controllers\ClickController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\LineController.cs" />
     <Compile Include="Controllers\PriceListController.cs" />
     <Compile Include="Controllers\StationController.cs" />
@@ -271,6 +272,10 @@
     <Compile Include="Migrations\202005041616045_paypal.cs" />
     <Compile Include="Migrations\202005041616045_paypal.Designer.cs">
       <DependentUpon>202005041616045_paypal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011031135347_lineId1.cs" />
+    <Compile Include="Migrations\202011031135347_lineId1.Designer.cs">
+      <DependentUpon>202011031135347_lineId1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -352,7 +357,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -369,6 +376,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -405,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005041616045_paypal.resx">
       <DependentUpon>202005041616045_paypal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011031135347_lineId1.resx">
+      <DependentUpon>202011031135347_lineId1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

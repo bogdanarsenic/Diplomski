@@ -22,13 +22,12 @@ namespace WebApp.Hubs
 
         public void GetTime()
         {
-            //Svim klijentima se salje setRealTime poruka
             Clients.All.setRealTime(DateTime.Now.ToString("h:mm:ss tt"));
         }
 
         public void TimeServerUpdates()
         {
-            timer.Interval = 5000;
+            timer.Interval = 7000;
             timer.Start();
             timer.Elapsed += OnTimedEvent;
         }

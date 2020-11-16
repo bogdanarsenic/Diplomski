@@ -96,7 +96,15 @@ namespace WebApp.Controllers
                         return StatusCode(HttpStatusCode.NoContent);
 
                     }
-                    string pom = appUser.Name;
+
+					if (u.ImageUrl != appUser.ImageUrl)
+					{
+						u.ImageUrl = appUser.ImageUrl;
+						contex.SaveChanges();
+						return StatusCode(HttpStatusCode.NoContent);
+					}
+
+					string pom = appUser.Name;
                     u.Name = pom.Split('|')[0];
                     u.LastName = appUser.LastName;
                     u.DateOfBirth = appUser.DateOfBirth;

@@ -72,6 +72,29 @@ namespace WebApp.Migrations
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Controller");
             }
-        }
+
+			if (!context.PriceLists.Any(u => u.Id == "Temporal"))
+			{
+				var pricelist = new PriceList() { Id = "Temporal", Price = 0 };
+				context.PriceLists.Add(pricelist);
+			}
+			if (!context.PriceLists.Any(u => u.Id == "Day"))
+			{
+				var pricelist = new PriceList() { Id = "Day", Price = 0 };
+				context.PriceLists.Add(pricelist);
+			}
+
+			if (!context.PriceLists.Any(u => u.Id == "Month"))
+			{
+				var pricelist = new PriceList() { Id = "Month", Price = 0 };
+				context.PriceLists.Add(pricelist);
+			}
+
+			if (!context.PriceLists.Any(u => u.Id == "Year"))
+			{
+				var pricelist = new PriceList() { Id = "Year", Price = 0 };
+				context.PriceLists.Add(pricelist);
+			}
+		}
     }
 }
