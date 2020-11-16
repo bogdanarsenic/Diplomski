@@ -13,11 +13,11 @@
                 </label>
 
                 <label class="form-check-label">
-                        <input type="radio" [disabled]="isDisabledStudent() || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onStudent(i)">Student
+                        <input type="radio" [disabled]="disabledStudent || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onStudent(i)">Student
                 </label>
 
                 <label class="form-check-label" >
-                        <input type="radio" [disabled]="isDisabledPensioner() || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onPensioner(i)">Pensioner
+                        <input type="radio" [disabled]="disabledPensioner || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onPensioner(i)">Pensioner
                 </label>
         </div>
     </form>

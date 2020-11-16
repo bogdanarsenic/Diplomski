@@ -1,1 +1,5 @@
-<p>reserve works!</p>
+<div class="grid-container" *ngFor="let l of pricelist;let i=index" >
+    <div class="grid-item">
+        <button class="btn btn-block btn-danger" [disabled]="price[i]==undefined" (click)="Add(i)"> Buy </button>  
+    </div>
+</div>

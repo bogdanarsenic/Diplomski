@@ -1,1 +1,19 @@
-<p>ticket-user works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <app-ticket> </app-ticket>
+
+            <div *ngIf="canBuy">
+                <app-reserve [pricelist]="pricelist" [user]="user"></app-reserve>
+                <div>
+                    <app-paypal style="margin-left: 150px;width:300px;height:150px" [user]="user">  </app-paypal>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5" *ngIf="canBuy">
+            <app-show  [user]="user">
+            </app-show>
+        </div>
+    </div>
+</div>

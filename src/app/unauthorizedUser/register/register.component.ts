@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-
 import { User } from 'src/app/shared/classes/User';
 import { Login } from 'src/app/shared/classes/Login';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';

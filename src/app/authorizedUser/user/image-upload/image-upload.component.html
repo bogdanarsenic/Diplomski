@@ -6,13 +6,15 @@
             <input type="file" id="ImageUrl" (change) = "onFileChanged($event)" formControlName="ImageUrl">
         </div>
 
+        <img [src]="imageShow" height="200"> <br/>
+        
         <div class="form-btn">
             <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Upload proof
             </button>
         </div>
        
         <div class="form-btn">
-            <a routerLink=""> Next </a>
+            <a routerLink=""> Skip </a>
         </div>
     </form>
 </div>

@@ -31,22 +31,28 @@
         <li class="nav-item">
           <a routerLink="/vehicles" class="nav-link" >Current vehicles</a>
         </li>
+
         <li class="nav-item">
           <a routerLink="/pricelist" class="nav-link">Pricelist</a>
         </li>
-        <li class="nav-item">
-          <a routerLink="/ticket-proba" class="nav-link">Proba</a>
-        </li>
+
+        <div *ngIf="isAdmin()">
+          <li class="nav-item">
+            <a routerLink="/pricelist-admin" class="nav-link">Pricelist</a>    
+          </li>
+         </div>
 
         <div *ngIf="isController()">
             <li class="nav-item">
                 <a routerLink="/verify" class="nav-link" >Verify</a>
             </li>
-
+        </div>
+        <div *ngIf="isController()">
             <li class="nav-item">
               <a routerLink="/validate" class="nav-link" >Validate</a>
           </li>
         </div>
+      
       </ul>
 
       <ul class="nav navbar-nav ml-auto" style="margin-right: 20px;">

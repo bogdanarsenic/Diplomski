@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <app-ticket> </app-ticket>
+
+            <div class="grid-container" *ngFor="let l of pricelist;let i=index" >
+                <app-edit-ticket [pricelist]="pricelist[i]"></app-edit-ticket>
+            </div>
+        </div>
+    </div>
+</div>

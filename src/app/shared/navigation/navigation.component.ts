@@ -26,6 +26,11 @@ export class NavigationComponent implements OnInit {
   { 
     return localStorage.role=="Controller"? true : false
   }
+
+  isUser()
+  {
+    return localStorage.role=="AppUser"? true : false
+  }
   
   public showLogIn(){
     return localStorage.jwt ? false:true  

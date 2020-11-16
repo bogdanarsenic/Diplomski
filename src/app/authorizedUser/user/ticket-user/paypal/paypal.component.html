@@ -1,1 +1,18 @@
-<p>paypal works!</p>
+<div class="payPal">
+    <h4> Or buy it <i> safer </i> way with <span style="color:gold">PayPal</span>: </h4>
+             <label style="color:#f4f4f4;margin-left:10px">
+                    <input type="radio" [disabled]="priceTemporal==undefined" style="margin-right:5px" name="paypalButtons" (click)="paypalHour()">Temporal
+             </label>
+            <label  style="color:#f4f4f4; margin-left:20px">
+                   <input type="radio" [disabled]="priceDay==undefined" style="margin-right:5px" name="paypalButtons" (click)="paypalDay()">Day
+            </label>
+            <label  style="color:#f4f4f4; margin-left:20px">
+                   <input type="radio" [disabled]="priceMonth==undefined" style="margin-right:5px"  name="paypalButtons" (click)="paypalMonth()">Month
+            </label>
+           <label  style="color:#f4f4f4; margin-left:20px">
+                  <input type="radio" [disabled]="priceYear==undefined" style="margin-right:5px"  name="paypalButtons" (click)="paypalYear()">Year
+           </label>
+</div>
+
+<div [hidden]="!paypalchecked" #paypal style="margin-left: 150px;width:300px;height:150px"></div>
+

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
-
 import { ServicesService } from 'src/app/services/services.service';
 import { User } from 'src/app/shared/classes/User';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';
@@ -22,6 +20,8 @@ export class EditprofileComponent implements OnInit {
   user:User=new User();
   registerUserForm:FormGroup;
   id:string;
+  isRegular:boolean;
+  imageUrl:string;
 
   status:string;
 
@@ -54,6 +54,7 @@ export class EditprofileComponent implements OnInit {
   }
   ngOnInit() {
 
+    this.isRegular=true;
     this.status="";
     this.getUser();
 
@@ -72,10 +73,12 @@ export class EditprofileComponent implements OnInit {
           this.registerUserForm.value.DateOfBirth=this.user.DateOfBirth;
           this.registerUserForm.value.ConfirmPassword=this.user.ConfirmPassword;
           this.registerUserForm.value.Type=this.user.Type;
+          this.imageUrl=this.user.ImageUrl;
           this.status=this.user.Status;
-
-          console.log(this.registerUserForm);
-
+          if(this.user.Type!="Regular")
+          {
+            this.isRegular=false;
+          }
       },
       err=>{
         alert("Something went wrong");
@@ -89,9 +92,13 @@ export class EditprofileComponent implements OnInit {
       this.Update(this.user)
   }
 
+  isUser()
+  {
+    return localStorage.getItem('role')=="AppUser"? true : false
+  }
+
   Update(user:User)
   {
-
 
     this.user.Name = this.registerUserForm.value.Name;
     this.user.LastName = this.registerUserForm.value.LastName
@@ -100,24 +107,21 @@ export class EditprofileComponent implements OnInit {
     this.user.Password = this.registerUserForm.value.Password;
     this.user.ConfirmPassword = this.registerUserForm.value.ConfirmPassword;
     this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
-    this.user.Type = this.registerUserForm.value.Type;
+    if(this.isUser())
+    {
+      this.user.Type = this.registerUserForm.value.Type;
+    }
     
     var u = this.user;
     u.Name = this.user.Name+'|'+this.user.Password;
     this.id = this.user.Email.split('@')[0];
-   
-    console.log(this.user);
 
     this.editService.putApplicationUsers(this.id,u).subscribe(
       data=>{
-
-                console.log('ok');
-                this.router.navigate(['']);
-                
+                this.router.navigate(['']);           
             },
             error=>
-            {
-              
+            {           
               alert("Username doesn't exist. Usernames needs to match!")
             }
           )  

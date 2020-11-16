@@ -97,7 +97,7 @@ export class TimetableComponent implements OnInit {
             if(this.cityLines.findIndex(y=>x.Name==y.LineId)!=0)
             {
                 this.cityLines.push(x);
-                this.cityLines.sort((function(a, b){return a-b}));   
+                this.cityLines.sort((x,y)=>{return x.Name-y.Name});   
             }
         }
       else
@@ -105,7 +105,7 @@ export class TimetableComponent implements OnInit {
           if(this.subLines.findIndex(y=>x.Name==y.LineId)!=0)
           {
               this.subLines.push(x);
-              this.subLines.sort((function(a, b){return a-b}));
+              this.subLines.sort((x,y)=>{return x.Name-y.Name});
           }
         }
     })

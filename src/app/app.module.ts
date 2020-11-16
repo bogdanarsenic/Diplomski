@@ -15,7 +15,6 @@ import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
 import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
 import { CanActivateViaUserGuard } from './auth/guards/user.guard';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
-import { EditTicketComponent } from './authorizedUser/admin/edit-ticket/edit-ticket.component';
 import { ValidateComponent } from './authorizedUser/controller/validate/validate.component';
 import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.component';
 import { ImageUploadComponent } from './authorizedUser/user/image-upload/image-upload.component';
@@ -23,7 +22,6 @@ import { RegisterComponent } from './unauthorizedUser/register/register.componen
 import { LoginComponent } from './unauthorizedUser/login/login.component';
 import { VehiclesComponent } from './shared/vehicles/vehicles.component';
 import { TimetableComponent } from './shared/timetable/timetable.component';
-import { PricelistComponent } from './shared/pricelist/pricelist.component';
 import { ShowTimetableComponent } from './shared/timetable/show-timetable/show-timetable.component';
 import { TimetableAdminComponent } from './authorizedUser/admin/timetable-admin/timetable-admin.component';
 import { EditTimetableComponent } from './authorizedUser/admin/timetable-admin/edit-timetable/edit-timetable.component';
@@ -41,19 +39,21 @@ import { ShowComponent } from './authorizedUser/user/ticket-user/show/show.compo
 import { PaypalComponent } from './authorizedUser/user/ticket-user/paypal/paypal.component';
 import { TicketComponent } from './shared/pricelist/ticket/ticket.component';
 import { NavigationComponent } from './shared/navigation/navigation.component';
+import { TicketAdminComponent } from './authorizedUser/admin/ticket-admin/ticket-admin.component';
+import { EditTicketComponent } from './authorizedUser/admin/ticket-admin/edit-ticket/edit-ticket.component';
+import { CommonModule } from '@angular/common';
+import { VerifyComponent } from './authorizedUser/controller/verify/verify.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     ModalComponent,
-    EditTicketComponent,
     ImageUploadComponent,
     ValidateComponent,
     EditprofileComponent,
     LoginComponent,
     MapComponent,
-    PricelistComponent,
     RegisterComponent,
     TimetableComponent,
     VehiclesComponent,
@@ -71,8 +71,10 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
     ReserveComponent,
     ShowComponent,
     PaypalComponent,
-    TicketComponent
-  ],
+    TicketComponent,
+    TicketAdminComponent,
+    EditTicketComponent,
+    VerifyComponent ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -83,6 +85,7 @@ import { NavigationComponent } from './shared/navigation/navigation.component';
     MatButtonModule,
     MatDialogModule,
     AppRoutingModule,
+    CommonModule
 
   ],
   providers: [

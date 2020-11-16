@@ -4,7 +4,7 @@ import { PriceList } from '../../classes/PriceList';
 import { User } from '../../classes/User';
 import { PricelistService } from '../pricelist.service';
 import { CommonModule } from '@angular/common';
-
+import { TicketUserService } from 'src/app/authorizedUser/user/ticket-user/ticket-user.service';
 
 @Component({
   selector: 'app-ticket',
@@ -16,17 +16,25 @@ export class TicketComponent implements OnInit {
   pricelist:PriceList[];
   pricelistTemp:PriceList[]
   user:User;
+  disabledStudent:boolean;
+  disabledPensioner:boolean;
 
-  studentCoefficient:number=0.8
-  pensionerCoefficient:number=0.7
-
-  constructor(private priceListService:PricelistService, private serverService:ServicesService) { }
+  constructor(private priceListService:PricelistService, private priceUserService:TicketUserService, private serverService:ServicesService) { }
 
   ngOnInit(){
     this.getPricelist();
-    this.getUserDetails();
+    this.registered();
+    this.disabledStudent=false;
+    this.disabledPensioner=false;
   }
 
+  registered()
+  {
+    if(localStorage.jwt)
+    {
+      this.getUserDetails();
+    }
+  }
   getPricelist() {
 
     this.priceListService.getAllPriceLists()
@@ -34,7 +42,8 @@ export class TicketComponent implements OnInit {
       data => {    
           this.pricelist=data;   
           this.pricelist.sort((a,b)=>a.Price-b.Price);
-          this.pricelistTemp=this.pricelist.map((x)=>{return {...x}})   
+          this.pricelistTemp=this.pricelist.map((x)=>{return {...x}}) 
+          this.priceUserService.SendPriceList.emit(this.pricelistTemp);  
 
       },
       err => {
@@ -48,12 +57,11 @@ export class TicketComponent implements OnInit {
     .subscribe(
             
       data => {
-
           this.user = data;   
           this.isAdmin(); 
           this.isDisabledPensioner();
-          this.isDisabledStudent();
-        
+          this.isDisabledStudent();       
+          this.priceListService.TakeUser.emit(this.user);
       },
       err => {
         console.log(err);
@@ -67,18 +75,38 @@ export class TicketComponent implements OnInit {
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
     this.pricelist[i].Price=this.pricelist[i].Price
+    if(this.isUser())
+    {  
+        this.priceListService.TakePrice.emit(this.pricelist[i].Price);
+        this.priceListService.TakeIndex.emit(i);
+      }  
   }
 
   onStudent(i:number)
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
-    this.pricelist[i].Price=this.pricelist[i].Price*this.studentCoefficient
+    this.pricelist[i].Price=Math.round(this.pricelist[i].Price*0.8)
+    if(this.isUser())
+    {  
+        this.priceListService.TakePrice.emit(this.pricelist[i].Price);
+        this.priceListService.TakeIndex.emit(i);
+      }  
 
   }
   onPensioner(i:number)
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
-    this.pricelist[i].Price=this.pricelist[i].Price*this.pensionerCoefficient
+    this.pricelist[i].Price=Math.round(this.pricelist[i].Price*0.7)
+    if(this.isUser())
+    {  
+        this.priceListService.TakePrice.emit(this.pricelist[i].Price);
+        this.priceListService.TakeIndex.emit(i);
+      }  
+  }
+
+  isUser()
+  {
+    return localStorage.role=="AppUser"? true:false 
   }
 
   isAdmin()
@@ -91,19 +119,19 @@ export class TicketComponent implements OnInit {
       if(localStorage.role=="AppUser")
         {
             if(this.user.Type=="Student" && this.user.Active==true)
-              return false;
-            return true;
+              return this.disabledStudent=false;
+            return this.disabledStudent=true;
         }
-          return false;
+          return  this.disabledStudent=false;
   }
   isDisabledPensioner()
   {
     if(localStorage.role=="AppUser")
     {
         if(this.user.Type=="Pensioner" && this.user.Active==true)
-          return false;
-        return true;
+          return this.disabledPensioner=false;
+        return this.disabledPensioner=true;
     }
-      return false;
+        return this.disabledPensioner=false;
   }
 }

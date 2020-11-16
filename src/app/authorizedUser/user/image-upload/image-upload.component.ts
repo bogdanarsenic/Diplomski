@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
 import { User } from 'src/app/shared/classes/User';
+import { ImageService } from './image.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -21,7 +22,7 @@ export class ImageUploadComponent implements OnInit {
   registerUserForm:FormGroup;
 
 
-  constructor(private fb:FormBuilder,private registerService:ServicesService, private router:Router) 
+  constructor(private fb:FormBuilder,private registerService:ServicesService, private router:Router, private imageService:ImageService) 
   { 
     this.createForm();
   }
@@ -44,6 +45,7 @@ export class ImageUploadComponent implements OnInit {
   {
     //this.selectedFile = event.target.value;
     this.selectedFile = event.target.files[0]
+    this.image=this.selectedFile.name;
     var reader = new FileReader();
     reader.readAsDataURL(event.target.files[0]);
     reader.onload = (event) => {
@@ -51,11 +53,19 @@ export class ImageUploadComponent implements OnInit {
       }
   }
 
+
   onSubmit()
   {
     if(this.registerUserForm.value.ImageUrl!="")
     {
-          this.user.ImageUrl = this.imageShow;
+          const fd=new FormData();
+          fd.append('image',this.selectedFile,this.selectedFile.name)
+
+          this.imageService.AddingImage(fd).subscribe(data=>{
+
+          });
+          
+          this.user.ImageUrl = this.image;
 
           this.registerService.putApplicationUsers(this.user.Email,this.user).subscribe(
             data=>

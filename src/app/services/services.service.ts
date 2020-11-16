@@ -69,12 +69,4 @@ export class ServicesService {
   postTicket(t:Ticket):Observable<any>{
     return this.httpClient.post("http://localhost:52295/api/Ticket", t);
   }
-
-  postPriceList(pricelist:PriceList){
-    return this.httpClient.post("http://localhost:52295/api/PriceList", pricelist);
-  }
-
-  putPriceList(id:string,pricelist:PriceList): Observable<any>{
-    return this.httpClient.put(`http://localhost:52295/api/PriceList/${id}`, pricelist );
-  }
 }
