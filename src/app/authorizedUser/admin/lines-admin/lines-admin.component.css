@@ -1,5 +1,11 @@
-li {
-  background-color: white;
-  float: left;
-  list-style-type: none;
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.buttons {
+  margin-top: 10px;
+  margin-left: 150px;
 }

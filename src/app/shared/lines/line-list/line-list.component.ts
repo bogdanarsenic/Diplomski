@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Line } from '../../classes/Line';
 import { Station } from '../../classes/Station';
 import { StationLine } from '../../classes/StationLine';
 import { LinesService } from '../lines.service';
@@ -11,15 +10,13 @@ import { LinesService } from '../lines.service';
 })
 export class LineListComponent implements OnInit {
 
-  lines:Line[];
-  lineNames:any[];
+  lines:any[];
   allStations:Station[];
   allStationLines:StationLine[];
 
   constructor(private lineService:LinesService) { }
 
   ngOnInit(){
-    this.lineNames=[];
     this.callGetLines();
     this.callGetStation();
     this.callGetStationLine();
@@ -32,14 +29,12 @@ export class LineListComponent implements OnInit {
       data=>
       {
           this.lines=data; 
+          this.lines.sort((function(a,b){return a.Name-b.Name}))
           this.lineService.TakeLines.emit(this.lines);
-          this.lineNames=this.lines.map((x)=>{ return x["Name"]});      
-          this.lineNames.sort((function(a, b){return a-b}));
       }
     )
   }
 
-  
   callGetStation()
   {
       this.lineService.getAllStations().subscribe(
@@ -56,9 +51,6 @@ export class LineListComponent implements OnInit {
         data => {
           this.allStationLines = data;      
           this.lineService.TakeStationLines.emit(this.allStationLines);   
-        },
-        error => {
-          console.log(error);
         }
       )
   }

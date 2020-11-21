@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TimeTable } from '../../classes/TimeTable';
-
+import { TimetableService } from '../timetable.service';
 
 @Component({
   selector: 'app-show-timetable',
@@ -14,17 +14,25 @@ export class ShowTimetableComponent implements OnInit {
 
   @Input() timetable:TimeTable
 
-  constructor() {
-   }
+  constructor(private timetableService:TimetableService) {}
 
   ngOnInit() {
-    this.hours=[]
-    this.minutes=[]
+
     this.onShow();
+    
+    this.timetableService.AddorEdit.subscribe(
+      data=>
+      {
+        this.timetable=data;
+        this.onShow();
+      }
+    )
   }
 
   onShow()
   {
+    this.hours=[]
+    this.minutes=[]
     var times2=[];
 
      times2=this.timetable.Times.split(';');  

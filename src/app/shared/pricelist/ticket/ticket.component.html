@@ -6,10 +6,11 @@
 
     <form>
         <h3> {{l.Id}} </h3>
-        <h3> {{l.Price}} </h3>
+        <hr/>
+        <h4> <b> {{l.Price}} din </b></h4>
         <div class="form-check">
                 <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="radiobuttons" (click)="onRegular(i)"> Regular
+                        <input type="radio" class="form-check-input" name="radiobuttons" (click)="onRegular(i)"> Regular 
                 </label>
 
                 <label class="form-check-label">
@@ -17,7 +18,7 @@
                 </label>
 
                 <label class="form-check-label" >
-                        <input type="radio" [disabled]="disabledPensioner || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onPensioner(i)">Pensioner
+                        <input type="radio" [disabled]="disabledPensioner || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onPensioner(i)"> Pensioner
                 </label>
         </div>
     </form>

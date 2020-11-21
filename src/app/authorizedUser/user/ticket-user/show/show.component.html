@@ -1,12 +1,12 @@
 
 <button class="btn btn-info" [hidden]="buttonTicket" (click)="showTickets()">
-    Show my tickets
+        <i class="fas fa-sort-down"> Show my tickets</i>
 </button>
 <button class="btn btn-info" [hidden]="!buttonTicket" (click)="hideTickets()">
-    Hide my tickets
+        <i class="fas fa-sort-up"> Hide my tickets</i>
 </button>
         <div *ngIf="buttonTicket">
-            <table class="table table-striped table-dark">
+            <table class="table table-responsive-md table-hover table-active">
                     <thead>
                             <tr>
     
@@ -18,7 +18,7 @@
                             Type
                             </th>
                             <th>
-                            Date
+                            Purchase Date
                             </th>
     
                             <th>

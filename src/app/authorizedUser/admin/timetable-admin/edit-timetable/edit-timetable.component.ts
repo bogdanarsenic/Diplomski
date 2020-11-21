@@ -15,24 +15,18 @@ export class EditTimetableComponent implements OnInit {
   @Input() timetable:TimeTable;
   @Input() times:string;
   
-
   constructor(private service:TimetableService,private router:Router) 
   { }
 
-
-  ngOnInit(){
-    
+  ngOnInit(){ 
   }
-
 
   onSubmit()
   {
-
       this.timetable.Times=this.times;
       this.service.putTimeTable(this.timetable.Id,this.timetable).subscribe(
         data=>
             {
-                console.log("uspesno editovan");   
                 this.router.navigate(['']).then(()=>window.location.reload());                  
             }
       )

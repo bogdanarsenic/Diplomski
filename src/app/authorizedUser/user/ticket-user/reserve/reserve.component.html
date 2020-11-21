@@ -1,5 +1,4 @@
-<div class="grid-container" *ngFor="let l of pricelist;let i=index" >
-    <div class="grid-item">
-        <button class="btn btn-block btn-danger" [disabled]="price[i]==undefined" (click)="Add(i)"> Buy </button>  
+    <div class="grid-item" *ngFor="let l of pricelist;let i=index">
+        
+        <button class="btn btn-block btn-info" [disabled]="price[i]==undefined" (click)="Add(i)"> <i class="fas fa-credit-card"> Buy </i> </button>  
     </div>
-</div>

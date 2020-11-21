@@ -3,77 +3,37 @@
   height: 100vh;
 }
 
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
 .section .section-center {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 35%;
   right: 35%;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
-.login {
-  text-align: center;
-  padding-bottom: 10px;
-}
 #booking {
   font-family: "Montserrat", sans-serif;
-
   background-size: cover;
-
   background-position: center;
-}
-
-.submitbutton {
-  position: absolute;
-  bottom: 15px;
-  color: #fff;
-  background-color: #1e62d8;
-
-  font-weight: 700;
-  padding: 14px 50px;
-  border-radius: 4px;
-  border: none;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
-}
-
-.submitbutton2 {
-  position: absolute;
-  right: 20px;
-  bottom: 15px;
-  display: inline-block;
-  color: #fff;
-  background-color: #1e62d8;
-  font-weight: 700;
-  padding: 14px 10px;
-  border-radius: 4px;
-
-  border: none;
-  -webkit-transition: 0.2s all;
-  transition: 0.2s all;
-}
-
-.form-btn2 {
-  padding-left: 250px;
-  padding-top: 0px;
 }
 
 #booking::before {
   content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  background: rgba(47, 103, 177, 0.6);
+  background: rgba(126, 211, 245, 0.6);
 }
 
 .booking-form {
   background-color: #fff;
-  padding: 50px 20px;
-  -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+  padding: 30px 20px;
   border-radius: 4px;
 }
 

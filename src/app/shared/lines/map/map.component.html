@@ -1,5 +1,5 @@
 
-        <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="15" (mapClick)="placeMarker($event)" >  
+        <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="13" (mapClick)="placeMarker($event)" >  
           
           <div *ngIf="!vehicle">
             <agm-marker [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [title]="markerInfo.title"

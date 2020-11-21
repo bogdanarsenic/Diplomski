@@ -1,3 +1,13 @@
 ul {
+  list-style-type: none;
+  padding-bottom: 10px;
+}
+ul li {
   float: left;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+label {
+  font-size: large;
 }

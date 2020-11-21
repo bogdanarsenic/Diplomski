@@ -1,17 +1,26 @@
-<app-timetable >
 
-</app-timetable> 
+    <app-timetable >
+    </app-timetable> 
 
-<app-form-timetable *ngIf="show">
+    <hr/>
+    <div class="row">
+        <div class="col-md-4">
+            <app-show-timetable *ngIf="timetable!=undefined && !add && show" [timetable]="timetable"> </app-show-timetable>
+        </div>
 
-</app-form-timetable>
+        <div *ngIf="show" class="col-md-4 text-center" style="background-color: rgba(0,0,0,.055);" >
+            <app-form-timetable >
+            </app-form-timetable>
 
+            <div *ngIf="add" style="margin-top: 10px;">
+                <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
+                <app-add-timetable [timetable]="timetable" [times]="times">  </app-add-timetable>
+            </div>
 
-<app-add-timetable  *ngIf="add && show" [timetable]="timetable" [times]="times">
-
-</app-add-timetable>
-
-
-<app-edit-timetable  *ngIf="!add && show" [timetable]="timetable" [times]="times">
-
-</app-edit-timetable>
+            <div *ngIf="!add" style="margin-top: 10px;">
+                <button class="btn btn-default btn-sm btn-danger" style="margin-right: 5px;" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
+                <button class="btn btn-default btn-sm btn-secondary"  (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
+                <app-edit-timetable [timetable]="timetable" [times]="times"> </app-edit-timetable>
+            </div>
+        </div>
+    </div>

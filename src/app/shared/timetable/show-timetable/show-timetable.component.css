@@ -1,20 +1,16 @@
-table {
-  background-color: beige;
-}
-
-.boldovan {
-  margin: auto;
-  background-color: beige;
-}
-
-.redvoznje {
-  border-collapse: collapse;
-}
-
 sup {
   color: red;
 }
 
-button {
-  background-color: burlywood;
+b {
+  float: left;
+}
+
+ul {
+  float: left;
+}
+
+li {
+  float: left;
+  list-style-type: none;
 }

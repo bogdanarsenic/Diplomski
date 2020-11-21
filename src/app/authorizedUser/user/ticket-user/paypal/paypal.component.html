@@ -1,16 +1,16 @@
 <div class="payPal">
-    <h4> Or buy it <i> safer </i> way with <span style="color:gold">PayPal</span>: </h4>
-             <label style="color:#f4f4f4;margin-left:10px">
-                    <input type="radio" [disabled]="priceTemporal==undefined" style="margin-right:5px" name="paypalButtons" (click)="paypalHour()">Temporal
+    <h4> Or buy it <i> safer </i> way with <span style="color: #1f4068;">PayPal</span>: </h4>
+             <label>
+                    <input type="radio" [disabled]="priceTemporal==undefined" name="paypalButtons" (click)="paypalHour()">Temporal
              </label>
-            <label  style="color:#f4f4f4; margin-left:20px">
-                   <input type="radio" [disabled]="priceDay==undefined" style="margin-right:5px" name="paypalButtons" (click)="paypalDay()">Day
+            <label>
+                   <input type="radio" [disabled]="priceDay==undefined" name="paypalButtons" (click)="paypalDay()">Day
             </label>
-            <label  style="color:#f4f4f4; margin-left:20px">
-                   <input type="radio" [disabled]="priceMonth==undefined" style="margin-right:5px"  name="paypalButtons" (click)="paypalMonth()">Month
+            <label >
+                   <input type="radio" [disabled]="priceMonth==undefined"   name="paypalButtons" (click)="paypalMonth()">Month
             </label>
-           <label  style="color:#f4f4f4; margin-left:20px">
-                  <input type="radio" [disabled]="priceYear==undefined" style="margin-right:5px"  name="paypalButtons" (click)="paypalYear()">Year
+           <label >
+                  <input type="radio" [disabled]="priceYear==undefined"  name="paypalButtons" (click)="paypalYear()">Year
            </label>
 </div>
 

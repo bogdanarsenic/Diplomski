@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { AddTimetableComponent } from './add-timetable/add-timetable.component';
+import { EditTimetableComponent } from './edit-timetable/edit-timetable.component';
 
 @Component({
   selector: 'app-timetable-admin',
@@ -8,6 +10,9 @@ import { TimetableService } from 'src/app/shared/timetable/timetable.service';
   styleUrls: ['./timetable-admin.component.css']
 })
 export class TimetableAdminComponent implements OnInit {
+
+  @ViewChild(EditTimetableComponent,{static:false}) childEdit:EditTimetableComponent
+  @ViewChild(AddTimetableComponent,{static:false}) childAdd:AddTimetableComponent
 
   times:string
   timetable:TimeTable
@@ -32,6 +37,21 @@ export class TimetableAdminComponent implements OnInit {
       this.times=data;
     })
 
+  }
+  
+  onEdit()
+  {
+    this.childEdit.onSubmit();
+  }
+
+  onDelete()
+  {
+    this.childEdit.Delete();
+  }
+
+  onAdd()
+  {
+    this.childAdd.onSubmit();
   }
 
   ShowEditorAdd()

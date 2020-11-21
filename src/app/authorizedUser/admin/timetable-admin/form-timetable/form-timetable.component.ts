@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-form-timetable',
@@ -21,7 +19,7 @@ export class FormTimetableComponent implements OnInit {
   timetableForm:FormGroup;
   times:string;
 
-  constructor(private fb:FormBuilder,private service:TimetableService,private router:Router) 
+  constructor(private fb:FormBuilder,private service:TimetableService) 
   {
     this.createForm();
   }

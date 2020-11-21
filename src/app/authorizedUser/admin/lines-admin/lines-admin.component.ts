@@ -75,4 +75,18 @@ export class LinesAdminComponent implements OnInit {
       }
     )
   }
+  open()
+  {
+    this.childAdd.openModal('custom-modal-2');
+  }
+
+  Edit()
+  {
+    this.childEdit.Edit();
+  }
+
+  deleteLine()
+  {
+    this.childEdit.deleteLine();
+  }
 }

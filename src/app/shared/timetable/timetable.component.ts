@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
@@ -17,7 +16,6 @@ export class TimetableComponent implements OnInit {
   subLines:any[]
   timetables:TimeTable []
   timetable:TimeTable
-  timetablesTemp:TimeTable[]
   days: Array<string> = ["Weekday", "Saturday", "Sunday"];
   day:string;
   suburban:boolean;
@@ -26,9 +24,8 @@ export class TimetableComponent implements OnInit {
   line:string;
   lines:Line[];
 
-  constructor(private serverService:TimetableService,private lineService:LinesService,private router:Router) 
-  {
-  }
+  constructor(private serverService:TimetableService,private lineService:LinesService) 
+  {}
 
   ngOnInit(){
 
@@ -74,7 +71,6 @@ export class TimetableComponent implements OnInit {
           this.timetables=data;
       }
   )
-
   }
 
   callGetLines()
@@ -132,11 +128,11 @@ export class TimetableComponent implements OnInit {
   {
     var t;
     t=this.timetables.findIndex(item=>item.Day==this.day && item.LineId==this.line)
-    this.timetablesTemp=this.timetables.map((x)=>{ return {...x}})
+    var timetablesTemp=this.timetables.map((x)=>{ return {...x}})
 
     if(t!=-1) 
         {
-          this.timetable=this.timetablesTemp[t]
+          this.timetable=timetablesTemp[t]
           if(this.isAdmin())
               this.checkEmit()
         }

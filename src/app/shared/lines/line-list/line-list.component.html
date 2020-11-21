@@ -1,9 +1,9 @@
-<label style="color:#f4f4f4">
-    Lines:
-</label>
-  <div *ngFor="let line of lineNames">
-    <ul>
-     <input type="radio" value="{{line}}" name="cityLine" (click)="onItemChange(line)" />
-     <label for="radio1" style="color:#f4f4f4;margin-left:5px">{{line}}</label>
-    </ul>
- </div>
+  <ul>
+    <li *ngFor="let line of lines">
+       <input type="radio" value="{{line.Name}}" name="cityLine" (click)="onItemChange(line.Name)" />
+       <label for="radio1"> <b> {{line.Name}}</b></label>
+    </li>
+  </ul>
+
+
+

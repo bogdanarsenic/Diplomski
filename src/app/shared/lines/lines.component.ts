@@ -17,7 +17,6 @@ export class LinesComponent implements OnInit {
   allStations:Station[];
   allStationLines:StationLine[]
   lines:Line[]
-  vehicle:boolean
   lineId:number;
 
   constructor(private lineService:LinesService) { }

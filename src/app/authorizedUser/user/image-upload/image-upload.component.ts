@@ -16,11 +16,8 @@ export class ImageUploadComponent implements OnInit {
   localUrl: any[];
   imageShow : any;
   image:any;
-
   user:User;
-
   registerUserForm:FormGroup;
-
 
   constructor(private fb:FormBuilder,private registerService:ServicesService, private router:Router, private imageService:ImageService) 
   { 
@@ -43,7 +40,6 @@ export class ImageUploadComponent implements OnInit {
 
   onFileChanged(event)
   {
-    //this.selectedFile = event.target.value;
     this.selectedFile = event.target.files[0]
     this.image=this.selectedFile.name;
     var reader = new FileReader();
@@ -56,8 +52,7 @@ export class ImageUploadComponent implements OnInit {
 
   onSubmit()
   {
-    if(this.registerUserForm.value.ImageUrl!="")
-    {
+
           const fd=new FormData();
           fd.append('image',this.selectedFile,this.selectedFile.name)
 
@@ -73,9 +68,7 @@ export class ImageUploadComponent implements OnInit {
               this.router.navigate(['']).then(()=>window.location.reload());
             }
           )     
-    }
-    else
-      alert("You need to upload some image");
+ 
   }
 
 }

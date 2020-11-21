@@ -1,13 +1,15 @@
-<app-lines></app-lines>
+   <div class="row">
+    <div class="col-md-7">
+         <app-lines></app-lines>
+         <div class="buttons">
+            <button class="btn btn-default btn-sm btn-success" style="margin-right: 5px;" (click)="open()" type="button"> <i class="fa fa-plus"> Add Line</i></button>
+            <button class="btn btn-default btn-sm btn-secondary" style="margin-right: 5px;"  [disabled]="lineId===undefined" (click)="Edit()" type="button"><i class="fa fa-edit"> Edit Line</i></button>
+            <button class="btn btn-default btn-sm btn-danger" [disabled]="lineId===undefined" (click)="deleteLine()" type="button"><i class="fa fa-trash"> Delete Line</i></button>
+         </div>
+    </div>
 
-<div class="container">
-    <ul>
-            <li>
-                <app-add-lines [lines]="lines" [location]="location" [lineId]="lineId"></app-add-lines>
-            </li>
-            <li>
-                <app-edit-lines [lines]="lines" [station]="station"></app-edit-lines>
-            </li>
-                
-    </ul>
-</div>
+    <div class="col-md-4">
+        <app-add-lines [lines]="lines" [location]="location" [lineId]="lineId"></app-add-lines>
+        <app-edit-lines [lines]="lines" [station]="station"></app-edit-lines>
+    </div>
+    </div> 

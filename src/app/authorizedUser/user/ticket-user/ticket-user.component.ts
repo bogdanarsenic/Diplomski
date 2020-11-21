@@ -52,7 +52,7 @@ export class TicketUserComponent implements OnInit {
           if(user.Type=="Regular")
             return this.canBuy=true;
 
-          else if((user.Type=="Student" || user.Type=="Pensioner") && user.ImageUrl!=null)
+          else if (user.ImageUrl!=null && user.ImageUrl!=undefined && user.ImageUrl!="")
             return this.canBuy=true;
       }
       return this.canBuy=false;

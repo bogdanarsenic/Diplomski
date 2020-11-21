@@ -3,7 +3,6 @@ import { MarkerInfo } from './model/marker-info.model';
 import { GeoLocation } from './model/geolocation';
 import { Polyline } from './model/polyline';
 import { MapsAPILoader } from '@agm/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Station } from '../../classes/Station';
 import { Line } from '../../classes/Line';
@@ -17,7 +16,7 @@ import { LinesAdminService } from 'src/app/authorizedUser/admin/lines-admin/line
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
-  styles: ['agm-map {height: 500px; width: 700px;}','app/shared/lines/map/modal.less'],
+  styles: ['agm-map {height: 400px; width: 600px;}','app/shared/lines/map/modal.less'],
 })
 export class MapComponent implements OnInit {
 
@@ -40,7 +39,7 @@ export class MapComponent implements OnInit {
   @Input() allStationLines:StationLine[]
   @Input() allStations:Station[];
 
-constructor(private lineService:LinesService, private lineAdminService:LinesAdminService,private mapsAPILoader:MapsAPILoader,private router:Router){
+constructor(private lineService:LinesService, private lineAdminService:LinesAdminService,private mapsAPILoader:MapsAPILoader){
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954,""), "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
     this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
   }

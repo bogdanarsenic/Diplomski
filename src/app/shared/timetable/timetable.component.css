@@ -1,17 +1,14 @@
 table {
-    background-color:beige;    
+  margin: auto;
+  width: 380px;
+  height: 200px;
+  margin-top: 45px;
+  background-color: rgba(0, 0, 0, 0.055);
+  border-radius: 20px;
+  border: none;
 }
 
-.boldovan {
-    margin: auto;
-    background-color:beige;
-}
-
-.redvoznje{
-    border-collapse: collapse;
-}
-
-button
-{
-    background-color:burlywood;
+select {
+  width: 120px;
+  font-size: medium;
 }

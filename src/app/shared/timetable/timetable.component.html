@@ -1,35 +1,32 @@
-<div class="table-responsive-md">
-            <table class="table table-hover table-grey">
+            <table class="table table-responsive-md table-hover table-active">
                 <tr>
                     <td>        
                         <input type="radio" name="line" value="City lines" (click)="onCity()"/>
                         <span> City line</span>
                     </td>
 
-                    <td>        
+                    <td style="float:right">        
                         <input type="radio" name="line" value="Suburban lines" (click)="onSuburban()"/>
                         <span> Suburban line</span>
                     </td>   
                  </tr>
                 
-                <tr>
+                <tr *ngIf="suburban || city" >
                     <td >        
-                        <select *ngIf="suburban || city" (change)="checkDay($event.target.value)">
+                        <select (change)="checkDay($event.target.value)">
                             <option *ngFor="let day of days" > {{day}} </option>
                         </select>
                     </td>
                  </tr>
-
-            <div *ngIf="city || suburban"> 
-                <tr>    
-                    <td >       
+                <tr *ngIf="city || suburban">    
+                    <td>       
                             <select *ngIf="city" (change)="onItemChange($event.target.value)">
-                                    <option disabled selected value> -- select a line -- </option>
+                                    <option disabled selected value>-select a line-</option>
                                     <option *ngFor="let line of cityLines" > {{line.Name}} </option>
                             </select>
                  
                             <select *ngIf="suburban" (change)="onItemChange($event.target.value)">
-                                <option disabled selected value> -- select a line -- </option>
+                                <option  disabled selected value>-select a line- </option>
                                 <option *ngFor="let line of subLines" > {{line.Name}} </option>
                             </select>      
                          
@@ -40,13 +37,11 @@
                             <app-show-timetable [timetable]="timetable"> </app-show-timetable>
                     </td>
                  </tr>
-            </div>
 
         </table>    
-    </div>       
         
         <div *ngIf="!isAdmin()">
-            <div class="col text-center">     
-                <button class="btn btn-default" (click)="Show()" [hidden]="showTT"> Show timetable</button>
+            <div class="col text-center">   
+                <button class="btn btn-sm btn-info" (click)="Show()" [hidden]="showTT">  <i class="fa fa-search-plus"> Show timetable</i></button>
             </div>
         </div>

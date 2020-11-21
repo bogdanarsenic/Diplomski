@@ -24,7 +24,6 @@ export class ShowComponent implements OnInit {
   showTickets()
   {
     this.getTickets();
-
   }
   hideTickets()
   {
@@ -42,6 +41,7 @@ export class ShowComponent implements OnInit {
             if(this.ticketsByUser.length>0)
             {
               this.buttonTicket=true;
+              this.ticketsByUser.map((x)=>x.Date=x.Date.replace('T',' ').split('.')[0])
             }else
               alert("You haven't bought any tickets")
         }

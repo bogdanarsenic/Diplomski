@@ -62,11 +62,7 @@ export class TicketComponent implements OnInit {
           this.isDisabledPensioner();
           this.isDisabledStudent();       
           this.priceListService.TakeUser.emit(this.user);
-      },
-      err => {
-        console.log(err);
       }
-      
     ) 
     
   }

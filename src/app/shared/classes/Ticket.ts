@@ -1,7 +1,7 @@
 export class Ticket{
 
     TicketType: string;
-    Date : Date;
+    Date : string;
     UserId:string;
     Price:number;
     IsValid:boolean;

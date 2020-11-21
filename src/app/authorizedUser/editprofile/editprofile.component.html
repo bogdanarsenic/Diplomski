@@ -1,48 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<br/>
+<hr/>
+  <div class="row">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <div class="col col-md-4">
+    <div  *ngIf="isUser()">
 
-	<title>Booking Form HTML Template</title>
+          <h5>        Your status:        </h5>  
+          <div *ngIf="status=='InProgress'"> 
+            <i class="fas fa-spinner">In progress</i>
+          </div>
 
-</head>
+          <h4 *ngIf="status=='Approved'" style="color:green"> 
+              <i class="far fa-thumbs-up"> Approved</i>
+          </h4>
 
+          <h4 *ngIf="status=='Denied'" style="color:red"> 
+            <i class="far fa-thumbs-down"> Denied</i>
+          </h4>
 
+          <hr/>
 
-<body>
-
-  <div class="section">
-    <div id="booking" >
-
-      <div class="section-left" *ngIf="isUser()">
-          <h5>
-             Your status:
-          </h5>  
-         <h4 *ngIf="status=='InProgress'" style="color:yellow"> 
-              {{status}}
-         </h4>
-
-         <h4 *ngIf="status=='Approved'" style="color:green"> 
-            {{status}}
-         </h4>
-
-         <h4 *ngIf="status=='Denied'" style="color:red"> 
-          {{status}}
-         </h4>
          <div *ngIf="!isRegular && (imageUrl==null || imageUrl=='')">
              <app-image-upload></app-image-upload>
           </div>
-      </div>
-
-        <div class="section-center">
+     </div>
+    </div>
+       <div class="col col-md-5">
             <div class="booking-form">
                 <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
-                  <h3 class="register"> Edit profile:</h3>
-
                     <div class="form-group">
                         <span class="form-label"> Name: </span>
                         <input class="form-control" type="text" name="Name" [(ngModel)]="user.Name" value="{{user.Name}}" id="Name" formControlName="Name" placeholder="Name">
@@ -158,16 +143,11 @@
                             </div>
                           </div>
                       </div>
-
-                    <div class="form-btn">
-                        <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Edit
-                        </button>
-                      </div>
-                           
+                      <div class="col text-center">
+                        <button class="btn btn-default btn-block btn-info" type="submit"  [disabled]="registerUserForm.invalid"> <i class="fa fa-edit"> Edit</i>
+                        </button>  
+                      </div>                         
                 </form>
             </div>
-              </div>
         </div>
     </div>
-</body>
-</html>

@@ -1,21 +1,22 @@
-<div class="booking-form">
-    <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
 
-        <div class="form-group">
-            <span class="form-label">Image: </span>
-            <input type="file" id="ImageUrl" (change) = "onFileChanged($event)" formControlName="ImageUrl">
-        </div>
+    <br/>
+    <br/>
 
-        <img [src]="imageShow" height="200"> <br/>
-        
-        <div class="form-btn">
-            <button class="submitbutton" type="submit"  [disabled]="registerUserForm.invalid"> Upload proof
-            </button>
-        </div>
-       
-        <div class="form-btn">
-            <a routerLink=""> Skip </a>
-        </div>
-    </form>
-</div>
+    <div class="col col-xs-1 text-center" style="background-color: rgba(0, 0, 0, 0.055)">
+
+        <form [formGroup]="registerUserForm" (submit)="onSubmit()" novalidate>
+
+            <div class="form-group">
+                <label class="fas fa-upload" for="ImageUrl"> Upload Image</label>
+                <input type="file" id="ImageUrl" (change) = "onFileChanged($event)" formControlName="ImageUrl">
+            </div>
+
+            <img [src]="imageShow" height="200"> <hr/>
+            
+            <div class="form-btn">
+                <button class="btn btn-info" routerLink=""> <i class="fas fa-long-arrow-alt-left"> Skip </i> </button>
+                <button class="btn btn-success" type="submit"  [disabled]="image==undefined"> <i class="fas fa-upload"> Submit </i> </button>
+            </div>      
+        </form>
+    </div>
 

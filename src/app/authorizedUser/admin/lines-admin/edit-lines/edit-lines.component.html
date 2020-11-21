@@ -1,43 +1,34 @@
-<div *ngIf="edit" style="background-color: ivory;">
-            <form #f="ngForm" enctype="multipart/form-data" (ngSubmit)="UpdateLine()" ngNativeValidate>
-              <label style="text-align:center; font-size: 16px">Line</label><br />
-              <i style="font-size: 15px;">Name:</i>
-              <span class="inlineinput">
-                <input type="text" id="name" style='display: inline-block;width: 100px;height: 25px;' name="fname" [(ngModel)]="lineEdit.Name">
-              </span>
-        
-              <span class="inlineinput">
-                <input class="btn btn-default" type="submit" class="submit1" value="Change" style='display: inline-block;background-color:burlywood;' id="dir">
-              </span>
+<div *ngIf="edit" class="edit">
+            <form #f="ngForm" enctype="multipart/form-data" ngNativeValidate>
+              <label>Line</label><br />
+              <label>Name:</label>
+              <input type="text" id="name" name="fname" [(ngModel)]="lineEdit.Name">
+              <button class="btn btn-default btn-sm btn-secondary" (click)="UpdateLine()"> <i class="fa fa-edit"> Edit </i> </button>
             </form>
-          </div>
+</div>
           
-
-
-    <div *ngIf="editStation" style="background-color: ivory; margin-left:20px">
-            <form #f="ngForm" enctype="multipart/form-data" (ngSubmit)="UpdateStation()" ngNativeValidate>
-              <label style="margin-left: 210px;margin-top: 30px; font-size: 18px">Station</label><br />
-              <label style="margin-left: 5px; margin-top:10px">
+    <div *ngIf="editStation" class="edit">
+            <form #f="ngForm" enctype="multipart/form-data" ngNativeValidate>
+              <label >Station</label><br/>
+              <label>
                 Name:
-                <input type="text" style='width: 528px;height: 25px; margin-left: 0px' name="names" [(ngModel)]="stationEdit.Name">
+                <input type="text" name="names" [(ngModel)]="stationEdit.Name">
               </label>
-              <label style="margin-left: 5px; margin-top:10px">
+              <label>
                 Address:
-                <input type="text" style='width: 528px;height: 25px;margin-left: 0px' name="add" [(ngModel)]="stationEdit.Address">
+                <input type="text"  name="add" [(ngModel)]="stationEdit.Address">
               </label>
-              <label style="margin-left: 5px; margin-top:10px">
+              <label>
                 Coordinate X:
-                <input type="text" style='width: 528px;height: 25px;margin-left: 0px' name="cooX" [(ngModel)]="stationEdit.CoordinateX">
+                <input type="text" name="cooX" [(ngModel)]="stationEdit.CoordinateX">
               </label>
-              <label style="margin-left: 5px; margin-top:10px">
+              <label>
                 Coordinate Y:
-                <input type="text" name="cooY" style='width: 528px;height: 25px;margin-left: 0px' [(ngModel)]="stationEdit.CoordinateY">
+                <input type="text" name="cooY"  [(ngModel)]="stationEdit.CoordinateY">
               </label> <br>
-              <input type="submit" id="dir" style='background-color:burlywood;' value="Change">
-              <button (click)="deleteStation()" type="button">Delete station</button>
+
+              <button class="btn btn-default btn-sm btn-secondary" style="margin-right: 10px;" (click)="UpdateStation()" type="button"> <i class="fa fa-edit"> Edit </i> </button>
+              <button class="btn btn-default btn-sm btn-danger" (click)="deleteStation()" type="button"><i class="fa fa-trash"> Delete </i></button>
             </form>
            
-          </div>
-
-<button class="btn btn-default" [disabled]="lineId===undefined" (click)="Edit()" type="button">Edit Line</button>
-<button class="btn btn-default" [disabled]="lineId===undefined" (click)="deleteLine()" type="button"> Delete Line</button>
+ </div>

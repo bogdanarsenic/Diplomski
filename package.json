@@ -25,6 +25,7 @@
     "@google/maps": "^1.1.0",
     "@types/googlemaps": "^3.36.4",
     "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
     "google-maps": "^4.2.3",
     "less": "^3.11.1",
     "net": "^1.0.2",

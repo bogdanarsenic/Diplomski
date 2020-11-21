@@ -1,84 +1,63 @@
+<hr/>
+<p> Ticket ids: </p><p *ngFor="let l of ids"> {{l.Id}} </p>
 
-<div class="main">
+<br/>
+<br/>
+<hr/>
 
-        <h3>
-            Check if the ticket is valid:
-        </h3>
+<div class="col xs-1 text-center" style="background-color: rgba(0, 0, 0, 0.055);">
+        <h5> Check if the ticket is valid:</h5>
 
-        <input type="number" style="text-align: center;margin-top: 10px; margin-left: 175px;" #param>
-        <div>
-            <a class="btn btn-lg btn-block btn-danger" style="color:#f4f4f4" (click)="Valid(param.value)">Check </a>
-        </div>
+            <input type="number" #param>
+            <button class="btn btn-sm btn-info" (click)="Valid(param.value)"> <i class="fa fa-search-plus"> Check </i> </button>
 
+            <div *ngIf="show">
+                <br/>
+                <hr/>
+                <table class="table table-responsive-md table-hover table-active">
+                            <thead>
+                                    <tr>
+                                        <th> User ID</th>
+                                        <th> Type </th>
+                                        <th> Date </th>
+                                        <th> Price </th>
+                                        <th> Valid </th>
+                                    </tr>
+                            </thead>
 
-        <div *ngIf="show">
-    <table class="table table-striped table-dark">
-        <thead>
-                <tr>
+                            <tbody>
+                                    <tr>
+                                            <td> {{ticket.UserId}} </td>
 
-        
-                <th>
-                User ID
-                </th>
-                <th>
-                Type
-                </th>
-                <th>
-                Date
-                </th>
+                                            <td *ngIf="ticket.TicketType=='0'">
+                                                    Temporal
+                                            </td>
 
-                <th>
-                        Price
-                </th>
+                                            <td *ngIf="ticket.TicketType=='1'">
+                                                    Day
+                                            </td>
 
-                <th>
-                    Valid
-                </th>
-                </tr>
+                                            <td *ngIf="ticket.TicketType=='2'">
+                                                Month
+                                            </td>
 
-        </thead>
+                                            <td *ngIf="ticket.TicketType=='3'">
+                                                Year
+                                            </td>
 
-        <tbody>
-                <tr>
-                        <td>
-                                {{ticket.UserId}}
-                        </td>
+                                            <td> {{ticket.Date}} </td>
+                                        
+                                            <td> {{ticket.Price}} </td>
 
-                        <td *ngIf="ticket.TicketType=='0'">
-                                Temporal
-                        </td>
+                                            <td *ngIf="ticket.IsValid" style="color: green;">
+                                                <i class="far fa-thumbs-up"> <b> Valid </b> </i>
+                                            </td>
 
-                        <td *ngIf="ticket.TicketType=='1'">
-                            Day
-                        </td>
-
-                        <td *ngIf="ticket.TicketType=='2'">
-                            Month
-                         </td>
-
-                        <td *ngIf="ticket.TicketType=='3'">
-                            Year
-                        </td>
-
-                        <td>
-                                {{ticket.Date}}
-                        </td>
-
-                        <td>
-                                {{ticket.Price}}
-                        </td>
-
-                        <td *ngIf="ticket.IsValid" style="color: green;">
-                            {{ticket.IsValid}}
-                        </td>
-
-                        <td *ngIf="!ticket.IsValid" style="color: red;">
-                            {{ticket.IsValid}}
-                        </td>
-                </tr>
-        </tbody>
-    </table>
-
-        </div>
-
-</div>
+                                            <td *ngIf="!ticket.IsValid" style="color: red;">
+                                                    <i class="far fa-thumbs-down"> <b>NotValid</b> </i>
+                                            </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                </div>
+    </div>

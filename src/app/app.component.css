@@ -1,0 +1,5 @@
+.border {
+  border-style: outset;
+  border-top: none;
+  border-color: rgba(143, 214, 247, 0.6);
+}

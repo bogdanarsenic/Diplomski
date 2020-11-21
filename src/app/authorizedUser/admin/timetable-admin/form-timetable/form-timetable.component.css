@@ -1,27 +1,13 @@
 table {
   margin: auto;
-  width: 20% !important;
-  background-color: beige;
   height: 20px;
   font-size: large;
 }
 
+form {
+  width: 350px;
+}
+
 td {
   font-size: medium;
-}
-.boldovan {
-  margin: auto;
-  width: 20% !important;
-  background-color: beige;
-}
-
-.redvoznje {
-  border-collapse: collapse;
-}
-
-body {
-  background-color: beige;
-}
-button {
-  background-color: burlywood;
 }

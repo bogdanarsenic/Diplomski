@@ -1,25 +1,22 @@
 
-  <div class="container-fluid">
+      <jw-modal id="custom-modal-1">
+            <div class="backgroundJw">
 
-    <button  class="btn btn-default" (click)="openModal('custom-modal-2')" type="button"> Add Line</button>
- 
-  <jw-modal id="custom-modal-1">
-    <h4 style="color:black; font-size:16;font-style:bold;margin-left:50px;width:300px;text-align:center">Creating new station</h4>
-    <p style="font-size: 200%;font-family:'Times New Roman', Times, serif; margin-top: 20px ">Name: 
-      <input style="width: 50%;" type="text" [(ngModel)]="bodyText"  /></p>
-    <button class="btn btn-default" style="margin-left:100px" (click)="save()">Create</button>
-    <button class="btn btn-default" style="margin-left:50px" (click)="closeModal('custom-modal-1');">Close</button>
-   
-  </jw-modal>
+              <h4>Creating new station</h4>
+              <p>Name: 
+                <input type="text" [(ngModel)]="bodyText" /></p>
+              <button class="btn btn-success" (click)="save()"><i class="fas fa-check"> Create </i></button>
+              <button class="btn btn-danger" (click)="closeModal('custom-modal-1');"><i class="fas fa-window-close"> Close</i></button>
+              
+            </div>
+      </jw-modal>
 
-  <jw-modal id="custom-modal-2">
-    <h4 style="color:black; font-size:16;font-style:bold;margin-left:50px;width:300px;text-align:center">Creating new line</h4>   
-     <p style="font-size: 200%;font-family:'Times New Roman', Times, serif; margin-top: 20px ">Name: 
-      <input style="width: 50%;" type="text" [(ngModel)]="bodyText1" />
-    </p>
-    <button class="btn btn-default" style="margin-left:100px" (click)="createLine()">Create</button>
-    <button class="btn btn-default" style="margin-left:50px" (click)="closeModal('custom-modal-2');">Close</button>
-  </jw-modal>
-
-
-</div>
+      <jw-modal id="custom-modal-2">
+            <div class="backgroundJw">
+                <h4>Creating new line</h4>   
+                <p>Name:  <input type="text" [(ngModel)]="bodyText1" />
+                </p>
+                <button class="btn btn-success" (click)="createLine()"><i class="fas fa-check"> Create </i></button>
+                <button class="btn btn-danger" (click)="closeModal('custom-modal-2');"><i class="fas fa-window-close"> Close</i></button>
+            </div>
+      </jw-modal>

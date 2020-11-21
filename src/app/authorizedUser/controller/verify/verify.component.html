@@ -1,80 +1,80 @@
+<br/>
+<hr/>
 
-    <table class="table table-striped table-dark">
-                <tr>
+<div class="row">
+    <div class="col col-xs-1">
+    <table class="table table-responsive-md table-hover table-active">
+                    <tr>
 
-        
-                <th>
-                User ID
-                </th>
-                <th>
-                Name
-                </th>
-                <th>
-                LastName
-                </th>
+            
+                    <th>
+                    User ID
+                    </th>
+                    <th>
+                    Name
+                    </th>
+                    <th>
+                    LastName
+                    </th>
 
-                <th>
-                 Email
-                </th>
+                    <th>
+                    Email
+                    </th>
 
-                <th>
-                Address
-                </th>
-                <th>
-                Type
-                </th>
+                    <th>
+                    Address
+                    </th>
+                    <th>
+                    Type
+                    </th>
 
-                <th>
-                 Proof
-                </th>
-                </tr>
+                    <th>
+                    Proof
+                    </th>
+                    </tr>
 
 
-                <tr *ngFor="let user of unapprovedUsers">
-                        <td>
-                                {{user.Id}}
-                        </td>
+                    <tr *ngFor="let user of unapprovedUsers">
+                            <td>
+                                    {{user.Id}}
+                            </td>
 
-                        <td>
-                            {{user.Name}}
-                        </td>
+                            <td>
+                                {{user.Name}}
+                            </td>
 
-                        <td>
-                            {{user.LastName}}
+                            <td>
+                                {{user.LastName}}
 
-                        </td>
+                            </td>
 
-                        <td>
-                            {{user.Email}}
+                            <td>
+                                {{user.Email}}
 
-                        </td>
+                            </td>
 
-                        <td>
-                            {{user.Address}}
+                            <td>
+                                {{user.Address}}
 
-                        </td>
+                            </td>
 
-                        <td>
-                            {{user.Type}}
+                            <td>
+                                {{user.Type}}
 
-                        </td>
+                            </td>
 
-                        <td>
-                          <img [src]="user.ImageUrl" height="200">
-                        </td>
+                            <td>
+                            <img [src]="user.ImageUrl" height="80">
+                            </td>
 
-                        <td>
-                            <button class="btn" (click)="approveUser(user)" style="background-color:green;color:#f4f4f4">
-                                    Approve
-                            </button>
-                        </td>
-
-                        <td>
-                            <button class="btn" (click)="refuseUser(user)" style="background-color:red;color:#f4f4f4">
-                                Refuse
-                            </button>
-
-                        </td>
-                    
-                </tr>
-    </table>
+                            <td>
+                                <button class="btn btn-sm btn-success" (click)="approveUser(user)"><i class="fas fa-check"> Approve </i></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" (click)="refuseUser(user)"> <i class="fas fa-window-close"> Refuse </i> </button>
+                            </td>
+                        
+                    </tr>
+        </table>
+    </div>
+</div>

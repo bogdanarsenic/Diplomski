@@ -57,10 +57,7 @@ export class ReserveComponent implements OnInit {
   
         this.ticketUserService.postTicket(ticket).subscribe(
         data => {
-          console.log("Kupljena karta!!");              
-        },
-        error => {
-          console.log(error);
+          alert("You bought a "+type+" ticket for "+price +"RSD");                   
         }
       )
   

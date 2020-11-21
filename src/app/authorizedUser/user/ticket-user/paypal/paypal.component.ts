@@ -31,7 +31,6 @@ export class PaypalComponent implements OnInit {
     this.ticket=new Ticket();
   }
 
-  
   onPayPal()
   {
     paypal
@@ -45,13 +44,11 @@ export class PaypalComponent implements OnInit {
         createOrder: (data, actions) => {
           return actions.order.create({
 
-            purchase_units: [      
-              
+            purchase_units: [                  
               {                
                 amount: {
                   value: this.paypalPrice/100,
                   currency_code: 'USD'
-
                 }
               }
             ]
@@ -70,18 +67,10 @@ export class PaypalComponent implements OnInit {
         .subscribe(
           data => {
             console.log("Kupljena karta!!");              
-          },
-          error => {
-            console.log(error);
           }
         )
-          console.log(order);
-        },
-        onError: err => {
-          console.log(err);
         }
-      }) 
-      
+      })      
       .render(this.paypalElement.nativeElement);
   }
 

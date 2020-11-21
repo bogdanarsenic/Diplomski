@@ -13,7 +13,6 @@ import { LinesService } from '../lines/lines.service';
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.css'],
-  styles: ['agm-map {height: 500px; width: 1000px;}'], //postavljamo sirinu i visinu mape
 })
 
 export class VehiclesComponent implements OnInit, OnDestroy {
@@ -92,7 +91,6 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   public onNotification(notif: string) {
      this.ngZone.run(() => { 
        this.notifications.push(notif);  
-       console.log(this.notifications);
     });  
   }
 
