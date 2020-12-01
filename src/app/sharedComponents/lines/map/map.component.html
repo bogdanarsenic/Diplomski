@@ -1,0 +1,30 @@
+
+        <agm-map [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [zoom]="13" (mapClick)="placeMarker($event)" >  
+          
+          <div *ngIf="!vehicle" >
+            <agm-marker [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude" [title]="markerInfo.title"
+            [label]="markerInfo.label" [iconUrl]="markerInfo.iconUrl">
+            </agm-marker>
+        
+            <agm-polyline [strokeColor]="polyline.color">
+                <agm-polyline-point *ngFor="let point of polyline.path" [latitude]="point.latitude" [longitude]="point.longitude">
+                </agm-polyline-point>
+            </agm-polyline>
+
+            <agm-marker (markerClick)="clickedMarker(point,infowindow)" *ngFor="let point of polyline.path" [latitude]="point.latitude"
+            [longitude]="point.longitude" [iconUrl]="polyline.icon">
+            <agm-info-window #infowindow [latitude]="markerInfo.location.latitude" [longitude]="markerInfo.location.longitude">
+    
+              <!-- U info-window stavljamo html -->
+              <span style="font-size: 16px;font-family:'Times New Roman'">Address : {{stationClicked.Address}}</span>
+              <br />
+              <span style="font-family:'Times New Roman'; color:gray;">Lines: {{stationClicked.LineId}}</span>
+            </agm-info-window>
+            </agm-marker>
+          </div>
+
+          <div *ngIf="vehicle" >
+            <agm-marker  latitude="{{latMarker}}" longitude="{{longMarker}}" [iconUrl]="polyline.icon">      
+            </agm-marker>
+          </div>
+    </agm-map>

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Line } from 'src/app/shared/classes/Line';
-import { Station } from 'src/app/shared/classes/Station';
-import { TimeTable } from 'src/app/shared/classes/TimeTable';
+import { Line } from 'src/app/sharedComponents/classes/Line';
+import { Station } from 'src/app/sharedComponents/classes/Station';
+import { LinesService } from 'src/app/sharedComponents/lines/lines.service';
 import { LinesAdminService } from '../lines-admin.service';
 
 @Component({
@@ -17,12 +17,15 @@ export class EditLinesComponent implements OnInit {
   edit:boolean;
   lineEdit:Line;
   lineId:number;
+  index:number;
+  indexStation:number;
 
-  @Input() lines:Line[];
+  @Input() lines:any[];
   @Input() station:Station;
+  @Input() stations:Station[];
   
 
-  constructor(private lineAdminService:LinesAdminService,private router:Router) { }
+  constructor(private lineAdminService:LinesAdminService, private lineService:LinesService, private router:Router) { }
 
   ngOnInit() {
     this.editStation=false;
@@ -33,13 +36,16 @@ export class EditLinesComponent implements OnInit {
     this.lineId=lineId;
     var linesTemp=this.lines.map((x)=>{ return {...x}})
     this.lineEdit=linesTemp.find(x=>x.Id==lineId);
+    this.index=linesTemp.findIndex(x=>x.Id==lineId);
     this.editStation=false;
   }
 
   GetStation(station:Station)
   {
       this.editStation=true;
-      this.stationEdit=station;
+      this.stationEdit=station;    
+      var stationsTemp=this.stations.map((x)=>{ return {...x}})
+      this.indexStation=stationsTemp.findIndex(x=>x.Id==this.stationEdit.Id);
   }
   
   UpdateLine()
@@ -48,11 +54,17 @@ export class EditLinesComponent implements OnInit {
 
     if(i==-1 && this.lineEdit.Name!="")
     {
+
         this.lineAdminService.putLine(this.lineId, this.lineEdit)
         .subscribe(
-          data => {   }
-        )
-        this.router.navigate(['/lines']).then(()=>window.location.reload());  
+          data => { 
+       
+            this.lines.splice(this.index,1);
+            this.lines.push(this.lineEdit);
+            this.lines.sort((a,b)=> a.Name-b.Name);
+            this.lineService.TakeLines.emit(this.lines);
+            }
+        ) 
         }   
     else
     {
@@ -62,10 +74,13 @@ export class EditLinesComponent implements OnInit {
 
   UpdateStation()
   {
+
     this.lineAdminService.putStation(this.stationEdit.Id, this.stationEdit)
     .subscribe(
       data => {
-        this.router.navigate(['/lines']).then(()=>window.location.reload());  
+            this.stations.splice(this.indexStation,1);
+            this.stations.push(this.stationEdit);
+            this.lineService.TakeStations.emit(this.stations);
       }
     )
     
@@ -75,16 +90,16 @@ export class EditLinesComponent implements OnInit {
 
     this.lineAdminService.deleteLine(this.lineId).subscribe(
         data => {
-            this.router.navigate(['/lines']).then(()=>window.location.reload());   
-          }
+                  this.lines.splice(this.index,1);
+                  this.lineService.TakeLines.emit(this.lines); 
+                }
         )
-
   }
 
   deleteStation(){
     this.lineAdminService.deleteStation(this.stationEdit.Id).subscribe(
       data => {
-        this.router.navigate(['/lines']).then(()=>window.location.reload());  
+        this.router.navigate(['']).then(()=>window.location.reload());
       }
     )
   }

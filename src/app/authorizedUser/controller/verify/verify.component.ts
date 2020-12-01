@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
 import { CommonModule } from '@angular/common';
-import { User } from 'src/app/shared/classes/User';
+import { User } from 'src/app/sharedComponents/classes/User';
 
 @Component({
   selector: 'app-verify',
@@ -15,7 +14,7 @@ export class VerifyComponent implements OnInit {
   local:string
   folder:string
 
-  constructor(private serverService: ServicesService, private router: Router) { }
+  constructor(private serverService: ServicesService) { }
   
   ngOnInit() {
     this.unapprovedUsers=[];
@@ -41,12 +40,14 @@ export class VerifyComponent implements OnInit {
   }
 
   approveUser(user){
+    var index=this.unapprovedUsers.findIndex(x=>x.Email==user.Email);
+    this.unapprovedUsers.slice(index,1);
     user.Active = true;
     user.Status="Approved";
     this.serverService.putApplicationUsers(user.Id,user)
     .subscribe(
       data =>{
-        this.router.navigate(['']).then(()=>window.location.reload());
+        this.getUsers();
       }
     )
   }
@@ -57,7 +58,7 @@ export class VerifyComponent implements OnInit {
     this.serverService.putApplicationUsers(user.Id,user)
     .subscribe(
       data =>{
-        this.router.navigate(['']).then(()=>window.location.reload());
+        this.getUsers();
       }
     )
   }

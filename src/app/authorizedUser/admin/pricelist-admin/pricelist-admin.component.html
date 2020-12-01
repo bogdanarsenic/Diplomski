@@ -1,0 +1,12 @@
+<br/>
+<br/>
+<div class="row">
+       <div class="col-md-7">
+           <app-pricelist> </app-pricelist>
+
+           <div *ngFor="let l of pricelist;let i=index" >
+               <app-edit-pricelist [pricelist]="pricelist[i]"></app-edit-pricelist>
+           </div>
+       </div>
+   </div>
+

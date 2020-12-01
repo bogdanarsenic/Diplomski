@@ -2,18 +2,18 @@
  <br/>
     <div class="row">
         <div class="col-md-7">
-            <app-ticket> </app-ticket>
+            <app-pricelist> </app-pricelist>
 
             <div *ngIf="canBuy">
-                <app-reserve [pricelist]="pricelist" [user]="user"></app-reserve>
+                <app-reserve [pricelist]="pricelist" [user]="user" [tickets]="tickets"></app-reserve>
                 <div>
                     <app-paypal style="margin-left: 150px;width:300px;height:150px" [user]="user">  </app-paypal>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-5" style="margin-top:50px" *ngIf="canBuy">
-            <app-show  [user]="user">
+        <div class="col-md-5" style="margin-top:50px">
+            <app-show  [hidden]="!canBuy" [user]="user" [ticket]="ticket">
             </app-show>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/classes/User';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { User } from 'src/app/sharedComponents/classes/User';
 import { TicketUserService } from '../ticket-user.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class ShowComponent implements OnInit {
 
   ticketsByUser: Array<any>;
   @Input() user:User;
+  @Input() ticket:Ticket;
   tickets:Array<any>;
   buttonTicket:boolean;
 
@@ -42,6 +44,7 @@ export class ShowComponent implements OnInit {
             {
               this.buttonTicket=true;
               this.ticketsByUser.map((x)=>x.Date=x.Date.replace('T',' ').split('.')[0])
+              this.ticketServer.GetTickets.emit(this.ticketsByUser);
             }else
               alert("You haven't bought any tickets")
         }

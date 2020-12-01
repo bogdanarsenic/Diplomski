@@ -1,10 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login } from '../shared/classes/Login';
-import { PriceList } from '../shared/classes/PriceList';
-import { Ticket } from '../shared/classes/Ticket';
-import { User } from '../shared/classes/User';
+import { Login } from '../sharedComponents/classes/Login';
+import { User } from '../sharedComponents/classes/User';
 
 
 const httpOptions = {
@@ -40,9 +38,6 @@ export class ServicesService {
     return this.httpClient.get('http://localhost:52295/api/ApplicationUser/0', httpOptions);
   }
 
-  getTicket(id:string): any{
-    return this.httpClient.get('http://localhost:52295/api/Ticket',{params:{id}});
-  }
 
   putApplicationUsers(id:string,user:User):Observable<any>
   {
@@ -54,19 +49,8 @@ export class ServicesService {
       return this.httpClient.put('http://localhost:52295/api/ApplicationUser/1', body,{'headers' : header} );
   }
 
-  getAllTickets():any{
-    return this.httpClient.get("http://localhost:52295/api/Ticket");
-  }
-
   getAllUsers():any{
     return this.httpClient.get("http://localhost:52295/api/ApplicationUser");
   }
 
-  getAllPriceLists():any{
-    return this.httpClient.get("http://localhost:52295/api/PriceList");
-  }
-
-  postTicket(t:Ticket):Observable<any>{
-    return this.httpClient.post("http://localhost:52295/api/Ticket", t);
-  }
 }

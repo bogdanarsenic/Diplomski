@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { PriceList } from 'src/app/shared/classes/PriceList';
-import { Ticket } from 'src/app/shared/classes/Ticket';
+import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
 
 
 @Injectable({
@@ -11,6 +11,8 @@ import { Ticket } from 'src/app/shared/classes/Ticket';
 export class TicketUserService {
 
   SendPriceList=new EventEmitter<PriceList[]>();
+  GetTickets=new EventEmitter<Ticket[]>();
+  AddTicket=new EventEmitter<Ticket>();
 
   constructor(private httpClient:HttpClient)
   { }
@@ -20,5 +22,9 @@ export class TicketUserService {
   }
   postTicket(t:Ticket):any{
     return this.httpClient.post("http://localhost:52295/api/Ticket", t);
+  }
+
+  getTicket(id:string): any{
+    return this.httpClient.get('http://localhost:52295/api/Ticket',{params:{id}});
   }
 }

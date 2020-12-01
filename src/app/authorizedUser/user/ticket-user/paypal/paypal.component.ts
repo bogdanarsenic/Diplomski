@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ServicesService } from 'src/app/services/services.service';
-import { Ticket } from 'src/app/shared/classes/Ticket';
-import { User } from 'src/app/shared/classes/User';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { User } from 'src/app/sharedComponents/classes/User';
+import { TicketUserService } from '../ticket-user.service';
 
 declare var paypal;
 
@@ -24,7 +24,7 @@ export class PaypalComponent implements OnInit {
   index:number
   @Input() user:User
 
-  constructor(private serverService:ServicesService) { }
+  constructor(private ticketUserService:TicketUserService) { }
 
   ngOnInit() {
     this.paypalchecked=false;
@@ -63,10 +63,10 @@ export class PaypalComponent implements OnInit {
           this.ticket.IsValid = true;
           this.ticket.OrderID = data.orderID;
           this.ticket.PayerID = data.payerID;
-          this.serverService.postTicket(this.ticket)
+          this.ticketUserService.postTicket(this.ticket)
         .subscribe(
           data => {
-            console.log("Kupljena karta!!");              
+            this.ticketUserService.AddTicket.emit(this.ticket);          
           }
         )
         }

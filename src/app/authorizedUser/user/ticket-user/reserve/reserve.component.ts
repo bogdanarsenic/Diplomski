@@ -1,8 +1,8 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { PriceList } from 'src/app/shared/classes/PriceList';
-import { Ticket } from 'src/app/shared/classes/Ticket';
-import { User } from 'src/app/shared/classes/User';
+import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { User } from 'src/app/sharedComponents/classes/User';
 import { TicketUserService } from '../ticket-user.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class ReserveComponent implements OnInit {
 
   @Input() pricelist:PriceList[];
   @Input() user:User;
+  @Input() tickets:Ticket[];
   priceTemporal:number;
   priceDay:number;
   priceMonth:number;
@@ -57,7 +58,8 @@ export class ReserveComponent implements OnInit {
   
         this.ticketUserService.postTicket(ticket).subscribe(
         data => {
-          alert("You bought a "+type+" ticket for "+price +"RSD");                   
+         // alert("You bought a "+type+" ticket for "+price +"RSD");    
+          this.ticketUserService.AddTicket.emit(ticket);          
         }
       )
   

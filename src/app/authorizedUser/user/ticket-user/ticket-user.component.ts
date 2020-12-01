@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PriceList } from 'src/app/shared/classes/PriceList';
-import { User } from 'src/app/shared/classes/User';
-import { PricelistService } from 'src/app/shared/pricelist/pricelist.service';
+import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { User } from 'src/app/sharedComponents/classes/User';
+import { PricelistService } from 'src/app/sharedComponents/pricelist/pricelist.service';
 import { PaypalComponent } from './paypal/paypal.component';
 import { ReserveComponent } from './reserve/reserve.component';
+import { ShowComponent } from './show/show.component';
 import { TicketUserService } from './ticket-user.service';
 
 @Component({
@@ -15,12 +17,15 @@ export class TicketUserComponent implements OnInit {
 
   @ViewChild(PaypalComponent,{static:false})childPaypal:PaypalComponent
   @ViewChild(ReserveComponent,{static:false})childReserve:ReserveComponent
+  @ViewChild(ShowComponent,{static:false})childShow:ShowComponent
 
   user:User;
   price:number;
   index:number;
   pricelist:PriceList[];
   canBuy:boolean;
+  tickets:Ticket[];
+  ticket:Ticket;
 
   constructor(private priceListService:PricelistService, private priceUserService:TicketUserService)
    { }
@@ -32,6 +37,7 @@ export class TicketUserComponent implements OnInit {
       this.TakePrice();
       this.TakeIndex();
       this.TakePricelist();
+      this.AddNewTicket();
   }
 
   TakeUser()
@@ -74,6 +80,27 @@ export class TicketUserComponent implements OnInit {
       data=>
       {
         this.price=data;
+      }
+    )
+  }
+
+  GetTickets()
+  {
+    this.priceUserService.GetTickets.subscribe(
+      data=>
+      {
+        this.tickets=data;
+      }
+    )
+  }
+
+  AddNewTicket()
+  {
+    this.priceUserService.AddTicket.subscribe(
+      data=>
+      {
+        this.ticket=data;
+        this.childShow.getTickets();
       }
     )
   }

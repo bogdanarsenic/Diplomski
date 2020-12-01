@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalService } from 'src/app/services/modal.service';
-import { Line } from 'src/app/shared/classes/Line';
-import { Station } from 'src/app/shared/classes/Station';
-import { StationLine } from 'src/app/shared/classes/StationLine';
-import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
+import { Line } from 'src/app/sharedComponents/classes/Line';
+import { Station } from 'src/app/sharedComponents/classes/Station';
+import { StationLine } from 'src/app/sharedComponents/classes/StationLine';
+import { LinesService } from 'src/app/sharedComponents/lines/lines.service';
+import { GeoLocation } from 'src/app/sharedComponents/lines/map/model/geolocation';
 import { LinesAdminService } from '../lines-admin.service';
 
 @Component({
@@ -18,13 +18,16 @@ export class AddLinesComponent implements OnInit {
   bodyText1:string;
   station:Station;
   stationLine:StationLine;
+
   stationId:string;
   line:Line;
-  @Input() lines:Line[]
+  @Input() lines:any[]
   @Input() location:GeoLocation;
   @Input() lineId:number;
+  @Input() stationLines:StationLine[];
+  @Input() stations:Station[];
 
-  constructor(private modalService: ModalService,private lineAdminService:LinesAdminService,private router:Router)
+  constructor(private modalService: ModalService,private lineAdminService:LinesAdminService,private lineService:LinesService)
   { }
 
   ngOnInit(){}
@@ -55,11 +58,11 @@ export class AddLinesComponent implements OnInit {
     this.lineAdminService.postStation(this.station)
         .subscribe(
           data =>{
-            this.stationId = data.Id;
+            this.stationId=data.Id;
+            this.station.Id = data.Id;
+            this.stations.push(this.station);
+            this.lineService.TakeStations.emit(this.stations);
             this.postStationLine();
-          },
-          error => {
-            console.log(error);
           }
         )
   }
@@ -68,12 +71,11 @@ export class AddLinesComponent implements OnInit {
     
     this.stationLine.LineId = this.lineId;
     this.stationLine.StationId = this.stationId;
+    this.stationLines.push(this.stationLine);
     this.lineAdminService.postStationLine(this.stationLine)
         .subscribe(
           data =>{
-          },
-          error => {
-            console.log(error);
+            this.lineService.TakeStationLines.emit(this.stationLines);  
           }
         )
   }
@@ -82,11 +84,11 @@ export class AddLinesComponent implements OnInit {
     this.lineAdminService.postLine(this.line)
         .subscribe(
           data =>{
-          this.lineId = data.Id;           
-          this.router.navigate(['/lines-admin']).then(()=>window.location.reload());        
-          },
-          error => {
-            console.log(error);
+            this.lineId = data.Id;  
+            this.line.Id=this.lineId;
+            this.lines.push(this.line);   
+            this.lines.sort((a,b)=> a.Name-b.Name);
+            this.lineService.TakeLines.emit(this.lines);  
           }
         )
   }

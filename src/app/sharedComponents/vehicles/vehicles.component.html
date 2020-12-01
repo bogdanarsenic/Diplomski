@@ -1,0 +1,14 @@
+
+<div class="row">
+    <div class="col-md-7" >
+        <app-lines [vehicle]="isVehicle"></app-lines>
+    </div>
+    <div class="col-md-5" *ngIf="isConnected" >
+            <br/>
+            <h5>Current vehicle address:</h5>
+           <hr/>
+            <h5>{{stationsToDraw[num].Address}}</h5>
+    </div>
+</div>
+
+

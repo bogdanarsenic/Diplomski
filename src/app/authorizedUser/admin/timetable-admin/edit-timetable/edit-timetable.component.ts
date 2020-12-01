@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
+import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
 import { CommonModule } from '@angular/common';
 
 
@@ -14,8 +13,10 @@ export class EditTimetableComponent implements OnInit {
 
   @Input() timetable:TimeTable;
   @Input() times:string;
+  @Input() timetables:TimeTable[]
+
   
-  constructor(private service:TimetableService,private router:Router) 
+  constructor(private timetableService:TimetableService) 
   { }
 
   ngOnInit(){ 
@@ -23,21 +24,32 @@ export class EditTimetableComponent implements OnInit {
 
   onSubmit()
   {
+      var i=this.timetables.findIndex(x=>x.Id===this.timetable.Id);
+
       this.timetable.Times=this.times;
-      this.service.putTimeTable(this.timetable.Id,this.timetable).subscribe(
+      this.timetableService.putTimeTable(this.timetable.Id,this.timetable).subscribe(
         data=>
             {
-                this.router.navigate(['']).then(()=>window.location.reload());                  
+              this.timetables.splice(i,1);
+              this.timetables.push(this.timetable);
+              this.timetableService.AddorEdit.emit(this.timetable);
+              this.timetableService.SendNew.emit(this.timetables);   
+              this.times="";
+              this.timetableService.sharedComponentsTimes.emit(this.times);  
             }
       )
   }  
 
   Delete()
   {
-      this.service.deleteTime(this.timetable.Id).subscribe(
+
+    var i=this.timetables.findIndex(x=>x.Id===this.timetable.Id);
+
+      this.timetableService.deleteTime(this.timetable.Id).subscribe(
         data=>
         {
-          this.router.navigate(['']).then(()=>window.location.reload());
+          this.timetables.splice(i,1);
+          this.timetableService.SendNew.emit(this.timetables);    
         }
       )
   }

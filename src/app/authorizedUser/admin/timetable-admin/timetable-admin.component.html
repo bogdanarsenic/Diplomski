@@ -14,13 +14,13 @@
 
             <div *ngIf="add" style="margin-top: 10px;">
                 <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
-                <app-add-timetable [timetable]="timetable" [times]="times">  </app-add-timetable>
+                <app-add-timetable [timetable]="timetable" [times]="times" [timetables]="timetables">  </app-add-timetable>
             </div>
 
             <div *ngIf="!add" style="margin-top: 10px;">
-                <button class="btn btn-default btn-sm btn-danger" style="margin-right: 5px;" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
-                <button class="btn btn-default btn-sm btn-secondary"  (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
-                <app-edit-timetable [timetable]="timetable" [times]="times"> </app-edit-timetable>
+                <button class="btn btn-default btn-sm btn-secondary"  style="margin-right: 5px;" (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
+                <button class="btn btn-default btn-sm btn-danger" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
+                <app-edit-timetable [timetable]="timetable" [times]="times" [timetables]="timetables"> </app-edit-timetable>
             </div>
         </div>
     </div>

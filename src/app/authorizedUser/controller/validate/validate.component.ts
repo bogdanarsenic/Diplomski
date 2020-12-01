@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from 'src/app/services/services.service';
 import { CommonModule } from '@angular/common';
-import { Ticket } from 'src/app/shared/classes/Ticket';
+import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { TicketUserService } from '../../user/ticket-user/ticket-user.service';
 
 @Component({
   selector: 'app-validate',
@@ -15,7 +15,7 @@ export class ValidateComponent implements OnInit {
   show:boolean;
   ids:Ticket[];
 
-  constructor(private serverService:ServicesService) 
+  constructor(private ticketUserService:TicketUserService) 
   { }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class ValidateComponent implements OnInit {
     this.ids=[];
     this.ticket=new Ticket();
     this.show=false;
-    this.serverService.getAllTickets().subscribe(
+    this.ticketUserService.getAllTickets().subscribe(
       data=>
         {
           this.ids=data;
@@ -36,7 +36,7 @@ export class ValidateComponent implements OnInit {
       this.show=false;
       this.id=String(a);
 
-      this.serverService.getTicket(this.id).subscribe(
+      this.ticketUserService.getTicket(this.id).subscribe(
         data=>
         {
             this.ticket=data;    

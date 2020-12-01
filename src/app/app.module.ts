@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotificationService } from './services/notification.service';
-import { HttpClickService } from './services/click-http.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ModalComponent } from './authorizedUser/admin/modal/modal.component';
 import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
@@ -20,16 +19,16 @@ import { EditprofileComponent } from './authorizedUser/editprofile/editprofile.c
 import { ImageUploadComponent } from './authorizedUser/user/image-upload/image-upload.component';
 import { RegisterComponent } from './unauthorizedUser/register/register.component';
 import { LoginComponent } from './unauthorizedUser/login/login.component';
-import { VehiclesComponent } from './shared/vehicles/vehicles.component';
-import { TimetableComponent } from './shared/timetable/timetable.component';
-import { ShowTimetableComponent } from './shared/timetable/show-timetable/show-timetable.component';
+import { VehiclesComponent } from './sharedComponents/vehicles/vehicles.component';
+import { TimetableComponent } from './sharedComponents/timetable/timetable.component';
+import { ShowTimetableComponent } from './sharedComponents/timetable/show-timetable/show-timetable.component';
 import { TimetableAdminComponent } from './authorizedUser/admin/timetable-admin/timetable-admin.component';
 import { EditTimetableComponent } from './authorizedUser/admin/timetable-admin/edit-timetable/edit-timetable.component';
 import { AddTimetableComponent } from './authorizedUser/admin/timetable-admin/add-timetable/add-timetable.component';
 import { FormTimetableComponent } from './authorizedUser/admin/timetable-admin/form-timetable/form-timetable.component';
-import { MapComponent } from './shared/lines/map/map.component';
-import { LinesComponent } from './shared/lines/lines.component';
-import { LineListComponent } from './shared/lines/line-list/line-list.component';
+import { MapComponent } from './sharedComponents/lines/map/map.component';
+import { LinesComponent } from './sharedComponents/lines/lines.component';
+import { LineListComponent } from './sharedComponents/lines/line-list/line-list.component';
 import { LinesAdminComponent } from './authorizedUser/admin/lines-admin/lines-admin.component';
 import { AddLinesComponent } from './authorizedUser/admin/lines-admin/add-lines/add-lines.component';
 import { EditLinesComponent } from './authorizedUser/admin/lines-admin/edit-lines/edit-lines.component';
@@ -37,12 +36,12 @@ import { TicketUserComponent } from './authorizedUser/user/ticket-user/ticket-us
 import { ReserveComponent } from './authorizedUser/user/ticket-user/reserve/reserve.component';
 import { ShowComponent } from './authorizedUser/user/ticket-user/show/show.component';
 import { PaypalComponent } from './authorizedUser/user/ticket-user/paypal/paypal.component';
-import { TicketComponent } from './shared/pricelist/ticket/ticket.component';
-import { NavigationComponent } from './shared/navigation/navigation.component';
-import { TicketAdminComponent } from './authorizedUser/admin/ticket-admin/ticket-admin.component';
-import { EditTicketComponent } from './authorizedUser/admin/ticket-admin/edit-ticket/edit-ticket.component';
+import { NavigationComponent } from './sharedComponents/navigation/navigation.component';
 import { CommonModule } from '@angular/common';
 import { VerifyComponent } from './authorizedUser/controller/verify/verify.component';
+import { PricelistComponent } from './sharedComponents/pricelist/pricelist.component';
+import { PricelistAdminComponent } from './authorizedUser/admin/pricelist-admin/pricelist-admin.component';
+import { EditPricelistComponent } from './authorizedUser/admin/pricelist-admin/edit-pricelist/edit-pricelist.component';
 
 @NgModule({
   declarations: [
@@ -71,10 +70,10 @@ import { VerifyComponent } from './authorizedUser/controller/verify/verify.compo
     ReserveComponent,
     ShowComponent,
     PaypalComponent,
-    TicketComponent,
-    TicketAdminComponent,
-    EditTicketComponent,
-    VerifyComponent ],
+    VerifyComponent,
+    EditPricelistComponent,
+    PricelistComponent,
+    PricelistAdminComponent ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -95,7 +94,6 @@ import { VerifyComponent } from './authorizedUser/controller/verify/verify.compo
 
     NotificationService,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-    HttpClickService
     ],
     
   bootstrap: [AppComponent]

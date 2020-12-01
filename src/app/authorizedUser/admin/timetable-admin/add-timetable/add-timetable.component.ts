@@ -1,9 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
+import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-add-timetable',
@@ -13,9 +11,10 @@ import { CommonModule } from '@angular/common';
 export class AddTimetableComponent implements OnInit {
 
   @Input() timetable:TimeTable
+  @Input() timetables:TimeTable[]
   @Input() times:string
 
-  constructor(private service:TimetableService,private router:Router) 
+  constructor(private timetableService:TimetableService) 
   {}
 
   ngOnInit(){
@@ -25,10 +24,14 @@ export class AddTimetableComponent implements OnInit {
   {
     this.timetable.Times=this.times;
 
-    this.service.postTimetable(this.timetable).subscribe(
+    this.timetableService.postTimetable(this.timetable).subscribe(
         data=>
             {
-              this.router.navigate(['']).then(()=>window.location.reload());
+              this.timetable.Id=data.Id;
+              this.timetables.push(this.timetable);
+              this.timetableService.SendNew.emit(this.timetables);
+              this.times="";
+              this.timetableService.sharedComponentsTimes.emit(this.times);  
             }
     )
   }

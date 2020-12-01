@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
-import { User } from 'src/app/shared/classes/User';
+import { User } from 'src/app/sharedComponents/classes/User';
 import { ImageService } from './image.service';
 
 @Component({

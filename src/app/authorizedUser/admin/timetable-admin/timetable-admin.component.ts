@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
+import { TimetableComponent } from 'src/app/sharedComponents/timetable/timetable.component';
+import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
 import { AddTimetableComponent } from './add-timetable/add-timetable.component';
 import { EditTimetableComponent } from './edit-timetable/edit-timetable.component';
 
@@ -13,17 +14,21 @@ export class TimetableAdminComponent implements OnInit {
 
   @ViewChild(EditTimetableComponent,{static:false}) childEdit:EditTimetableComponent
   @ViewChild(AddTimetableComponent,{static:false}) childAdd:AddTimetableComponent
+  @ViewChild(TimetableComponent,{static:false})childTimetable:TimetableComponent
 
   times:string
   timetable:TimeTable
   add:boolean
   show:boolean
+  timetables:TimeTable[]
 
   constructor(private timetableService:TimetableService) { }
 
   ngOnInit() {
+
     this.add=false;
     this.show=false;
+
     this.timetableService.AddorEdit.subscribe(data=>{
         this.timetable=data;
         this.ShowEditorAdd();
@@ -33,9 +38,20 @@ export class TimetableAdminComponent implements OnInit {
       this.show=data;
     })
 
-    this.timetableService.SharedTimes.subscribe(data=>{
+    this.timetableService.sharedComponentsTimes.subscribe(data=>{
       this.times=data;
     })
+
+    this.timetableService.GetTimetables.subscribe(data=>{
+      this.timetables=data;
+    })
+
+    this.timetableService.SendNew.subscribe(data=>{
+      this.timetables=data;
+      this.childTimetable.timetables=data;
+      this.childTimetable.findTimeForTimetable();
+    })
+
 
   }
   
