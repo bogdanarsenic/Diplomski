@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { PriceList } from 'src/app/shared/classes/PriceList';
 import { TicketUserService } from '../../user/ticket-user/ticket-user.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @Component({
   selector: 'app-pricelist-admin',

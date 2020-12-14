@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { Ticket } from 'src/app/shared/classes/Ticket';
 import { TicketUserService } from '../../user/ticket-user/ticket-user.service';
 
 @Component({

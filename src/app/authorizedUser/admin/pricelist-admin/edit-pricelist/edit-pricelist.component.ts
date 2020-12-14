@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { PriceList } from 'src/app/shared/classes/PriceList';
 import { PricelistAdminService } from '../pricelist.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @Component({
   selector: 'app-edit-pricelist',

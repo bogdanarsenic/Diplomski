@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicesService } from 'src/app/services/services.service';
-import { CommonModule } from '@angular/common';
-import { User } from 'src/app/sharedComponents/classes/User';
+import { User } from 'src/app/shared/classes/User';
 
 @Component({
   selector: 'app-verify',

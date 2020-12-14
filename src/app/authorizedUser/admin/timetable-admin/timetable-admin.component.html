@@ -12,6 +12,10 @@
             <app-form-timetable >
             </app-form-timetable>
 
+
+            <router-outlet>
+                
+            </router-outlet>
             <div *ngIf="add" style="margin-top: 10px;">
                 <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
                 <app-add-timetable [timetable]="timetable" [times]="times" [timetables]="timetables">  </app-add-timetable>

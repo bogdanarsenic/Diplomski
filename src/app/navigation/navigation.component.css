@@ -1,0 +1,13 @@
+a {
+  margin-right: 30px;
+  float: left;
+}
+
+.nav-item .active {
+  color: rgb(91, 184, 120);
+  font-weight: bolder;
+}
+
+.dropdown-menu :active {
+  background-color: rgb(91, 184, 120);
+}

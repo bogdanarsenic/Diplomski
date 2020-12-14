@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
-import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
+import { PriceList } from 'src/app/shared/classes/PriceList';
+import { Ticket } from 'src/app/shared/classes/Ticket';
 
 
 @Injectable({

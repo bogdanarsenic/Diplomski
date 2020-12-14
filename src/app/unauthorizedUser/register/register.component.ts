@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { User } from 'src/app/sharedComponents/classes/User';
-import { Login } from 'src/app/sharedComponents/classes/Login';
-import { CustomValidators } from 'src/app/sharedComponents/validator/customValidator';
-import { MatchPassword } from 'src/app/sharedComponents/validator/MatchPassword';
+import { User } from 'src/app/shared/classes/User';
+import { Login } from 'src/app/shared/classes/Login';
+import { CustomValidators } from 'src/app/shared/validator/customValidator';
+import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
 
 
 
@@ -93,7 +92,7 @@ export class RegisterComponent {
                 localStorage.setItem('role', role)
 
                 if(user.Type!='Regular')
-                   this.router.navigateByUrl('image-upload');
+                  this.router.navigate(['profile/image-upload'])
                 else
                     this.router.navigate(['']).then(()=>window.location.reload());
                 

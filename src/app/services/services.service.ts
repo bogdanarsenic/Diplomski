@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Login } from '../sharedComponents/classes/Login';
-import { User } from '../sharedComponents/classes/User';
+import { Login } from '../shared/classes/Login';
+import { User } from '../shared/classes/User';
 
 
 const httpOptions = {

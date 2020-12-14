@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
-import { TimetableComponent } from 'src/app/sharedComponents/timetable/timetable.component';
-import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
+import { Router } from '@angular/router';
+import { TimeTable } from 'src/app/shared/classes/TimeTable';
+import { TimetableComponent } from 'src/app/shared/timetable/timetable.component';
+import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import { AddTimetableComponent } from './add-timetable/add-timetable.component';
 import { EditTimetableComponent } from './edit-timetable/edit-timetable.component';
 
@@ -22,7 +23,7 @@ export class TimetableAdminComponent implements OnInit {
   show:boolean
   timetables:TimeTable[]
 
-  constructor(private timetableService:TimetableService) { }
+  constructor(private timetableService:TimetableService,private router:Router) { }
 
   ngOnInit() {
 
@@ -38,7 +39,7 @@ export class TimetableAdminComponent implements OnInit {
       this.show=data;
     })
 
-    this.timetableService.sharedComponentsTimes.subscribe(data=>{
+    this.timetableService.sharedTimes.subscribe(data=>{
       this.times=data;
     })
 
@@ -57,6 +58,7 @@ export class TimetableAdminComponent implements OnInit {
   
   onEdit()
   {
+    this.router.navigate(['a/timetable/edit']);   
     this.childEdit.onSubmit();
   }
 
@@ -67,6 +69,7 @@ export class TimetableAdminComponent implements OnInit {
 
   onAdd()
   {
+    this.router.navigate(['a/timetable/add']);     
     this.childAdd.onSubmit();
   }
 

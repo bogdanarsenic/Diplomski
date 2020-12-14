@@ -1,11 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalService } from 'src/app/services/modal.service';
-import { Line } from 'src/app/sharedComponents/classes/Line';
-import { Station } from 'src/app/sharedComponents/classes/Station';
-import { StationLine } from 'src/app/sharedComponents/classes/StationLine';
-import { LinesService } from 'src/app/sharedComponents/lines/lines.service';
-import { GeoLocation } from 'src/app/sharedComponents/lines/map/model/geolocation';
+import { Line } from 'src/app/shared/classes/Line';
+import { Station } from 'src/app/shared/classes/Station';
+import { StationLine } from 'src/app/shared/classes/StationLine';
+import { LinesService } from 'src/app/shared/lines/lines.service';
+import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
 import { LinesAdminService } from '../lines-admin.service';
+import {NgModel} from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
+
+
 
 @Component({
   selector: 'app-add-lines',

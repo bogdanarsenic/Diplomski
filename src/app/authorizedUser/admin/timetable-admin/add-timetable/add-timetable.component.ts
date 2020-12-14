@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
-import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
-import { CommonModule } from '@angular/common';
+import { TimeTable } from 'src/app/shared/classes/TimeTable';
+import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+
 
 @Component({
   selector: 'app-add-timetable',
@@ -31,7 +31,7 @@ export class AddTimetableComponent implements OnInit {
               this.timetables.push(this.timetable);
               this.timetableService.SendNew.emit(this.timetables);
               this.times="";
-              this.timetableService.sharedComponentsTimes.emit(this.times);  
+              this.timetableService.sharedTimes.emit(this.times);  
             }
     )
   }

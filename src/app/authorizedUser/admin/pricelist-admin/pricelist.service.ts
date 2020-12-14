@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
+import { PriceList } from 'src/app/shared/classes/PriceList';
 
 @Injectable({
   providedIn: 'root'

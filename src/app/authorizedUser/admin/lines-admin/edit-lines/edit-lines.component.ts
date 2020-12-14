@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Line } from 'src/app/sharedComponents/classes/Line';
-import { Station } from 'src/app/sharedComponents/classes/Station';
-import { LinesService } from 'src/app/sharedComponents/lines/lines.service';
+import { Line } from 'src/app/shared/classes/Line';
+import { Station } from 'src/app/shared/classes/Station';
+import { LinesService } from 'src/app/shared/lines/lines.service';
 import { LinesAdminService } from '../lines-admin.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @Component({
   selector: 'app-edit-lines',

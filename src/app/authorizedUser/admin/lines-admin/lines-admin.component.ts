@@ -1,9 +1,9 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { Line } from 'src/app/sharedComponents/classes/Line';
-import { Station } from 'src/app/sharedComponents/classes/Station';
-import { StationLine } from 'src/app/sharedComponents/classes/StationLine';
-import { LinesComponent } from 'src/app/sharedComponents/lines/lines.component';
-import { LinesService } from 'src/app/sharedComponents/lines/lines.service';
+import { Line } from 'src/app/shared/classes/Line';
+import { Station } from 'src/app/shared/classes/Station';
+import { StationLine } from 'src/app/shared/classes/StationLine';
+import { LinesComponent } from 'src/app/shared/lines/lines.component';
+import { LinesService } from 'src/app/shared/lines/lines.service';
 import { AddLinesComponent } from './add-lines/add-lines.component';
 import { EditLinesComponent } from './edit-lines/edit-lines.component';
 import { LinesAdminService } from './lines-admin.service';

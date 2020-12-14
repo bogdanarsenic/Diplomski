@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { User } from 'src/app/sharedComponents/classes/User';
-import { CustomValidators } from 'src/app/sharedComponents/validator/customValidator';
-import { MatchPassword } from 'src/app/sharedComponents/validator/MatchPassword';
+import { User } from 'src/app/shared/classes/User';
+import { CustomValidators } from 'src/app/shared/validator/customValidator';
+import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
 
 
 @Component({

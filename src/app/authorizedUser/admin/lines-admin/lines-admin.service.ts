@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Line } from 'src/app/sharedComponents/classes/Line';
-import { Station } from 'src/app/sharedComponents/classes/Station';
-import { StationLine } from 'src/app/sharedComponents/classes/StationLine';
-import { GeoLocation } from 'src/app/sharedComponents/lines/map/model/geolocation';
+import { Line } from 'src/app/shared/classes/Line';
+import { Station } from 'src/app/shared/classes/Station';
+import { StationLine } from 'src/app/shared/classes/StationLine';
+import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
 
 @Injectable({
   providedIn: 'root'

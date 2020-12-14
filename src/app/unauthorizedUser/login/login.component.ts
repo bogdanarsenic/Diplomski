@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup,FormBuilder, Validators} from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { ServicesService } from 'src/app/services/services.service';
-import { Login } from 'src/app/sharedComponents/classes/Login';
+import { Login } from 'src/app/shared/classes/Login';
 
 @Component({
   selector: 'app-login',
@@ -56,6 +55,16 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('role',role);
 
           this.router.navigate(['']).then(()=>window.location.reload());
+
+          // switch(role)
+          // { 
+          //   case "Admin": this.router.navigate(['a']);
+          //                 break;
+          //   case "Controller": this.router.navigate(['c']);
+          //                 break;
+          //   case "AppUser":this.router.navigate(['u']);
+          //                 break;
+          // }
 
         },error=>
         {

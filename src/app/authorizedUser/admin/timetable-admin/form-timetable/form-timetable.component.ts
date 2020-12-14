@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
-import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
-import { CommonModule } from '@angular/common';
+import { TimeTable } from 'src/app/shared/classes/TimeTable';
+import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+
 
 @Component({
   selector: 'app-form-timetable',
@@ -49,7 +49,7 @@ export class FormTimetableComponent implements OnInit {
           this.timetable.Times+=this.times+";";
       }
     }
-      this.service.sharedComponentsTimes.emit(this.timetable.Times);
+      this.service.sharedTimes.emit(this.timetable.Times);
   }
   
   onChange()

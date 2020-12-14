@@ -1,0 +1,26 @@
+<br/>
+<br/>
+<div class="grid-container">
+    <hr>
+<div class="grid-item" *ngFor="let l of pricelist; let i=index">
+
+<form>
+    <h3> {{l.Id}} </h3>
+    <hr/>
+    <h4> <b> {{l.Price}} din </b></h4>
+    <div class="form-check">
+            <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="radiobuttons" (click)="onRegular(i)"> Regular 
+            </label>
+
+            <label class="form-check-label">
+                    <input type="radio" [disabled]="disabledStudent || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onStudent(i)">Student
+            </label>
+
+            <label class="form-check-label" >
+                    <input type="radio" [disabled]="disabledPensioner || isAdmin()" class="form-check-input" name="radiobuttons" (click)="onPensioner(i)"> Pensioner
+            </label>
+    </div>
+</form>
+</div>
+</div>

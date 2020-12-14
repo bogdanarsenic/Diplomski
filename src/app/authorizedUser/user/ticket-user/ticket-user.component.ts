@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PriceList } from 'src/app/sharedComponents/classes/PriceList';
-import { Ticket } from 'src/app/sharedComponents/classes/Ticket';
-import { User } from 'src/app/sharedComponents/classes/User';
-import { PricelistService } from 'src/app/sharedComponents/pricelist/pricelist.service';
+import { PriceList } from 'src/app/shared/classes/PriceList';
+import { Ticket } from 'src/app/shared/classes/Ticket';
+import { User } from 'src/app/shared/classes/User';
+import { PricelistService } from 'src/app/shared/pricelist/pricelist.service';
 import { PaypalComponent } from './paypal/paypal.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { ShowComponent } from './show/show.component';

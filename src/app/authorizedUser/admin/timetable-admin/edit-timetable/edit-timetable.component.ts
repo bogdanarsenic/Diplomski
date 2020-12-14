@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TimeTable } from 'src/app/sharedComponents/classes/TimeTable';
-import { TimetableService } from 'src/app/sharedComponents/timetable/timetable.service';
-import { CommonModule } from '@angular/common';
+import { TimeTable } from 'src/app/shared/classes/TimeTable';
+import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 
 
 @Component({
@@ -35,7 +34,7 @@ export class EditTimetableComponent implements OnInit {
               this.timetableService.AddorEdit.emit(this.timetable);
               this.timetableService.SendNew.emit(this.timetables);   
               this.times="";
-              this.timetableService.sharedComponentsTimes.emit(this.times);  
+              this.timetableService.sharedTimes.emit(this.times);  
             }
       )
   }  
