@@ -6,12 +6,11 @@ import { User } from 'src/app/shared/classes/User';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';
 import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
 
-
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.css'],
-  providers:[ServicesService]
+  providers:[ServicesService],
 })
 export class EditprofileComponent implements OnInit {
 

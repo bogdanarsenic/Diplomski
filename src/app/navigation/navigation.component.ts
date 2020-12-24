@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
@@ -9,12 +8,10 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private serverService: ServicesService, private router: Router){}
+  constructor(private serverService: ServicesService){}
 
   ngOnInit(){
-    this.router.navigate([this.router.url]);
-    this.isAdmin();
-    this.isController();
+    
   }
 
   isAdmin()
@@ -37,12 +34,6 @@ export class NavigationComponent implements OnInit {
   }
 
   public callLogout(){
-    this.serverService.logOut()
-    .subscribe(
-      data => {
-        localStorage.clear();
-        this.router.navigate(['signIn/login']);     
-      }
-    )
+    this.serverService.logOut();
   }
 }

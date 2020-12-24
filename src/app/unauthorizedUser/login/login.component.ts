@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   login:Login;
   id:string;
 
-  constructor(private fb:FormBuilder,private router:Router, private loginService:ServicesService)
+  constructor(private fb:FormBuilder,private router:Router, private loginService:ServicesService, private serverService:ServicesService)
 
   {
     this.createForm();
@@ -44,27 +44,22 @@ export class LoginComponent implements OnInit {
       this.loginService.getTheToken(this.login).subscribe(
         res=>{
 
+  
           let jwt=res.access_token;
           let jwtData=jwt.split('.')[1]
           let decodedJwtJsonData=window.atob(jwtData)
           let decodedJwtData=JSON.parse(decodedJwtJsonData)
 
           let role=decodedJwtData.role
+          var tokenExpires=new Date();
+          tokenExpires.setSeconds(tokenExpires.getSeconds() + res.expires_in);
+          this.serverService.autoLogout(res.expires_in*1000);
 
           localStorage.setItem('jwt',jwt);
           localStorage.setItem('role',role);
+          localStorage.setItem('tokenExpiresOn',tokenExpires.toString());
 
-          this.router.navigate(['']).then(()=>window.location.reload());
-
-          // switch(role)
-          // { 
-          //   case "Admin": this.router.navigate(['a']);
-          //                 break;
-          //   case "Controller": this.router.navigate(['c']);
-          //                 break;
-          //   case "AppUser":this.router.navigate(['u']);
-          //                 break;
-          // }
+          this.router.navigate(['']);
 
         },error=>
         {

@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Observable} from 'rxjs';
 import { Login } from '../shared/classes/Login';
 import { User } from '../shared/classes/User';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 
 const httpOptions = {
@@ -15,7 +17,11 @@ const httpOptions = {
 })
 export class ServicesService {
 
-  constructor(private httpClient: HttpClient) { }
+  private tokenExpirationTimer:any;
+
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService, private router:Router) { }
+
+  sendRole=new EventEmitter<string>();
 
   getTheToken(loginUser : Login) : Observable<any>{
     let headers = new HttpHeaders();
@@ -30,14 +36,40 @@ export class ServicesService {
     return this.httpClient.post("http://localhost:52295/api/Account/Register",guest);
   }
 
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('jwt');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  autoLogout(tokenExpiration:number):any{
+
+    this.tokenExpirationTimer=setTimeout(()=>{
+        alert("Your token expired!");
+        this.logOut();
+      },tokenExpiration);
+  }
+
   logOut() : any{
-    return this.httpClient.post("http://localhost:52295/api/Account/Logout", httpOptions);
+
+    localStorage.clear();
+    this.router.navigate(['signIn/login']);  
+
+    if(this.tokenExpirationTimer)
+    {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer=null;
+    
+    if(this.isAuthenticated())
+    {
+        return this.httpClient.post("http://localhost:52295/api/Account/Logout", httpOptions);
+    }
+  
   }
 
   getUser(): any{
     return this.httpClient.get('http://localhost:52295/api/ApplicationUser/0', httpOptions);
   }
-
 
   putApplicationUsers(id:string,user:User):Observable<any>
   {

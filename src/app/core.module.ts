@@ -1,19 +1,19 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from "@angular/core";
-import { CanActivateViaAdminGuard } from './auth/guards/admin.guard';
-import { CanActivateViaControllerGuard } from './auth/guards/controller.guard';
-import { CanActivateViaUserGuard } from './auth/guards/user.guard';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { CanActivateRoleGuard } from './auth/guards/role.guard';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { NotificationService } from './services/notification.service';
 
 
 @NgModule({
+
     providers:[
-        
-        CanActivateViaAdminGuard,
-        CanActivateViaControllerGuard,
-        CanActivateViaUserGuard,
+
+        CanActivateRoleGuard,
     
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService,
         NotificationService,
         {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
 
