@@ -19,8 +19,9 @@ namespace WebApp.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // POST: api/StationLine
-        [ResponseType(typeof(StationLine))]
+		// POST: api/StationLine
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(StationLine))]
         public IHttpActionResult PostStationLine(StationLine stationLine)
         {
 

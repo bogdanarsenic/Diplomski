@@ -26,8 +26,9 @@ namespace WebApp.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: api/AppUsers
-        public IEnumerable<ApplicationUser> GetAppUsers()
+		// GET: api/AppUsers
+		[Authorize]
+		public IEnumerable<ApplicationUser> GetAppUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var userStore = new UserStore<ApplicationUser>(context);
@@ -60,6 +61,7 @@ namespace WebApp.Controllers
             return Ok(appUser);
         }
 
+		[Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser()
         {

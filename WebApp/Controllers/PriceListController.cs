@@ -25,7 +25,8 @@ namespace WebApp.Controllers
             return unitOfWork.PriceLists.GetAll();
         }
 
-        [ResponseType(typeof(PriceList))]
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(PriceList))]
         public IHttpActionResult PostPriceList(PriceList pricelist)
         {
 
@@ -40,7 +41,8 @@ namespace WebApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = pricelist.Id }, pricelist);
         }
 
-        [ResponseType(typeof(void))]
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutPriceList(string id, PriceList pricelist)
         {
             if (!ModelState.IsValid)

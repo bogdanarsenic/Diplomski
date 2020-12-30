@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using WebApp.Models;
+using WebApp.Persistence;
 
 namespace WebApp.Providers
 {
@@ -21,27 +22,86 @@ namespace WebApp.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+			var allowedOrigin = "https://localhost:4200";
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+			context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            if (user == null)
+			ApplicationUserManager userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+
+			ApplicationUser userGoodUsername = userManager.Users.FirstOrDefault(x=>x.UserName==context.UserName);
+
+            ApplicationUser userAuthenticated = await userManager.FindAsync(context.UserName, context.Password);
+
+			if (userAuthenticated == null && userGoodUsername != null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.!!!!");
-                return;
+				if(userGoodUsername.LockoutEnabled)
+				{
+
+					if (DateTime.Now > userGoodUsername.LockoutEndDateUtc)
+					{
+						userGoodUsername.LockoutEnabled = false;
+						userGoodUsername.LockoutEndDateUtc = null;
+						userGoodUsername.AccessFailedCount = 1;
+						context.SetError("invalid_grant", "Your password is incorrect! You have " + (3 - userGoodUsername.AccessFailedCount) + " more times to try before half an hour lockdown");
+						context.OwinContext.Get<ApplicationDbContext>().SaveChanges();
+						return;
+
+					}
+					else
+					{
+						context.SetError("invalid_grant", "You can't login until " + userGoodUsername.LockoutEndDateUtc);
+						return;
+					}
+				}
+
+				if(userGoodUsername.AccessFailedCount==2)
+				{
+					userGoodUsername.LockoutEnabled = true;
+					userGoodUsername.LockoutEndDateUtc = DateTime.Now.AddMinutes(30);
+					context.SetError("invalid_grant", "Your password is incorrect again! You can't try again until "+ userGoodUsername.LockoutEndDateUtc);
+					context.OwinContext.Get<ApplicationDbContext>().SaveChanges();
+					return;
+				}
+				else
+				{
+					userGoodUsername.AccessFailedCount++;
+					context.SetError("invalid_grant", "Your password is incorrect! You have " + (3 - userGoodUsername.AccessFailedCount) + " more times to try before half an hour lockdown");
+					context.OwinContext.Get<ApplicationDbContext>().SaveChanges();
+					return;
+				}
+				
             }
 
-            //if (!user.EmailConfirmed)
-            //{
-            //    context.SetError("invalid_grant", "AppUser did not confirm email.");
-            //    return;
-            //}
+			if (userAuthenticated == null)
+			{
+				context.SetError("invalid_grant", "This username doesn't exist!");
+				return;
+			}
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager, "JWT");
+			if(userAuthenticated.LockoutEnabled)
+			{	
+				if(DateTime.Now > userAuthenticated.LockoutEndDateUtc)
+				{
+					userAuthenticated.LockoutEnabled = false;
+					userAuthenticated.LockoutEndDateUtc = null;
+					userAuthenticated.AccessFailedCount = 0;
+					context.OwinContext.Get<ApplicationDbContext>().SaveChanges();
+
+				}
+				else
+				{ 
+					context.SetError("invalid_grant", "You can't login until "+ userAuthenticated.LockoutEndDateUtc);
+					return;
+				}
+			}
+
+
+            ClaimsIdentity oAuthIdentity = await userAuthenticated.GenerateUserIdentityAsync(userManager, "JWT");
           
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
 
             context.Validated(ticket);
         }
+
     }
 }

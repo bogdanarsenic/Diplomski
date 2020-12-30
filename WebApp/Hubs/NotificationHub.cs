@@ -27,7 +27,7 @@ namespace WebApp.Hubs
 
         public void TimeServerUpdates()
         {
-            timer.Interval = 7000;
+            timer.Interval = 5000;
             timer.Start();
             timer.Elapsed += OnTimedEvent;
         }
@@ -40,11 +40,6 @@ namespace WebApp.Hubs
         public void StopTimeServerUpdates()
         {
             timer.Stop();
-        }
-
-        public void NotifyAdmins(int clickCount)
-        {
-            hubContext.Clients.Group("Admins").userClicked($"Clicks: {clickCount}");
         }
 
         public override Task OnConnected()

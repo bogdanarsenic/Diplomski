@@ -77,7 +77,7 @@ namespace WebApp.App_Start
             container.RegisterType<ITimeTableRepository, TimeTableRepository>();
             container.RegisterType<IPriceListRepository, PriceListRepository>();
             container.RegisterType<ApplicationUserManager>();
-            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, CustomJwtFormat>(new InjectionConstructor("http://localhost:52295"));
+            container.RegisterType<ISecureDataFormat<AuthenticationTicket>, CustomJwtFormat>(new InjectionConstructor("https://localhost:44306/"));
 
 
         }

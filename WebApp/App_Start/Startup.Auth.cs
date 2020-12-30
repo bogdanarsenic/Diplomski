@@ -20,7 +20,7 @@ namespace WebApp
 {
     public partial class Startup
     {
-        const string ISSUER = "http://localhost:52295"; //TODO: Kad promenis port, menjaj i ovde.
+        const string ISSUER = "https://localhost:44306/"; //TODO: Kad promenis port, menjaj i ovde.
         public static OAuthAuthorizationServerOptions OAuthOptions { get; private set; }
 
         public static string PublicClientId { get; private set; }
@@ -41,9 +41,9 @@ namespace WebApp
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)
-                AllowInsecureHttp = true,
+                AllowInsecureHttp = false,
                 TokenEndpointPath = new PathString("/oauth/token"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromHours(1),
                 Provider = new CustomOAuthProvider(),
                 AccessTokenFormat = new CustomJwtFormat(ISSUER)
             };

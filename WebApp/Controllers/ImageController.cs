@@ -12,6 +12,7 @@ namespace WebApp.Controllers
 {
     public class ImageController : ApiController
     {
+		[Authorize(Roles ="AppUser")]
 		[ResponseType(typeof(void))]
 		public IHttpActionResult PutImage()
 		{

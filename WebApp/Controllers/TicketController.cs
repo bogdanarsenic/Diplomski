@@ -20,13 +20,15 @@ namespace WebApp.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        // GET: api/Ticket
-        public IEnumerable<Ticket> GetTickets()
+		// GET: api/Ticket
+		[Authorize(Roles = "AppUser")]
+		public IEnumerable<Ticket> GetTickets()
         {
             return unitOfWork.Tickets.GetAll();
         }
 
-        [ResponseType(typeof(Ticket))]
+		[Authorize(Roles = "Controller")]
+		[ResponseType(typeof(Ticket))]
         public IHttpActionResult GetTicket(string id)
         {
             int i = Convert.ToInt32(id);
@@ -115,7 +117,8 @@ namespace WebApp.Controllers
             
         }
 
-        [ResponseType(typeof(Ticket))]
+		[Authorize(Roles = "AppUser")]
+		[ResponseType(typeof(Ticket))]
         public IHttpActionResult PostTicket(Ticket ticket)
         {
 

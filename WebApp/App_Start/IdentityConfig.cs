@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using WebApp.Models;
 using WebApp.Persistence;
+using System;
 
 namespace WebApp
 {
@@ -20,13 +21,14 @@ namespace WebApp
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
-            // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<ApplicationUser>(manager)
+
+			manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                RequireUniqueEmail = true,
+
             };
-            // Configure validation logic for passwords
+
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
@@ -34,8 +36,11 @@ namespace WebApp
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
+				
             };
-            var dataProtectionProvider = options.DataProtectionProvider;
+
+
+			var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));

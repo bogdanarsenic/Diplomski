@@ -10,6 +10,7 @@ using System.Web.Http.ModelBinding;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Extensions.Logging;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -25,16 +26,20 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+		private readonly ILogger<AccountController> _logger;
 
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
+			ILogger<AccountController> logger)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
+			_logger = logger;
+
         }
 
         public ApplicationUserManager UserManager
@@ -320,7 +325,7 @@ namespace WebApp.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
-        [Route("Register")]
+		[Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)

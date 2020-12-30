@@ -27,32 +27,9 @@ namespace WebApp.Controllers
             return unitOfWork.TimeTables.GetAll();
         }
 
-        [Route("api/Timetables/GetTimetablebyLineId")]
-        public List<TimeTable> GetTimetablebyLineId(string lineId)
-        {
 
-            ApplicationDbContext context = new ApplicationDbContext();
-            List<TimeTable> redvoznje = new List<TimeTable>();
-            int brojac = 0;
-
-
-            foreach (TimeTable t in context.TimeTables)
-            {
-                if (t.LineId == lineId)
-                {
-                    redvoznje.Add(t);
-                }
-            }
-
-            if (brojac == redvoznje.Count)
-            {
-                return null;
-            }
-
-            return redvoznje;
-        }
-
-        [ResponseType(typeof(TimeTable))]
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(TimeTable))]
         public IHttpActionResult PostTimetable(TimeTable timetable)
         {
 
@@ -69,12 +46,13 @@ namespace WebApp.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = timetable.Id }, timetable);
         }
-        //DELETE: api/TimeTable
-        [ResponseType(typeof(void))]
+		//DELETE: api/TimeTable
+
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(void))]
         public IHttpActionResult DeleteTimeTable(string id)
         {
-
-
+		
             ApplicationDbContext db = new ApplicationDbContext();
 
             TimeTable t = db.TimeTables.FirstOrDefault(u => u.Id == id);
@@ -89,8 +67,9 @@ namespace WebApp.Controllers
 
             return Ok(t);
         }
-        //Put : api/TimeTable/id
-        [ResponseType(typeof(void))]
+		//Put : api/TimeTable/id
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutTimeTable(string id, TimeTable time)
         {
             if (!ModelState.IsValid)

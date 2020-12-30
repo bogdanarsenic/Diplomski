@@ -26,8 +26,9 @@ namespace WebApp.Controllers
             return unitOfWork.Stations.GetAll();
         }
 
-        // POST: api/PriceLists
-        [ResponseType(typeof(Station))]
+		// POST: api/PriceLists
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(Station))]
         public IHttpActionResult PostStation(Station station)
         {
 
@@ -42,8 +43,9 @@ namespace WebApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = station.Id }, station);
         }
 
-        // PUT: api/Station/5
-        [ResponseType(typeof(void))]
+		// PUT: api/Station/5
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutStation(int id, Station station)
         {
             if (!ModelState.IsValid)
@@ -86,8 +88,9 @@ namespace WebApp.Controllers
             return ret;
         }
 
-        // DELETE: api/Line/5
-        [ResponseType(typeof(Station))]
+		// DELETE: api/Line/5
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(Station))]
         public IHttpActionResult DeleteStation(int id)
         {
 

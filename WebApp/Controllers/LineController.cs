@@ -26,8 +26,9 @@ namespace WebApp.Controllers
             return unitOfWork.Lines.GetAll();
         }
 
-        // POST: api/Line
-        [ResponseType(typeof(Line))]
+		// POST: api/Line
+		[Authorize(Roles ="Admin")]
+		[ResponseType(typeof(Line))]
         public IHttpActionResult PostLine(Line line)
         {
 
@@ -42,8 +43,9 @@ namespace WebApp.Controllers
             return CreatedAtRoute("DefaultApi", new { id = line.Id }, line);
         }
 
-        // PUT: api/Line/5
-        [ResponseType(typeof(void))]
+		// PUT: api/Line/5
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(void))]
         public IHttpActionResult PutLine(int id, Line line)
         {
             if (!ModelState.IsValid)
@@ -84,8 +86,9 @@ namespace WebApp.Controllers
             return ret;
         }
 
-        // DELETE: api/Line/5
-        [ResponseType(typeof(Line))]
+		// DELETE: api/Line/5
+		[Authorize(Roles = "Admin")]
+		[ResponseType(typeof(Line))]
         public IHttpActionResult DeleteLine(int id)
         {
 

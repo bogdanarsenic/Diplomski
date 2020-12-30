@@ -13,9 +13,12 @@ namespace WebApp
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseCors(CorsOptions.AllowAll);
-            ConfigureAuth(app);
+			ConfigureAuth(app);
+
+			app.UseCors(CorsOptions.AllowAll);
             app.MapSignalR();
+
+			
         }
     }
 }
