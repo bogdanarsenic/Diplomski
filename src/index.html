@@ -1,13 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" >
+  
   <title>Angular</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://ajax.googleapis.com https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.paypal.com https://maps.googleapis.com 'unsafe-eval';
+  style-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.googleapis.com 'unsafe-inline';
+  connect-src 'self' https://www.sandbox.paypal.com https://localhost:44306 wss://localhost:44306;
+  font-src https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+  img-src 'self' https://maps.gstatic.com https://maps.googleapis.com data: https://localhost:44306;
+  frame-src https://www.sandbox.paypal.com;
+
+
+  ">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script defer src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiPPjNioNQBRRXgw2ucGyqMKIHfLnCtik"></script>
   <script defer src="https://www.paypal.com/sdk/js?client-id=AVILQ48-Jb_SjBQdWym4_eI6ZCLrR4XQZl7tmTy0PBjvR40dlMbnKOh6yO_zezzbNWELFLtN6wewsuFQ"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">

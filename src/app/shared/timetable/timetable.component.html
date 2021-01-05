@@ -5,7 +5,7 @@
                         <span> City line</span>
                     </td>
 
-                    <td style="float:right">        
+                    <td>        
                         <input type="radio" name="line" value="Suburban lines" (click)="onSuburban()"/>
                         <span> Suburban line</span>
                     </td>   
@@ -32,7 +32,7 @@
                          
                      </td>
                  </tr>
-                 <tr *ngIf="showTT && !isAdmin()">    
+                 <tr *ngIf="showTT && !admin">    
                     <td>
                             <app-show-timetable [timetable]="timetable"> </app-show-timetable>
                     </td>
@@ -40,7 +40,7 @@
 
         </table>    
         
-        <div *ngIf="!isAdmin()">
+        <div *ngIf="!admin">
             <div class="col text-center">   
                 <button class="btn btn-sm btn-info" (click)="Show()" [hidden]="showTT">  <i class="fa fa-search-plus"> Show timetable</i></button>
             </div>

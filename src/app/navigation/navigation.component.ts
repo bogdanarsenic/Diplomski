@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from 'src/app/services/services.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,32 +9,44 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private serverService: ServicesService){}
+  role:string;
+  tokenExpirationTimer:any;
+
+  constructor(private authService:AuthService, private router:Router){}
 
   ngOnInit(){
+
+    if(localStorage.jwt)
+    {
+      this.role=this.authService.getRole();
+      this.checkToken();
+    }
+  }
+
+  checkToken()
+  {
+    var expiredDate=new Date(localStorage.getItem('tokenExpiresOn'));
+    var now=new Date();
+
+    if(now>expiredDate)
+    {
+      alert("Your token expired!");
+      this.authService.logOut();
+    }
+    else
+    {
+        var tokenExpiresOn=expiredDate.getTime()-now.getTime();
+        this.authService.autoLogout(tokenExpiresOn);
+    }
     
   }
-
-  isAdmin()
-  {
-    return localStorage.role=="Admin"? true : false
-  }
-
-  isController()
-  { 
-    return localStorage.role=="Controller"? true : false
-  }
-
-  isUser()
-  {
-    return localStorage.role=="AppUser"? true : false
-  }
   
-  public showLogIn(){
+  showLogIn(){
     return localStorage.jwt ? false:true  
   }
 
-  public callLogout(){
-    this.serverService.logOut();
+  callLogout(){
+    this.authService.logOut();
+    this.router.navigate(['']).then(()=>window.location.reload());
   }
 }

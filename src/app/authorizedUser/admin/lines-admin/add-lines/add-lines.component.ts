@@ -6,9 +6,6 @@ import { StationLine } from 'src/app/shared/classes/StationLine';
 import { LinesService } from 'src/app/shared/lines/lines.service';
 import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
 import { LinesAdminService } from '../lines-admin.service';
-import {NgModel} from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
-
 
 
 @Component({

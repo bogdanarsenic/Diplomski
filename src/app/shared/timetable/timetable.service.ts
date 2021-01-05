@@ -8,7 +8,7 @@ import { TimeTable } from '../classes/TimeTable';
 })
 export class TimetableService {
 
-  url:string="http://localhost:52295/api/Timetable"
+  url:string="https://localhost:44306/api/Timetable"
 
   AddorEdit= new EventEmitter<TimeTable>();
   Show = new EventEmitter<boolean>();

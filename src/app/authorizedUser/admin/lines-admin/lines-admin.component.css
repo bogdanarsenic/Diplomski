@@ -9,3 +9,7 @@ button[disabled] {
   margin-top: 10px;
   margin-left: 150px;
 }
+
+.buttons .btn {
+  margin-right: 5px;
+}

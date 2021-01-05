@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/auth.service';
 import { TicketUserService } from 'src/app/authorizedUser/user/ticket-user/ticket-user.service';
-import { ServicesService } from 'src/app/services/services.service';
+import { UserService } from 'src/app/services/user.service';
 import { PriceList } from '../classes/PriceList';
 import { User } from '../classes/User';
 import { PricelistService } from './pricelist.service';
@@ -18,10 +19,13 @@ export class PricelistComponent implements OnInit {
   user:User;
   disabledStudent:boolean;
   disabledPensioner:boolean;
+  role:string;
 
-  constructor(private priceListService:PricelistService, private priceUserService:TicketUserService, private serverService:ServicesService) { }
+  constructor(private priceListService:PricelistService, private priceUserService:TicketUserService, private authService:AuthService, private userService:UserService) { }
 
   ngOnInit(){
+
+    this.role='';
     this.getPricelist();
     this.registered();
     this.disabledStudent=false;
@@ -32,6 +36,7 @@ export class PricelistComponent implements OnInit {
   {
     if(localStorage.jwt)
     {
+      this.role=this.authService.getRole();
       this.getUserDetails();
     }
   }
@@ -49,12 +54,12 @@ export class PricelistComponent implements OnInit {
   }
 
   getUserDetails() : any {
-    this.serverService.getUser()
+    this.userService.getUser()
     .subscribe(
             
       data => {
           this.user = data;   
-          this.isAdmin(); 
+
           this.isDisabledPensioner();
           this.isDisabledStudent();       
           this.priceListService.TakeUser.emit(this.user);
@@ -67,7 +72,7 @@ export class PricelistComponent implements OnInit {
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
     this.pricelist[i].Price=this.pricelist[i].Price
-    if(this.isUser())
+    if(this.role=="AppUser")
     {  
         this.priceListService.TakePrice.emit(this.pricelist[i].Price);
         this.priceListService.TakeIndex.emit(i);
@@ -78,7 +83,7 @@ export class PricelistComponent implements OnInit {
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
     this.pricelist[i].Price=Math.round(this.pricelist[i].Price*0.8)
-    if(this.isUser())
+    if(this.role=="AppUser")
     {  
         this.priceListService.TakePrice.emit(this.pricelist[i].Price);
         this.priceListService.TakeIndex.emit(i);
@@ -89,26 +94,16 @@ export class PricelistComponent implements OnInit {
   {
     this.pricelist[i].Price=this.pricelistTemp[i].Price
     this.pricelist[i].Price=Math.round(this.pricelist[i].Price*0.7)
-    if(this.isUser())
+    if(this.role=="AppUser")
     {  
         this.priceListService.TakePrice.emit(this.pricelist[i].Price);
         this.priceListService.TakeIndex.emit(i);
       }  
   }
 
-  isUser()
-  {
-    return localStorage.role=="AppUser"? true:false 
-  }
-
-  isAdmin()
-  {
-      return localStorage.role=="Admin"? true:false          
-  }
-
   isDisabledStudent()
   {
-      if(localStorage.role=="AppUser")
+      if(this.role=="AppUser")
         {
             if(this.user.Type=="Student" && this.user.Active==true)
               return this.disabledStudent=false;
@@ -118,7 +113,7 @@ export class PricelistComponent implements OnInit {
   }
   isDisabledPensioner()
   {
-    if(localStorage.role=="AppUser")
+    if(this.role=="AppUser")
     {
         if(this.user.Type=="Pensioner" && this.user.Active==true)
           return this.disabledPensioner=false;

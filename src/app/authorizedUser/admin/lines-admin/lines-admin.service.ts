@@ -11,7 +11,7 @@ import { GeoLocation } from 'src/app/shared/lines/map/model/geolocation';
 })
 export class LinesAdminService {
 
-  url:string="http://localhost:52295/api/"
+  url:string="https://localhost:44306/api/"
 
   constructor(private httpClient: HttpClient) { }
 

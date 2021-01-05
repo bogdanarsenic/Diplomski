@@ -11,3 +11,9 @@ agm-map {
   margin-left: 20px;
   display: flex;
 }
+
+#infowindow span {
+  font-size: 16px;
+  font-family: "Times New Roman";
+  color: gray;
+}

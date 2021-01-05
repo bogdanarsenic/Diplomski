@@ -3,6 +3,24 @@
   height: 100vh;
 }
 
+p {
+  margin-top: 25px;
+}
+
+.account {
+  margin-top: 25px;
+  color: black;
+}
+
+label {
+  margin-left: 5px;
+  color: blue;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
 button:disabled,
 button[disabled] {
   border: 1px solid #999999;

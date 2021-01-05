@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
-import { ServicesService } from 'src/app/services/services.service';
 import { User } from 'src/app/shared/classes/User';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';
 import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-editprofile',
   templateUrl: './editprofile.component.html',
   styleUrls: ['./editprofile.component.css'],
-  providers:[ServicesService],
+  providers:[UserService],
 })
 export class EditprofileComponent implements OnInit {
 
@@ -23,7 +23,7 @@ export class EditprofileComponent implements OnInit {
 
   status:string;
 
-  constructor(private editService:ServicesService,private router:Router,private fb:FormBuilder) {
+  constructor(private userService:UserService,private router:Router,private fb:FormBuilder) {
       this.createForm();
    }
 
@@ -59,7 +59,7 @@ export class EditprofileComponent implements OnInit {
   }
 
   getUser():any{
-      this.editService.getUser().subscribe(
+      this.userService.getUser().subscribe(
       data=>{
 
           this.user=data;
@@ -87,11 +87,6 @@ export class EditprofileComponent implements OnInit {
       this.Update(this.user)
   }
 
-  isUser()
-  {
-    return localStorage.getItem('role')=="AppUser"? true : false
-  }
-
   Update(user:User)
   {
 
@@ -102,16 +97,16 @@ export class EditprofileComponent implements OnInit {
     this.user.Password = this.registerUserForm.value.Password;
     this.user.ConfirmPassword = this.registerUserForm.value.ConfirmPassword;
     this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
-    if(this.isUser())
-    {
-      this.user.Type = this.registerUserForm.value.Type;
-    }
+
+    if(this.user.Type!=null)
+       this.user.Type = this.registerUserForm.value.Type;
+
     
     var u = this.user;
     u.Name = this.user.Name+'|'+this.user.Password;
     this.id = this.user.Email.split('@')[0];
 
-    this.editService.putApplicationUsers(this.id,u).subscribe(
+    this.userService.putApplicationUsers(this.id,u).subscribe(
       data=>{
                 this.router.navigate(['']);           
             }

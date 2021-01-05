@@ -1,17 +1,19 @@
 
     <div class="row">
         <div class="col-md-7">
+
+            <p *ngIf="!canBuy"> <br/> <br/> You need to be approved and to upload an image proof  if you want to buy ticket </p>
             <app-pricelist> </app-pricelist>
 
             <div *ngIf="canBuy">
                 <app-reserve [pricelist]="pricelist" [user]="user" [tickets]="tickets"></app-reserve>
                 <div>
-                    <app-paypal style="margin-left: 150px;width:300px;height:150px" [user]="user">  </app-paypal>
+                   <!--Bio je i ovde style!!!!--> <app-paypal style="margin-left: 150px;width:300px;height:150px"  [user]="user">  </app-paypal>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-5" style="margin-top:50px">
+        <div class="col-md-5">
             <app-show  [hidden]="!canBuy" [user]="user" [ticket]="ticket">
             </app-show>
         </div>

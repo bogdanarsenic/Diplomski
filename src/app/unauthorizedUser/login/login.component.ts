@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup,FormBuilder, Validators} from '@angular/forms';
-import { ServicesService } from 'src/app/services/services.service';
 import { Login } from 'src/app/shared/classes/Login';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers:[ServicesService]
 })
 export class LoginComponent implements OnInit {
 
@@ -16,7 +15,7 @@ export class LoginComponent implements OnInit {
   login:Login;
   id:string;
 
-  constructor(private fb:FormBuilder,private router:Router, private loginService:ServicesService, private serverService:ServicesService)
+  constructor(private fb:FormBuilder,private router:Router, private authService:AuthService)
 
   {
     this.createForm();
@@ -41,30 +40,21 @@ export class LoginComponent implements OnInit {
   {
       this.login=this.loginUserForm.value;
 
-      this.loginService.getTheToken(this.login).subscribe(
+      this.authService.getTheToken(this.login).subscribe(
         res=>{
 
-  
           let jwt=res.access_token;
-          let jwtData=jwt.split('.')[1]
-          let decodedJwtJsonData=window.atob(jwtData)
-          let decodedJwtData=JSON.parse(decodedJwtJsonData)
-
-          let role=decodedJwtData.role
-          var tokenExpires=new Date();
-          tokenExpires.setSeconds(tokenExpires.getSeconds() + res.expires_in);
-          this.serverService.autoLogout(res.expires_in*1000);
-
           localStorage.setItem('jwt',jwt);
-          localStorage.setItem('role',role);
-          localStorage.setItem('tokenExpiresOn',tokenExpires.toString());
+          this.authService.setToken(res.expires_in);
 
-          this.router.navigate(['']);
+          this.router.navigate(['']).then(()=>window.location.reload());
 
         },error=>
         {
-          alert("Invalid Username or Password!")
-          console.log(error);
+          if(!error.error.error_description)
+            alert("Cors is blocking your ip address!");
+          else
+          alert(error.error.error_description);
         }
       )        
       this.loginUserForm.reset();

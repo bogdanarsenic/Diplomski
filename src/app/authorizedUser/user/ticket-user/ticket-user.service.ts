@@ -18,13 +18,13 @@ export class TicketUserService {
   { }
 
   getAllTickets():any{
-    return this.httpClient.get("http://localhost:52295/api/Ticket");
+    return this.httpClient.get("https://localhost:44306/api/Ticket");
   }
   postTicket(t:Ticket):any{
-    return this.httpClient.post("http://localhost:52295/api/Ticket", t);
+    return this.httpClient.post("https://localhost:44306/api/Ticket", t);
   }
 
   getTicket(id:string): any{
-    return this.httpClient.get('http://localhost:52295/api/Ticket',{params:{id}});
+    return this.httpClient.get('https://localhost:44306/api/Ticket',{params:{id}});
   }
 }

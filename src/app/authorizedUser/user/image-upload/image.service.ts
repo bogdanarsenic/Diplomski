@@ -11,6 +11,6 @@ export class ImageService {
 
   AddingImage(fd:FormData):Observable<any>
   {
-    return this.http.put("http://localhost:52295/api/Image", fd)
+    return this.http.put("https://localhost:44306/api/Image", fd)
   }
 }

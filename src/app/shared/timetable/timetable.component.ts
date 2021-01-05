@@ -3,6 +3,8 @@ import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
 import { Line } from '../classes/Line';
 import { LinesService } from '../lines/lines.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-timetable',
@@ -15,19 +17,22 @@ export class TimetableComponent implements OnInit {
   subLines:any[]
   timetables:TimeTable []
   timetable:TimeTable
-  days: Array<string> = ["Weekday", "Saturday", "Sunday"];
+  days: Array<string> = [];
   day:string;
   suburban:boolean;
   city : boolean;
   showTT:boolean;
   line:string;
   lines:Line[];
+  admin:boolean;
 
-  constructor(private timetableService:TimetableService,private lineService:LinesService) 
+  constructor(private timetableService:TimetableService,private lineService:LinesService, private authService:AuthService) 
   {}
 
   ngOnInit(){
 
+    this.days.push("Weekday", "Saturday", "Sunday");
+    this.admin=this.authService.getRole()=='Admin'?true:false
     this.callGetTimetables();
     this.callGetLines();
     this.timetables=[];
@@ -117,13 +122,13 @@ export class TimetableComponent implements OnInit {
     if(t!=-1) 
         {
           this.timetable=timetablesTemp[t]
-          if(this.isAdmin())
+          if(this.admin)
               this.checkEmit()
         }
     else
     { 
         this.timetable.Id="";
-        if(this.isAdmin()) 
+        if(this.admin) 
         {
           this.timetable.Day=this.day;
           this.timetable.LineId=this.line;
@@ -160,8 +165,4 @@ export class TimetableComponent implements OnInit {
       }
   }
 
-  isAdmin()
-  {
-   return localStorage.getItem('role')=="Admin"? true : false
-  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServicesService } from 'src/app/services/services.service';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/classes/User';
 
 @Component({
@@ -13,17 +13,17 @@ export class VerifyComponent implements OnInit {
   local:string
   folder:string
 
-  constructor(private serverService: ServicesService) { }
+  constructor(private userService: UserService) { }
   
   ngOnInit() {
     this.unapprovedUsers=[];
-    this.local="http://localhost:52295/";
-    this.folder="Content/";
+    this.local="https://localhost:44306/";
+    this.folder="Content/images/";
     this.getUsers();
   }
 
   getUsers(){
-    this.serverService.getAllUsers()
+    this.userService.getAllUsers()
     .subscribe(
       data => {      
         this.unapprovedUsers=data.filter((x)=>!x.Active && x.Status=="InProgress");
@@ -43,7 +43,7 @@ export class VerifyComponent implements OnInit {
     this.unapprovedUsers.slice(index,1);
     user.Active = true;
     user.Status="Approved";
-    this.serverService.putApplicationUsers(user.Id,user)
+    this.userService.putApplicationUsers(user.Id,user)
     .subscribe(
       data =>{
         this.getUsers();
@@ -54,7 +54,7 @@ export class VerifyComponent implements OnInit {
   refuseUser(user){
     user.Active = false;
     user.Status="Denied";
-    this.serverService.putApplicationUsers(user.Id,user)
+    this.userService.putApplicationUsers(user.Id,user)
     .subscribe(
       data =>{
         this.getUsers();

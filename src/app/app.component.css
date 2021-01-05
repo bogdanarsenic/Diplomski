@@ -3,3 +3,8 @@
   border-top: none;
   border-color: rgba(143, 214, 247, 0.6);
 }
+
+.container {
+  padding-left: 0px;
+  padding-right: 0px;
+}

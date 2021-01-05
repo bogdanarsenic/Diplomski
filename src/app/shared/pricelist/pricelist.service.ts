@@ -15,7 +15,7 @@ export class PricelistService {
   constructor(private httpClient: HttpClient) { }
   
   getAllPriceLists():any{
-    return this.httpClient.get("http://localhost:52295/api/PriceList");
+    return this.httpClient.get("https://localhost:44306/api/PriceList");
   }
 
 }

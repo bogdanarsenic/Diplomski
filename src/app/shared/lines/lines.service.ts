@@ -9,7 +9,7 @@ import { StationLine } from '../classes/StationLine';
 })
 export class LinesService {
 
-  url:string="http://localhost:52295/api/"
+  url:string="https://localhost:44306/api/"
 
   TakeSelectedLine=new EventEmitter<string>();
   TakeLines=new EventEmitter<Line[]>();

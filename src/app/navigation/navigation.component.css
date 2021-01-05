@@ -8,6 +8,22 @@ a {
   font-weight: bolder;
 }
 
+nav {
+  height: 38px;
+}
+
+nav ul {
+  font-size: 15px;
+}
+
+.dropdown {
+  cursor: pointer;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
 .dropdown-menu :active {
   background-color: rgb(91, 184, 120);
 }

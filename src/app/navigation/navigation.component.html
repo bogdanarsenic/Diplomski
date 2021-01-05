@@ -1,10 +1,9 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="height: 38px">
-   
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 
   <div class="navbar-collapse collapse hide">
-      <ul class="nav navbar-nav ml-auto" style="font-size: 15px ">
+      <ul class="nav navbar-nav ml-auto">
         
-        <div *ngIf="isAdmin()">
+        <div *ngIf="role=='Admin'">
           <li class="nav-item">
             <a routerLink="admin/timetable" routerLinkActive="active" class="nav-link" >Time Table</a>
             <a routerLink="admin/lines" routerLinkActive="active" class="nav-link">Lines</a>
@@ -13,29 +12,29 @@
           </li>
          </div>
 
-          <div *ngIf="!isAdmin()"> 
+          <div *ngIf="role!=='Admin'"> 
             <li class="nav-item">
               <a routerLink="/timetable" routerLinkActive="active" class="nav-link" >Time Table</a>
               <a routerLink="/lines" routerLinkActive="active" class="nav-link">Lines</a>
               <a routerLink="/vehicles" routerLinkActive="active" class="nav-link" >Current vehicles</a>
-              <a *ngIf="isUser()" routerLink="user/pricelist" routerLinkActive="active" class="nav-link">Pricelist</a>
-              <a *ngIf="!isUser()" routerLink="/pricelist" routerLinkActive="active" class="nav-link">Pricelist</a>
+              <a *ngIf="role=='AppUser'" routerLink="user/pricelist" routerLinkActive="active" class="nav-link">Pricelist</a>
+              <a *ngIf="role!=='AppUser'" routerLink="/pricelist" routerLinkActive="active" class="nav-link">Pricelist</a>
 
             </li>
          </div> 
 
-        <div *ngIf="isController()">
+        <div *ngIf="role=='Controller'">
             <li class="nav-item">
                 <a routerLink="controller/verify" routerLinkActive="active" class="nav-link" >Verify</a>
                 <a routerLink="controller/validate" routerLinkActive="active" class="nav-link" >Validate</a>
             </li>
         </div>
-      
+    
       </ul>
 
-      <ul class="nav navbar-nav ml-auto" style="margin-right: 20px;">
+      <ul class="nav navbar-nav ml-auto">
 
-        <li class="nav-item dropdown" style="margin-right: 30px" *ngIf="showLogIn()">
+        <li class="nav-item dropdown" *ngIf="showLogIn()">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" routerLinkActive="active"> Sign In</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" routerLink="/signIn/register" > <i class="fas fa-user">Register</i></a>
@@ -43,21 +42,17 @@
             </div>
         </li>
 
-        <li class="nav-item dropdown" style="margin-right: 30px" *ngIf="!showLogIn()">
+        <li class="nav-item dropdown" *ngIf="!showLogIn()">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" routerLinkActive="active"> <i class="fas fa-sliders-h"> Profile</i></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" routerLink="/profile/edit" > <i class="fas fa-user">Edit Profile</i></a>
-              <a *ngIf="isUser()" class="dropdown-item" routerLink="/profile/image-upload" > <i class="fas fa-upload"> Upload Image</i></a>
+              <a *ngIf="role=='AppUser'" class="dropdown-item" routerLink="/profile/image-upload" > <i class="fas fa-upload"> Upload Image</i></a>
           </div>
         </li>
 
         <li class="nav-item" *ngIf="!showLogIn()">
           <a class="nav-link" (click)="callLogout()"><i class="fas fa-sign-out-alt"> Log out</i></a>
         </li>
-        <!-- <li class="nav-item" style="margin-right: 30px" *ngIf="showLogOut()">
-            <a class="nav-link" routerLink="/editprofile" routerLinkActive="active"><i class="fa fa-user">Edit Profile</i></a>
-            <a class="nav-link" (click)="callLogout()"><i class="fas fa-sign-out-alt"> Log out</i></a>
-        </li> -->
       </ul>
     </div>
   </nav>

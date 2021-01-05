@@ -11,6 +11,6 @@ export class PricelistAdminService {
   constructor(private httpClient:HttpClient) { }
 
   putPriceList(id:string,pricelist:PriceList): Observable<any>{
-    return this.httpClient.put(`http://localhost:52295/api/PriceList/${id}`, pricelist );
+    return this.httpClient.put(`https://localhost:44306/api/PriceList/${id}`, pricelist );
   }
 }

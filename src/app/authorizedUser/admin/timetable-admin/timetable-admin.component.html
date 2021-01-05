@@ -8,21 +8,17 @@
             <app-show-timetable *ngIf="timetable!=undefined && !add && show" [timetable]="timetable"> </app-show-timetable>
         </div>
 
-        <div *ngIf="show" class="col-md-4 text-center" style="background-color: rgba(0,0,0,.055);" >
+        <div *ngIf="show" class="col-md-4 text-center" id="showAdmin">
             <app-form-timetable >
             </app-form-timetable>
 
-
-            <router-outlet>
-                
-            </router-outlet>
-            <div *ngIf="add" style="margin-top: 10px;">
+            <div *ngIf="add" >
                 <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
                 <app-add-timetable [timetable]="timetable" [times]="times" [timetables]="timetables">  </app-add-timetable>
             </div>
 
-            <div *ngIf="!add" style="margin-top: 10px;">
-                <button class="btn btn-default btn-sm btn-secondary"  style="margin-right: 5px;" (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
+            <div *ngIf="!add" >
+                <button class="btn btn-default btn-sm btn-secondary" (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
                 <button class="btn btn-default btn-sm btn-danger" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
                 <app-edit-timetable [timetable]="timetable" [times]="times" [timetables]="timetables"> </app-edit-timetable>
             </div>

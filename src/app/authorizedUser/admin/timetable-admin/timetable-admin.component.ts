@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableComponent } from 'src/app/shared/timetable/timetable.component';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
@@ -23,7 +22,7 @@ export class TimetableAdminComponent implements OnInit {
   show:boolean
   timetables:TimeTable[]
 
-  constructor(private timetableService:TimetableService,private router:Router) { }
+  constructor(private timetableService:TimetableService) { }
 
   ngOnInit() {
 
@@ -58,7 +57,6 @@ export class TimetableAdminComponent implements OnInit {
   
   onEdit()
   {
-    this.router.navigate(['a/timetable/edit']);   
     this.childEdit.onSubmit();
   }
 
@@ -69,7 +67,6 @@ export class TimetableAdminComponent implements OnInit {
 
   onAdd()
   {
-    this.router.navigate(['a/timetable/add']);     
     this.childAdd.onSubmit();
   }
 

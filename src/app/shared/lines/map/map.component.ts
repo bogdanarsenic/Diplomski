@@ -10,6 +10,7 @@ import { Input } from '@angular/core';
 import { LinesService } from '../lines.service';
 import { LinesAdminService } from 'src/app/authorizedUser/admin/lines-admin/lines-admin.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -40,14 +41,14 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() allStationLines:StationLine[]
   @Input() stations:Station[];
 
-constructor(private lineService:LinesService, private lineAdminService:LinesAdminService,private mapsAPILoader:MapsAPILoader, private notificationService:NotificationService){
+constructor(private lineService:LinesService, private lineAdminService:LinesAdminService,private mapsAPILoader:MapsAPILoader, private authService:AuthService){
     this.markerInfo = new MarkerInfo(new GeoLocation(45.242268, 19.842954,""), "assets/ftn.png", "Jugodrvo" , "" , "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
     this.polyline = new Polyline([], 'blue', { url:"assets/busicon.png", scaledSize: {width: 50, height: 50}});
   }
 
   ngOnInit() {
     
-    this.showAdmin=localStorage.role=="Admin"?true:false
+    this.showAdmin=this.authService.getRole()=="Admin"?true:false
     this.stationClicked=new Station();
     this.setVehicleMarker();
 

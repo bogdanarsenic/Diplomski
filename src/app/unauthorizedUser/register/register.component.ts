@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ServicesService } from 'src/app/services/services.service';
 import { User } from 'src/app/shared/classes/User';
 import { Login } from 'src/app/shared/classes/Login';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';
 import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
+import { AuthService } from 'src/app/auth/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -13,7 +14,7 @@ import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers:[ServicesService]
+  providers:[UserService]
 })
 export class RegisterComponent {
 
@@ -22,7 +23,7 @@ export class RegisterComponent {
   validationMessage:string="";
   errors: any[] = [];
   
-  constructor (private fb:FormBuilder,private registerService:ServicesService, private router:Router){
+  constructor (private fb:FormBuilder,private authService:AuthService, private userService:UserService, private router:Router){
     this.createForm();
   }
 
@@ -73,28 +74,19 @@ export class RegisterComponent {
 
   Registrate(user:User)
     {
-    this.registerService.RegistrationGuest(user).subscribe(
+    this.userService.RegistrationGuest(user).subscribe(
       data=>{
 
-        this.registerService.getTheToken(new Login(user.Email,user.Password))
+        this.authService.getTheToken(new Login(user.Email,user.Password))
           .subscribe(
             res=>
             {
-              
+
                 let jwt=res.access_token;
-                let jwtData = jwt.split('.')[1]
-                let decodedJwtJsonData = window.atob(jwtData)
-                let decodedJwtData = JSON.parse(decodedJwtJsonData)
-
-                let role = decodedJwtData.role
-
-                localStorage.setItem('jwt', jwt)
-                localStorage.setItem('role', role)
-
-                if(user.Type!='Regular')
-                  this.router.navigate(['profile/image-upload'])
-                else
-                    this.router.navigate(['']).then(()=>window.location.reload());
+                localStorage.setItem('jwt', jwt);
+                this.authService.setToken(res.expires_in);
+ 
+                this.router.navigate(['']).then(()=>window.location.reload());
                 
             },err => {
               this.validationMessage = err.error.error_description;
