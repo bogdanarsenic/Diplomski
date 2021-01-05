@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -15,7 +16,10 @@ namespace WebApp.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public TicketController(IUnitOfWork unitOfWork)
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
+		public TicketController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -124,13 +128,17 @@ namespace WebApp.Controllers
 
             ticket.Date = DateTime.Now;
 
+		
             if (!ModelState.IsValid)
             {
+				log.Error("There is an error while buying a ticket! " + ModelState);
                 return BadRequest(ModelState);
             }
 
             unitOfWork.Tickets.Add(ticket);
             unitOfWork.Complete();
+
+			log.Info(ticket.UserId + " has bought a " + ticket.TicketType + " ticket at " + DateTime.Now);
 
             return CreatedAtRoute("DefaultApi", new { id = ticket.Id }, ticket);
         }

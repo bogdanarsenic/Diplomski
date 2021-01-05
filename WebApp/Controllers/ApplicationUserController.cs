@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using log4net;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 using System;
@@ -20,8 +21,10 @@ namespace WebApp.Controllers
     {
 
         private readonly IUnitOfWork unitOfWork;
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public ApplicationUserController(IUnitOfWork unitOfWork)
+
+		public ApplicationUserController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -125,7 +128,8 @@ namespace WebApp.Controllers
             }
             catch (System.Exception e)
             {
-            }
+				log.Error("Something wrong with editing user "+e);
+			}
 
             return StatusCode(HttpStatusCode.NoContent);
         }

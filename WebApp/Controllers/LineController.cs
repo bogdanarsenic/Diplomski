@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace WebApp.Controllers
     public class LineController : ApiController
     {
         private readonly IUnitOfWork unitOfWork;
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public LineController(IUnitOfWork unitOfWork)
+
+		public LineController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -34,11 +37,14 @@ namespace WebApp.Controllers
 
             if (!ModelState.IsValid)
             {
+				log.Error("Something wrong with adding new line " + ModelState);
                 return BadRequest(ModelState);
             }
 
             unitOfWork.Lines.Add(line);
             unitOfWork.Complete();
+
+			log.Info("New Line " + line.Name + " has been added at" +DateTime.Now);
 
             return CreatedAtRoute("DefaultApi", new { id = line.Id }, line);
         }
@@ -50,11 +56,14 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+				log.Error("Something wrong with changing the line"+line.Name+"!");
+
+				return BadRequest(ModelState);
             }
 
             if (id != line.Id)
             {
+				log.Error("Line can't be changed!");
                 return BadRequest();
             }
 
@@ -95,10 +104,12 @@ namespace WebApp.Controllers
             Line line = unitOfWork.Lines.Get(id);
             if (line == null)
             {
+				log.Error("Line with this id can't be removed!");
                 return NotFound();
             }
 
             unitOfWork.Lines.Remove(line);
+			log.Info("Line " + line.Name + " has been deleted at "+DateTime.Now);
             unitOfWork.Complete();
 
             return Ok(line);

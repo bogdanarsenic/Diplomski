@@ -331,7 +331,8 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+				log.Error(ModelState);
+				return BadRequest(ModelState);
             }
 
             string id = model.Email.Split('@')[0];
@@ -342,6 +343,7 @@ namespace WebApp.Controllers
 
             if (!result.Succeeded)
             {
+				log.Error(result);
                 return GetErrorResult(result);
             }
 

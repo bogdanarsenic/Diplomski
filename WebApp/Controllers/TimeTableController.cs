@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace WebApp.Controllers
     {
         private readonly IUnitOfWork unitOfWork;
 
-        public TimeTableController(IUnitOfWork unitOfWork)
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+		public TimeTableController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -38,11 +41,14 @@ namespace WebApp.Controllers
 
             if (!ModelState.IsValid)
             {
+				log.Error("Something is wrong while adding timetable!");
                 return BadRequest(ModelState);
             }
 
             unitOfWork.TimeTables.Add(timetable);
             unitOfWork.Complete();
+
+			log.Info("Timetable for line " + timetable.LineId + " and "+ timetable.Day +"has been added at "+DateTime.Now);
 
             return CreatedAtRoute("DefaultApi", new { id = timetable.Id }, timetable);
         }
@@ -59,13 +65,17 @@ namespace WebApp.Controllers
 
             if (t == null)
             {
+				log.Error("Error while deleting the timetable!");
                 return NotFound();
             }
 
             db.TimeTables.Remove(t);
             db.SaveChanges();
 
-            return Ok(t);
+			log.Info("Timetable for line " + t.LineId + " and " + t.Day + "has been deleted at " + DateTime.Now);
+
+
+			return Ok(t);
         }
 		//Put : api/TimeTable/id
 		[Authorize(Roles = "Admin")]
@@ -74,7 +84,9 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+				log.Error("Error while updating the timetable!");
+
+				return BadRequest(ModelState);
             }
 
             if (id != time.Id)
@@ -86,8 +98,10 @@ namespace WebApp.Controllers
             {
                 unitOfWork.TimeTables.Update(time);
                 unitOfWork.Complete();
-            }
-            catch (DbUpdateConcurrencyException)
+				log.Info("Timetable for line " + time.LineId + " and " + time.Day + "has been updated at " + DateTime.Now);
+
+			}
+			catch (DbUpdateConcurrencyException)
             {
                 if (!TimeTableExist(Convert.ToInt32(id)))
                 {

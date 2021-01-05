@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -14,8 +15,10 @@ namespace WebApp.Controllers
     public class PriceListController : ApiController
     {
         private readonly IUnitOfWork unitOfWork;
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public PriceListController(IUnitOfWork unitOfWork)
+
+		public PriceListController(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
@@ -47,18 +50,23 @@ namespace WebApp.Controllers
         {
             if (!ModelState.IsValid)
             {
+				log.Error("Pricelist can't be changed!");
                 return BadRequest(ModelState);
             }
 
             if (id != pricelist.Id)
             {
-                return BadRequest();
+				log.Error("Pricelist can't be changed!");
+
+				return BadRequest();
             }
 
             try
             {
                 unitOfWork.PriceLists.Update(pricelist);
-                unitOfWork.Complete();
+				log.Info("Pricelist for "+id+" has been changed at "+DateTime.Now);
+
+				unitOfWork.Complete();
             }
             catch (DbUpdateConcurrencyException)
             {
