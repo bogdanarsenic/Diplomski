@@ -21,7 +21,7 @@ namespace WebApp.Controllers
         }
 
 		// GET: api/Ticket
-		[Authorize(Roles = "AppUser")]
+		[Authorize]
 		public IEnumerable<Ticket> GetTickets()
         {
             return unitOfWork.Tickets.GetAll();

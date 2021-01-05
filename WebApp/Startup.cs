@@ -16,6 +16,8 @@ namespace WebApp
 			ConfigureAuth(app);
 
 			app.UseCors(CorsOptions.AllowAll);
+
+
             app.MapSignalR();
 
 			

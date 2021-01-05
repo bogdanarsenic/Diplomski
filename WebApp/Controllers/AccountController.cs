@@ -17,6 +17,7 @@ using Microsoft.Owin.Security.OAuth;
 using WebApp.Models;
 using WebApp.Providers;
 using WebApp.Results;
+using log4net;
 
 namespace WebApp.Controllers
 {
@@ -26,19 +27,19 @@ namespace WebApp.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-		private readonly ILogger<AccountController> _logger;
 
-        public AccountController()
+		private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
+		public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ISecureDataFormat<AuthenticationTicket> accessTokenFormat,
-			ILogger<AccountController> logger)
+            ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {
             UserManager = userManager;
             AccessTokenFormat = accessTokenFormat;
-			_logger = logger;
 
         }
 
@@ -346,7 +347,10 @@ namespace WebApp.Controllers
 
             UserManager.AddToRole(user.Id, "AppUser");
 
-            return Ok();
+			log.Info("New user " +user.Id+" registred at "+ DateTime.Now + "."); 
+
+
+			return Ok();
         }
 
         // POST api/Account/RegisterExternal
