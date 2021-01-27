@@ -35,6 +35,7 @@ export class EditprofileComponent implements OnInit {
       DateOfBirth:['',Validators.required],
       Email:["", [Validators.email, Validators.required]],
       Address:['',Validators.required],
+      PhoneNumber:["",[Validators.required, Validators.maxLength(12), Validators.minLength(7)]],
       Password:["",[
         Validators.required,CustomValidators.patternValidator(/\d/, {hasNumber: true}),
         CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
@@ -70,6 +71,7 @@ export class EditprofileComponent implements OnInit {
           this.registerUserForm.value.Address=this.user.Address;
           this.registerUserForm.value.DateOfBirth=this.user.DateOfBirth;
           this.registerUserForm.value.ConfirmPassword=this.user.ConfirmPassword;
+          this.registerUserForm.value.PhoneNumber=this.user.PhoneNumber;
           this.registerUserForm.value.Type=this.user.Type;
           this.imageUrl=this.user.ImageUrl;
           this.status=this.user.Status;
@@ -99,7 +101,10 @@ export class EditprofileComponent implements OnInit {
     this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
 
     if(this.user.Type!=null)
+    {
        this.user.Type = this.registerUserForm.value.Type;
+       this.user.PhoneNumber=this.registerUserForm.value.PhoneNumber;
+    }
 
     
     var u = this.user;

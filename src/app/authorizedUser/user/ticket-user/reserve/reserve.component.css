@@ -5,6 +5,13 @@
   width: 150px;
   height: 50px;
 }
+h5 {
+  color: white;
+}
+
+.backgroundJw {
+  background-color: rgba(0, 0, 0, 0.095);
+}
 
 button:disabled,
 button[disabled] {

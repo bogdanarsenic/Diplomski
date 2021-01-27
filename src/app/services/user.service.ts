@@ -25,6 +25,10 @@ export class UserService {
     return this.httpClient.get('https://localhost:44306/api/ApplicationUser/0', httpOptions);
   }
 
+  getUserByPhoneNumber(phoneNumber:string): Observable<any>{
+    return this.httpClient.get(`https://localhost:44306/api/ApplicationUser/GetUserByPhoneNumber`,{params:{phoneNumber}});
+  }
+
   putApplicationUsers(id:string,user:User):Observable<any>
   {
       let header=new HttpHeaders();

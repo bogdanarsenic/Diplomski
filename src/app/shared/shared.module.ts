@@ -10,6 +10,7 @@ import { MapComponent } from './lines/map/map.component';
 import { VehiclesComponent } from './vehicles/vehicles.component';
 import { LineListComponent } from './lines/line-list/line-list.component';
 import { AgmCoreModule } from '@agm/core';
+import { ModalComponent } from "../authorizedUser/admin/lines-admin/modal/modal.component";
 
 
 
@@ -22,6 +23,7 @@ import { AgmCoreModule } from '@agm/core';
         MapComponent,
         VehiclesComponent,
         LineListComponent,
+        ModalComponent,
     ],
     imports: [
         FormsModule,
@@ -41,6 +43,7 @@ import { AgmCoreModule } from '@agm/core';
         MapComponent,
         VehiclesComponent,
         LineListComponent,
+        ModalComponent
     ]
 
 })

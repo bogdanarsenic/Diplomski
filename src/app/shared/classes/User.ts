@@ -11,6 +11,7 @@ export class  User{
     ConfirmPassword: string;
     Email: string;
     Status:string;
+    PhoneNumber:string;
 
     constructor(){
     }

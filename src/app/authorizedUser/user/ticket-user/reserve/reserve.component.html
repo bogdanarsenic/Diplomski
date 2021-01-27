@@ -2,3 +2,12 @@
         
         <button class="btn btn-block btn-info" [disabled]="price[i]==undefined" (click)="Add(i)"> <i class="fas fa-credit-card"> Buy </i> </button>  
     </div>
+
+    <jw-modal id="custom-modal-3">
+        <div class="backgroundJw">
+          <h5>Please provide your phone number</h5>
+            <p><input type="tel" [(ngModel)]="phoneNumber" /></p>
+          <button class="btn btn-success" (click)="checkPhoneNumber()"><i class="fas fa-check"> Done </i></button>
+          <button class="btn btn-danger" (click)="closeModal('custom-modal-3');"><i class="fas fa-window-close"> Close</i></button>
+        </div>
+    </jw-modal>

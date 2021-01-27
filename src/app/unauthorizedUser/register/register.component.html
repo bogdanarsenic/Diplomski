@@ -105,6 +105,18 @@
                             </span>
                     </div>
 
+                    <div class="form-group">
+                      <span class="form-label">Phone Number: </span>
+                      <input class="form-control" type="tel" name="PhoneNumber" id="PhoneNumber" formControlName="PhoneNumber" placeholder="PhoneNumber">
+                      <span *ngIf="registerUserForm.controls.PhoneNumber.touched">
+                              <small *ngIf="registerUserForm.controls.PhoneNumber.errors?.required">
+                                      <div class="attent">
+                                        PhoneNumber is required!
+                                      </div>
+                              </small>
+                          </span>
+                  </div>
+
 
                     <div class="form-group">
                         <span class="form-label">Type: </span>

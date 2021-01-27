@@ -35,6 +35,7 @@ export class RegisterComponent {
       DateOfBirth:['',Validators.required],
       Email:["", [Validators.email, Validators.required]],
       Address:['',Validators.required],
+      PhoneNumber:["",[Validators.required, Validators.maxLength(12), Validators.minLength(7)]],
       Password:["",[
         Validators.required,CustomValidators.patternValidator(/\d/, {hasNumber: true}),
         CustomValidators.patternValidator(/[A-Z]/, {hasCapitalCase: true}),
@@ -62,9 +63,11 @@ export class RegisterComponent {
       this.user.Address = this.registerUserForm.value.Address;
       this.user.Password = this.registerUserForm.value.Password;
       this.user.ConfirmPassword = this.registerUserForm.value.ConfirmPassword;
+      this.user.PhoneNumber=this.registerUserForm.value.PhoneNumber;
       this.user.DateOfBirth = this.registerUserForm.value.DateOfBirth;
       this.user.Type = this.registerUserForm.value.Type;
       this.user.Status="InProgress";
+
 
       this.Registrate(this.user);
     }
