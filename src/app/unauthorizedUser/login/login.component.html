@@ -4,12 +4,12 @@
                       <form [formGroup]="loginUserForm" (submit)="onSubmit()" novalidate>
 
                           <div class="form-group">
-                              <span class="form-label">Your Username</span>
-								            	<input class="form-control" type="text" name="Username" id="Username" formControlName="Username" placeholder="Username">
-                              <span *ngIf="loginUserForm.controls.Username.touched">
-                                <small *ngIf="loginUserForm.controls.Username.errors?.required">
+                              <span class="form-label">Your Email</span>
+								            	<input class="form-control" type="text" name="Email" id="Email" formControlName="Email" placeholder="Email">
+                              <span *ngIf="loginUserForm.controls.Email.touched">
+                                <small *ngIf="loginUserForm.controls.Email.errors?.required">
                                         <div class="attent">
-                                                Username is required!
+                                            Email is required!
                                          </div>
                                 </small>
                             </span>

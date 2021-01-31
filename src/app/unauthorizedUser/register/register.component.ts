@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/classes/User';
-import { Login } from 'src/app/shared/classes/Login';
 import { CustomValidators } from 'src/app/shared/validator/customValidator';
 import { MatchPassword } from 'src/app/shared/validator/MatchPassword';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -20,10 +19,9 @@ export class RegisterComponent {
 
   registerUserForm:FormGroup;
   user:User;
-  validationMessage:string="";
   errors: any[] = [];
   
-  constructor (private fb:FormBuilder,private authService:AuthService, private userService:UserService, private router:Router){
+  constructor (private fb:FormBuilder,private authService:AuthService, private router:Router){
     this.createForm();
   }
 
@@ -56,7 +54,6 @@ export class RegisterComponent {
   {
     if(this.registerUserForm !=null)
     {
-      this.user = new User;
       this.user.Name = this.registerUserForm.value.Name;
       this.user.LastName = this.registerUserForm.value.LastName;
       this.user.Email = this.registerUserForm.value.Email;
@@ -68,7 +65,6 @@ export class RegisterComponent {
       this.user.Type = this.registerUserForm.value.Type;
       this.user.Status="InProgress";
 
-
       this.Registrate(this.user);
     }
   }
@@ -77,10 +73,10 @@ export class RegisterComponent {
 
   Registrate(user:User)
     {
-    this.userService.RegistrationGuest(user).subscribe(
+    this.authService.RegistrationGuest(user).subscribe(
       data=>{
 
-        this.authService.getTheToken(new Login(user.Email,user.Password))
+        this.authService.getTheToken(new User(user.Email,user.Password))
           .subscribe(
             res=>
             {
@@ -92,14 +88,13 @@ export class RegisterComponent {
                 this.router.navigate(['']).then(()=>window.location.reload());
                 
             },err => {
-              this.validationMessage = err.error.error_description;
-                      console.log(err);
+              alert(err.error.error_description);
+
             }
           )
     },
     error =>
     {
-        console.log(error);
         for(var key in error.error.ModelState){
           for (var i = 0; i < error.error.ModelState[key].length; i++) {
             this.errors.push(error.error.ModelState[key][i]);

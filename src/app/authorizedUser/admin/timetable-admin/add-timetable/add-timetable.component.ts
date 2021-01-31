@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
-
+import * as fromApp from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-add-timetable',
@@ -14,7 +15,7 @@ export class AddTimetableComponent implements OnInit {
   @Input() timetables:TimeTable[]
   @Input() times:string
 
-  constructor(private timetableService:TimetableService) 
+  constructor(private timetableService:TimetableService, private store: Store<fromApp.AppState>) 
   {}
 
   ngOnInit(){

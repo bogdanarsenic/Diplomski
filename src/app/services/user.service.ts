@@ -16,11 +16,6 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) { }
 
-  RegistrationGuest(guest:User):Observable<any>
-  {
-    return this.httpClient.post("https://localhost:44306/api/Account/Register",guest);
-  }
-
   getUser(): any{
     return this.httpClient.get('https://localhost:44306/api/ApplicationUser/0', httpOptions);
   }

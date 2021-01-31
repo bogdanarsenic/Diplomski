@@ -3,7 +3,6 @@ import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
 import { Line } from '../classes/Line';
 import { LinesService } from '../lines/lines.service';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({

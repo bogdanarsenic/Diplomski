@@ -47,6 +47,5 @@ export class NavigationComponent implements OnInit {
 
   callLogout(){
     this.authService.logOut();
-    this.router.navigate(['']).then(()=>window.location.reload());
-  }
+    }
 }

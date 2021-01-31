@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class EditprofileComponent implements OnInit {
 
   korisnik:User;
-  user:User=new User();
+  user:User;
   registerUserForm:FormGroup;
   id:string;
   isRegular:boolean;

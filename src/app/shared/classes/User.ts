@@ -13,6 +13,8 @@ export class  User{
     Status:string;
     PhoneNumber:string;
 
-    constructor(){
+    constructor(username:string,password:string){
+        this.Email=username;
+        this.Password=password;
     }
 }

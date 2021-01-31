@@ -2,18 +2,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Login } from '../shared/classes/Login';
+import { User } from '../shared/classes/User';
+import * as fromApp from '../store/app.reducer';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
   })
 }
-@Injectable({
-  providedIn: 'root'
-})
-
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +20,11 @@ export class AuthService {
   
   private tokenExpirationTimer:any;
 
-  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService, private router:Router) { }
+  constructor(
+    private httpClient: HttpClient, 
+    private jwtHelper: JwtHelperService, 
+    private router:Router,
+    private store: Store<fromApp.AppState>) { }
   
    getRole():string
     {
@@ -42,11 +44,11 @@ export class AuthService {
       localStorage.setItem('tokenExpiresOn',tokenExpires.toString());
     }
   
-   getTheToken(loginUser : Login) : Observable<any>{
+   getTheToken(loginUser : User) : Observable<any>{
       let headers = new HttpHeaders();
       headers = headers.append('Content-type','application/x-www-form-urlencoded');
   
-      return this.httpClient.post('https://localhost:44306/oauth/token', 'username='+loginUser.Username+'&password='+loginUser.Password+'&grant_type=password',{"headers": headers});
+      return this.httpClient.post('https://localhost:44306/oauth/token', 'username='+loginUser.Email+'&password='+loginUser.Password+'&grant_type=password',{"headers": headers});
     
     }
   
@@ -80,5 +82,10 @@ export class AuthService {
           return this.httpClient.post("https://localhost:44306/api/Account/Logout", httpOptions);
       }
   
+    }
+
+    RegistrationGuest(guest:User):Observable<any>
+    {
+      return this.httpClient.post("https://localhost:44306/api/Account/Register",guest);
     }
   }
