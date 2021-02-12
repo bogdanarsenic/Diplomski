@@ -65,6 +65,33 @@ namespace WebApp.Controllers
         }
 
 		[Authorize]
+		[ResponseType(typeof(ApplicationUser))]
+		[Route("api/ApplicationUser/GetUserByPhoneNumber")]
+		public IHttpActionResult GetUserPhoneNumber(string phoneNumber)
+		{
+			ApplicationDbContext contex = new ApplicationDbContext();
+
+			var idS = contex.Users.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+
+			if(idS==null)
+			{
+				log.Error("Something is wrong while checking the user phone number " + DateTime.Now);
+				return NotFound();
+			}
+
+			ApplicationUser appUser = contex.Users.FirstOrDefault(u => u.Id == idS && u.PhoneNumber==phoneNumber);
+
+			if (appUser == null )
+			{
+				log.Error("User " + User.Identity.Name + " provided bad phone number at "+DateTime.Now);
+				return NotFound();
+			}
+
+			return Ok(appUser);
+		}
+
+
+		[Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser()
         {

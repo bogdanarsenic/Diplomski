@@ -17,10 +17,8 @@ namespace WebApp
 
 			app.UseCors(CorsOptions.AllowAll);
 
-
             app.MapSignalR();
-
-			
+		
         }
     }
 }
