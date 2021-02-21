@@ -10,12 +10,8 @@ export class TimetableService {
 
   url:string="https://localhost:44306/api/Timetable"
 
-  AddorEdit= new EventEmitter<TimeTable>();
   Show = new EventEmitter<boolean>();
-  sharedTimes=new EventEmitter<string>();
-  GetTimetables=new EventEmitter<TimeTable[]>();
-  SendNew=new EventEmitter<TimeTable[]>();
-
+  
   constructor(private httpClient: HttpClient) { }
 
   getAllTimetables():any{

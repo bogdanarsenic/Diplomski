@@ -75,13 +75,13 @@ export class AuthService {
       this.tokenExpirationTimer=null;
 
       localStorage.clear();
-      this.router.navigate(['signIn/login']);  
       
       if(this.isAuthenticated())
       {
           return this.httpClient.post("https://localhost:44306/api/Account/Logout", httpOptions);
-      }
-  
+      }  
+
+      this.router.navigate(['']).then(()=>window.location.reload());
     }
 
     RegistrationGuest(guest:User):Observable<any>

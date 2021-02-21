@@ -10,6 +10,13 @@ ul {
   float: left;
 }
 
+p {
+  color: blue;
+  font-weight: bolder;
+  margin-left: 5px;
+  float: left;
+}
+
 li {
   float: left;
   list-style-type: none;

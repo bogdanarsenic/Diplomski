@@ -7,7 +7,8 @@ export const EDIT_TIMETABLE='EDIT_TIMETABLE';
 export const DELETE_TIMETABLE='DELETE_TIMETABLE';
 export const ADD_TIMES='ADD_TIMES';
 export const START_EDIT = 'START_EDIT';
-export const STOP_EDIT = 'STOP_EDIT';
+export const RESET_VALUES = 'RESET_VALUES';
+export const SELECTED_TIMETABLE='SELECTED_TIMETABLE';
 
 export class AddTimetable implements Action {
     readonly type=ADD_TIMETABLE;
@@ -50,9 +51,15 @@ export class StartEdit implements Action {
   
     constructor(public payload: number) {}
   }
+
+  export class SelectedTimetable implements Action {
+    readonly type = SELECTED_TIMETABLE;
   
-  export class StopEdit implements Action {
-    readonly type = STOP_EDIT;
+    constructor(public payload: TimeTable) {}
+  }
+  
+  export class ResetValues implements Action {
+    readonly type = RESET_VALUES;
   }
 
 export type TimetableActions = 
@@ -62,4 +69,5 @@ export type TimetableActions =
       | EditTimetable
       | DeleteTimetable
       | StartEdit
-      | StopEdit; //union type
+      | ResetValues
+      | SelectedTimetable; //union type

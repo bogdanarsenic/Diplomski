@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import * as fromApp from 'src/app/store/app.reducer';
+import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-timetable',
@@ -13,26 +15,20 @@ export class AddTimetableComponent implements OnInit {
 
   @Input() timetable:TimeTable
   @Input() timetables:TimeTable[]
-  @Input() times:string
+  subscription: Subscription;
 
   constructor(private timetableService:TimetableService, private store: Store<fromApp.AppState>) 
   {}
 
-  ngOnInit(){
-  }
+  ngOnInit(){}
 
   onSubmit()
   {
-    this.timetable.Times=this.times;
-
     this.timetableService.postTimetable(this.timetable).subscribe(
         data=>
             {
               this.timetable.Id=data.Id;
-              this.timetables.push(this.timetable);
-              this.timetableService.SendNew.emit(this.timetables);
-              this.times="";
-              this.timetableService.sharedTimes.emit(this.times);  
+              this.store.dispatch(new TimetableActions.AddTimetable(this.timetable));
             }
     )
   }

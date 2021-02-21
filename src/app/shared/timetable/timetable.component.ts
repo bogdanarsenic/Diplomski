@@ -1,47 +1,87 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
 import { Line } from '../classes/Line';
 import { LinesService } from '../lines/lines.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import * as fromApp from 'src/app/store/app.reducer';
+import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.css']
 })
-export class TimetableComponent implements OnInit {
+export class TimetableComponent implements OnInit,OnDestroy {
 
   cityLines: any[]
   subLines:any[]
-  timetables:TimeTable []
   timetable:TimeTable
-  days: Array<string> = [];
+  timetables:TimeTable []
+  days: Array<string> = ["Weekday","Saturday","Sunday"];
   day:string;
   suburban:boolean;
   city : boolean;
   showTT:boolean;
   line:string;
-  lines:Line[];
   admin:boolean;
+  
+ timetableForAdmin:TimeTable
 
-  constructor(private timetableService:TimetableService,private lineService:LinesService, private authService:AuthService) 
-  {}
+  constructor(
+              private timetableService:TimetableService,
+              private lineService:LinesService, 
+              private authService:AuthService, 
+              private store: Store<fromApp.AppState>
+              ) 
+  {
+    this.timetable=new TimeTable();
+  }
 
   ngOnInit(){
 
-    this.days.push("Weekday", "Saturday", "Sunday");
     this.admin=this.authService.getRole()=='Admin'?true:false
     this.callGetTimetables();
     this.callGetLines();
     this.timetables=[];
-    this.timetable=new TimeTable();
-    this.city=false;
-    this.suburban=false;
-    this.showTT=false;
     this.day="Weekday";
     this.cityLines=[];
     this.subLines=[];
+  }
+
+  ngOnDestroy(){
+    this.store.dispatch(new TimetableActions.ResetValues());
+  }
+
+    callGetTimetables()
+  {
+    this.timetableService.getAllTimetables().subscribe(
+      data=>
+      {
+              this.timetables=data;
+              this.store.dispatch(new TimetableActions.AddTimetables(this.timetables));
+      }
+  )
+  }
+
+  callGetLines()
+  {
+    this.lineService.getAllLines().subscribe(
+      data=>
+      {
+        this.subOrCity(data);
+      }      
+    )
+  }
+
+  subOrCity(lines:Line[])
+  {
+      this.cityLines=lines.filter(x=>(Number)(x.Name)<30);
+      this.cityLines.sort((x,y)=>{return x.Name-y.Name});  
+      this.subLines=lines.filter(x=>(Number)(x.Name)>30);
+      this.subLines.sort((x,y)=>{return x.Name-y.Name});
   }
 
   onCity()
@@ -62,47 +102,19 @@ export class TimetableComponent implements OnInit {
   {
     this.showTT=false;
     this.line="";
-    this.timetable.Id="";
-    this.checkEmit()
+    this.timetableService.Show.emit(this.showTT);
   }
 
-  callGetTimetables()
-  {
-    this.timetableService.getAllTimetables().subscribe(
-      data=>
-      {
-          this.timetables=data;
-          this.timetableService.GetTimetables.emit(this.timetables);
-      }
-  )
-  }
-
-  callGetLines()
-  {
-    this.lineService.getAllLines().subscribe(
-      data=>
-      {
-        this.lines=data;
-        this.subOrCity(this.lines);
-      }      
-    )
-  }
-
-  subOrCity(lines:Line[])
-  {
-      this.cityLines=lines.filter(x=>(Number)(x.Name)<30);
-      this.cityLines.sort((x,y)=>{return x.Name-y.Name});  
-      this.subLines=lines.filter(x=>(Number)(x.Name)>30);
-      this.subLines.sort((x,y)=>{return x.Name-y.Name});
-  }
-
-  onItemChange(line)
+  onChangeLine(line)
   { 
     this.showTT=false;
       if(line!="")
       {
         this.line=line;
-        this.findTimeForTimetable();
+        if(this.admin)
+          this.findTimeForAdmin();
+        else
+          this.findTimeForTimetable();
       }
   }
 
@@ -110,45 +122,20 @@ export class TimetableComponent implements OnInit {
   {
       this.showTT=false;
       this.day=day;
-      this.findTimeForTimetable();
+      if(this.admin && this.line!="")
+        this.findTimeForAdmin();
+      else if(!this.admin)
+        this.findTimeForTimetable();
   }
 
   findTimeForTimetable()
   {
     var t=this.timetables.findIndex(item=>item.Day==this.day && item.LineId==this.line)
-    var timetablesTemp=this.timetables.map((x)=>{ return {...x}})
-
+    
     if(t!=-1) 
-        {
-          this.timetable=timetablesTemp[t]
-          if(this.admin)
-              this.checkEmit()
-        }
+          this.timetable={...this.timetables[t]}
     else
-    { 
-        this.timetable.Id="";
-        if(this.admin) 
-        {
-          this.timetable.Day=this.day;
-          this.timetable.LineId=this.line;
-          this.timetable.Type=(Number(this.line)>30)?"Suburban":"City"  
-          this.checkEmit();
-        } 
-    }
-  }
-
-  checkEmit()
-  {
-      if(this.line!="")
-      {
-        this.showTT=true;
-        this.timetableService.Show.emit(this.showTT);
-        this.timetableService.AddorEdit.emit(this.timetable);
-      }
-      else
-      {
-        this.timetableService.Show.emit(this.showTT);
-      }
+          this.timetable.Id="";
   }
 
   Show()
@@ -159,9 +146,33 @@ export class TimetableComponent implements OnInit {
         this.showTT=false;
       }
       else
-      {    
         this.showTT=true;
-      }
+  }
+
+  findTimeForAdmin()
+  {
+    var t=this.timetables.findIndex(item=>item.Day==this.day && item.LineId==this.line) 
+    this.showTT=true;
+
+    if(t!=-1) 
+    {
+      this.timetableService.Show.emit(this.showTT);
+      this.store.dispatch(new TimetableActions.SelectedTimetable({...this.timetables[t]}));
+    }       
+    else
+    {
+
+      this.timetableService.Show.emit(this.showTT);
+      var timetable={...this.timetableForAdmin};
+      timetable.Id="";
+      timetable.Day=this.day;
+      timetable.LineId=this.line;
+      timetable.Type=(Number(this.line)>30)?"Suburban":"City";
+      timetable.Times="";
+      this.timetableForAdmin=timetable;
+      
+      this.store.dispatch(new TimetableActions.SelectedTimetable(this.timetableForAdmin));
+     }
   }
 
 }

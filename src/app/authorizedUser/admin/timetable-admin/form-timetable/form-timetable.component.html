@@ -1,5 +1,4 @@
 <form [formGroup]="timetableForm" (change)="onChange()">
-
     <table>
         <tr *ngFor="let j of broj">
             <td>
@@ -10,4 +9,15 @@
             </td>
         </tr>
     </table>
+    
+   <div *ngIf="timetable.Id==''">
+        <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
+        <app-add-timetable [timetable]="timetable" [timetables]="timetables">  </app-add-timetable>
+    </div>
+
+    <div *ngIf="timetable.Id!=''">
+        <button class="btn btn-default btn-sm btn-secondary" (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
+        <button class="btn btn-default btn-sm btn-danger" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
+        <app-edit-timetable [timetable]="timetable" [timetables]="timetables"> </app-edit-timetable>
+    </div>
 </form>

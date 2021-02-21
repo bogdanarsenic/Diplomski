@@ -1,32 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TimeTable } from '../../classes/TimeTable';
-import { TimetableService } from '../timetable.service';
 
 @Component({
   selector: 'app-show-timetable',
   templateUrl: './show-timetable.component.html',
   styleUrls: ['./show-timetable.component.css']
 })
-export class ShowTimetableComponent implements OnInit {
+export class ShowTimetableComponent implements OnInit,OnChanges {
 
   hours:string [];
   minutes: string[];
 
   @Input() timetable:TimeTable
 
-  constructor(private timetableService:TimetableService) {}
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
 
+  ngOnChanges(){
     this.onShow();
-    
-    this.timetableService.AddorEdit.subscribe(
-      data=>
-      {
-        this.timetable=data;
-        this.onShow();
-      }
-    )
   }
 
   onShow()

@@ -21,6 +21,9 @@ export class NavigationComponent implements OnInit {
       this.role=this.authService.getRole();
       this.checkToken();
     }
+    else{
+      this.role="";
+    }
   }
 
   checkToken()

@@ -1,26 +1,15 @@
 
-    <app-timetable >
+    <app-timetable>
     </app-timetable> 
 
     <hr/>
     <div class="row">
         <div class="col-md-4">
-            <app-show-timetable *ngIf="timetable!=undefined && !add && show" [timetable]="timetable"> </app-show-timetable>
+            <app-show-timetable *ngIf="timetable.Id!='' && show" [timetable]="timetable"> </app-show-timetable>
         </div>
 
         <div *ngIf="show" class="col-md-4 text-center" id="showAdmin">
-            <app-form-timetable >
+            <app-form-timetable [timetable]="timetable" [timetables]="timetables">
             </app-form-timetable>
-
-            <div *ngIf="add" >
-                <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
-                <app-add-timetable [timetable]="timetable" [times]="times" [timetables]="timetables">  </app-add-timetable>
-            </div>
-
-            <div *ngIf="!add" >
-                <button class="btn btn-default btn-sm btn-secondary" (click)="onEdit()" [disabled]="times=='' || times==undefined"><i class="fa fa-edit"> Edit</i></button>
-                <button class="btn btn-default btn-sm btn-danger" (click)="onDelete()" type="submit"> <i class="fa fa-trash"> Delete</i> </button>
-                <app-edit-timetable [timetable]="timetable" [times]="times" [timetables]="timetables"> </app-edit-timetable>
-            </div>
         </div>
     </div>
