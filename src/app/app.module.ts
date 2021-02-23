@@ -13,6 +13,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
+import { createEffect, EffectsModule } from '@ngrx/effects';
+import { TimetableEffects } from './authorizedUser/admin/timetable-admin/store/timetable.effects';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import * as fromApp from './store/app.reducer';
     ReactiveFormsModule,
     SharedModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([TimetableEffects]),
     StoreDevtoolsModule.instrument({ logOnly:environment.production }),
     StoreRouterConnectingModule.forRoot(),
     CoreModule

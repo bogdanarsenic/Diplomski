@@ -8,25 +8,19 @@ import { TimeTable } from '../classes/TimeTable';
 })
 export class TimetableService {
 
-  url:string="https://localhost:44306/api/Timetable"
-
   Show = new EventEmitter<boolean>();
   
   constructor(private httpClient: HttpClient) { }
-
-  getAllTimetables():any{
-    return this.httpClient.get(this.url);
-  }
   
-  postTimetable(timetable:TimeTable):any{
-    return this.httpClient.post(this.url, timetable);
-  }
+  // postTimetable(timetable:TimeTable):any{
+  //   return this.httpClient.post("https://localhost:44306/api/Timetable", timetable);
+  // }
 
-  putTimeTable(id:string, timeTiable: TimeTable): any{
-    return this.httpClient.put(this.url+`/${id}`, timeTiable);
+  putTimeTable(id:string, timetable: TimeTable): any{
+    return this.httpClient.put("https://localhost:44306/api/Timetable"+`/${id}`, timetable);
   }
 
   deleteTime(id :string) :any{
-      return this.httpClient.delete(this.url+`/${id}`);
+      return this.httpClient.delete("https://localhost:44306/api/Timetable"+`/${id}`);
   }
 }

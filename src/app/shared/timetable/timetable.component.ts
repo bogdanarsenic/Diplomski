@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import { TimeTable } from '../classes/TimeTable';
 import { TimetableService } from './timetable.service';
 import { Line } from '../classes/Line';
@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/auth/auth.service';
 import * as fromApp from 'src/app/store/app.reducer';
 import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
 import { Store } from '@ngrx/store';
-
 
 @Component({
   selector: 'app-timetable',
@@ -41,6 +40,11 @@ export class TimetableComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(){
+    
+    this.store.select('timetable').subscribe(x=>
+      {
+          this.timetables=x.timetables;
+      });
 
     this.admin=this.authService.getRole()=='Admin'?true:false
     this.callGetTimetables();
@@ -57,13 +61,7 @@ export class TimetableComponent implements OnInit,OnDestroy {
 
     callGetTimetables()
   {
-    this.timetableService.getAllTimetables().subscribe(
-      data=>
-      {
-              this.timetables=data;
-              this.store.dispatch(new TimetableActions.AddTimetables(this.timetables));
-      }
-  )
+      this.store.dispatch(new TimetableActions.FetchTimetables());
   }
 
   callGetLines()

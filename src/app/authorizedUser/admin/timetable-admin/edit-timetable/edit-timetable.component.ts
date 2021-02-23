@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableService } from 'src/app/shared/timetable/timetable.service';
@@ -11,40 +11,28 @@ import { Subscription } from 'rxjs';
   templateUrl: './edit-timetable.component.html',
   styleUrls: ['./edit-timetable.component.css']
 })
-export class EditTimetableComponent implements OnInit {
+export class EditTimetableComponent implements OnChanges {
 
   @Input() timetable:TimeTable;
   @Input() timetables:TimeTable[]
-  subscription:Subscription
 
-  constructor(private timetableService:TimetableService,private store: Store<fromApp.AppState>) 
+  index:number
+
+  constructor(private store: Store<fromApp.AppState>) 
   { }
 
-  ngOnInit(){}
+  ngOnChanges()
+  {
+    this.index=this.timetables.findIndex(x=>x.Id===this.timetable.Id);
+  }
 
   onSubmit()
   {
-    var i=this.timetables.findIndex(x=>x.Id===this.timetable.Id);
-
-    this.timetableService.putTimeTable(this.timetable.Id,this.timetable).subscribe(
-        data=>
-            {
-              this.store.dispatch(new TimetableActions.StartEdit(i));
-              this.store.dispatch(new TimetableActions.EditTimetable(this.timetable));
-            }
-      )
+    this.store.dispatch(new TimetableActions.EditTimetable({index:this.index,newTimetable:this.timetable}));
   }  
 
   Delete()
   {
-    var i=this.timetables.findIndex(x=>x.Id===this.timetable.Id);
-
-    this.timetableService.deleteTime(this.timetable.Id).subscribe(
-        data=>
-        {
-          this.store.dispatch(new TimetableActions.StartEdit(i));
-          this.store.dispatch(new TimetableActions.DeleteTimetable(this.timetable));
-        }
-      )
+    this.store.dispatch(new TimetableActions.DeleteTimetable({index:this.index,selectedTimetable:this.timetable}));
   }
 }

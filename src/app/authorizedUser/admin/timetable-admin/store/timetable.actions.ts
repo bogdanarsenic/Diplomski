@@ -1,56 +1,90 @@
 import { Action } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 
-export const ADD_TIMETABLE='ADD_TIMETABLE';
-export const ADD_TIMETABLES='ADD_TIMETABLES';
-export const EDIT_TIMETABLE='EDIT_TIMETABLE';
-export const DELETE_TIMETABLE='DELETE_TIMETABLE';
-export const ADD_TIMES='ADD_TIMES';
-export const START_EDIT = 'START_EDIT';
-export const RESET_VALUES = 'RESET_VALUES';
-export const SELECTED_TIMETABLE='SELECTED_TIMETABLE';
+export const SET_TIMETABLES='[Timetables] Set Timetables';
+export const FETCH_TIMETABLES = '[Timetables] Fetch Timetables';
 
-export class AddTimetable implements Action {
-    readonly type=ADD_TIMETABLE;
+export const SELECTED_TIMETABLE='[Timetable] Selected Timetable'
+export const RESET_VALUES = '[Timetable] Reset Values';
+
+export const ADD_TIMETABLE='[Timetable] Add Timetable';
+export const ADD_TIMETABLE_SUCCESS='[Timetable] Add Timetable Success';
+export const ADD_TIMETABLE_FAILED='[Timetable] Add Timetable Failed';
+
+export const EDIT_TIMETABLE='[Timetable] Edit Timetable';
+export const EDIT_TIMETABLE_SUCCESS='[Timetable] Edit Timetable Success';
+export const EDIT_TIMETABLE_FAILED='[Timetable] Edit Timetable Failed';
+
+export const DELETE_TIMETABLE='[Timetable] Delete Timetable';
+export const DELETE_TIMETABLE_SUCCESS='[Timetable] Delete Timetable Success';
+export const DELETE_TIMETABLE_FAILED='[Timetable] Delete Timetable Failed';
+;
+
+export class AddTimetableSuccess implements Action {
+    readonly type=ADD_TIMETABLE_SUCCESS;
 
     constructor(public payload:TimeTable)
     {}
 }
 
-export class AddTimetables implements Action {
-    readonly type=ADD_TIMETABLES;
+export class AddTimetable implements Action {
+  readonly type=ADD_TIMETABLE;
+  constructor(public payload:TimeTable)
+  {}
+}
+
+export class AddTimetableFailed implements Action {
+  readonly type=ADD_TIMETABLE_FAILED;
+}
+
+
+
+export class FetchTimetables implements Action {
+  readonly type = FETCH_TIMETABLES;
+}
+
+export class SetTimetables implements Action {
+    readonly type=SET_TIMETABLES;
 
     constructor(public payload:TimeTable[])
     {}
 }
 
-export class AddTimes implements Action {
-    readonly type=ADD_TIMES;
-
-    constructor(public payload:string[])
-    {}
-}
-
-
 export class EditTimetable implements Action {
     readonly type=EDIT_TIMETABLE;
 
-    constructor(public payload:TimeTable)
+    constructor(public payload:{ index:number, newTimetable:TimeTable})
     {}
+}
+
+export class EditTimetableSuccess implements Action {
+  readonly type=EDIT_TIMETABLE_SUCCESS;
+
+  constructor(public payload:{ index:number, newTimetable:TimeTable})
+  {}
+}
+
+export class EditTimetableFailed implements Action {
+  readonly type=EDIT_TIMETABLE_FAILED;
 }
 
 export class DeleteTimetable implements Action {
     readonly type=DELETE_TIMETABLE;
 
-    constructor(public payload:TimeTable)
+    constructor(public payload:{ index:number, selectedTimetable:TimeTable})
     {}
 }
 
-export class StartEdit implements Action {
-    readonly type = START_EDIT;
-  
-    constructor(public payload: number) {}
-  }
+export class DeleteTimetableSuccess implements Action {
+  readonly type=DELETE_TIMETABLE_SUCCESS;
+
+  constructor(public payload:number)
+  {}
+}
+
+export class DeleteTimetableFailed implements Action {
+  readonly type=DELETE_TIMETABLE_FAILED;
+}
 
   export class SelectedTimetable implements Action {
     readonly type = SELECTED_TIMETABLE;
@@ -64,10 +98,14 @@ export class StartEdit implements Action {
 
 export type TimetableActions = 
       | AddTimetable
-      | AddTimetables
-      | AddTimes
+      | AddTimetableSuccess
+      | SetTimetables
+      | FetchTimetables
       | EditTimetable
+      | EditTimetableFailed
+      | EditTimetableSuccess
       | DeleteTimetable
-      | StartEdit
+      | DeleteTimetableSuccess
+      | DeleteTimetableFailed
       | ResetValues
       | SelectedTimetable; //union type

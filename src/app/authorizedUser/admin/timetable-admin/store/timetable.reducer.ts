@@ -3,15 +3,11 @@ import * as TimetableActions from "./timetable.actions";
 
 export interface State {
     timetables:TimeTable[];
-    editedTimetable: TimeTable;
-    editedTimetableIndex: number;
     selectedTimetable:TimeTable;
 }
 
 const initialState:State={
     timetables:[],
-    editedTimetable: null,
-    editedTimetableIndex: -1,
     selectedTimetable:null
 }
 
@@ -21,85 +17,91 @@ export function timetableReducer(state=initialState,action:TimetableActions.Time
         case TimetableActions.ADD_TIMETABLE:
             return {
                 ...state,
-                timetables:[...state.timetables,action.payload],
-                editedTimetable: null,
-                editedTimetableIndex: -1,
+                timetables:[...state.timetables],
                 selectedTimetable:action.payload
             };
-        
-        case TimetableActions.SELECTED_TIMETABLE:
-            const selectedTimetable=action.payload;
 
+        case TimetableActions.ADD_TIMETABLE_SUCCESS:
             return {
                 ...state,
-                timetables:[...state.timetables],
-                editedTimetable:null,
-                editedTimetableIndex:-1,
-                selectedTimetable:selectedTimetable
+                timetables:[...state.timetables,action.payload],
+                selectedTimetable:action.payload
             };
 
-        case TimetableActions.ADD_TIMETABLES:
+        case TimetableActions.EDIT_TIMETABLE:
+
+                let selectedTimetable={...state.timetables[action.payload.index]};
 
                 return {
                     ...state,
-                    timetables:[...state.timetables,...action.payload],
-                    editedTimetable: null,
-                    editedTimetableIndex: -1,
-                    selectedTimetable:null
+                    timetables:[...state.timetables],
+                    selectedTimetable:selectedTimetable
                 };
-
-
-        case TimetableActions.EDIT_TIMETABLE:
-                const timetable=state.timetables[state.editedTimetableIndex];
+        
+        case TimetableActions.EDIT_TIMETABLE_SUCCESS:
 
                 const updatedTimetable={
-                    ...timetable,
-                    ...action.payload
+                    ...state.timetables[action.payload.index],
+                    ...action.payload.newTimetable
                 };
                 
                 const updatedTimetables=[...state.timetables];
-                updatedTimetables[state.editedTimetableIndex]=updatedTimetable;
+                updatedTimetables[action.payload.index]=updatedTimetable;
 
                 return {
                     ...state,
                     timetables: updatedTimetables,
-                    editedTimetable: null,
-                    editedTimetableIndex: -1,
                     selectedTimetable:updatedTimetable
                 };
-        case TimetableActions.DELETE_TIMETABLE:
 
-                var timetableDeleted={...state.timetables[state.editedTimetableIndex]}
-                timetableDeleted.Id=""
-                timetableDeleted.Times=""
+        case TimetableActions.DELETE_TIMETABLE:
+    
+                    return {
+                    ...state,
+                    timetables: [...state.timetables],
+                    selectedTimetable:action.payload.selectedTimetable
+                    };
+
+        case TimetableActions.DELETE_TIMETABLE_SUCCESS:
+
+                        var timetableDeleted={...state.timetables[action.payload]}
+                        timetableDeleted.Id=""
+                        timetableDeleted.Times=""
+        
+                        return {
+                        ...state,
+                        timetables: state.timetables.filter((tt, ttIndex) => {
+                                    return ttIndex !== action.payload;
+                                    }),
+                        selectedTimetable:timetableDeleted
+                        };
+        
+        case TimetableActions.SELECTED_TIMETABLE:
+            
+            return {
+                ...state,
+                timetables:[...state.timetables],
+                selectedTimetable:action.payload
+            };
+
+        case TimetableActions.SET_TIMETABLES:
 
                 return {
-                ...state,
-                timetables: state.timetables.filter((tt, ttIndex) => {
-                            return ttIndex !== state.editedTimetableIndex;
-                            }),
-                editedTimetable: null,
-                editedTimetableIndex: -1,
-                selectedTimetable:timetableDeleted
-      };
-      case TimetableActions.START_EDIT:
-        return {
-          ...state,
-          editedTimetableIndex: action.payload,
-          editedTimetable: { ...state.timetables[action.payload] },
-          selectedTimetable:{...state.timetables[action.payload]}
-        };
-        
-      case TimetableActions.RESET_VALUES:
-        return {
-          ...state,
-          timetables:[],
-          editedTimetable: null,
-          editedTimetableIndex: -1,
-          selectedTimetable:null
+                    ...state,
+                    timetables:[...state.timetables,...action.payload],
+                    selectedTimetable:null
+                };
 
-        };
-        default:
-            return state;
+       
+                
+            case TimetableActions.RESET_VALUES:
+                return {
+                ...state,
+                timetables:[],
+                selectedTimetable:null
+
+                };
+                default:
+                    return state;
     }
 }

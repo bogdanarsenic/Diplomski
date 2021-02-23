@@ -12,7 +12,7 @@
     
    <div *ngIf="timetable.Id==''">
         <button class="btn btn-default btn-sm btn-success"  (click)="onAdd()" [disabled]="times=='' || times==undefined"> <i class="fa fa-plus"> Add</i></button>     
-        <app-add-timetable [timetable]="timetable" [timetables]="timetables">  </app-add-timetable>
+        <app-add-timetable [timetable]="timetable">  </app-add-timetable>
     </div>
 
     <div *ngIf="timetable.Id!=''">
