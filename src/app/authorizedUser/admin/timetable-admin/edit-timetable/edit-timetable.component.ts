@@ -1,10 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import * as fromApp from 'src/app/store/app.reducer';
 import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-timetable',

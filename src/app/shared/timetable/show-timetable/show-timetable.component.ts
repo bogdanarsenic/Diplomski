@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { TimeTable } from '../../classes/TimeTable';
 
 @Component({
@@ -6,16 +6,12 @@ import { TimeTable } from '../../classes/TimeTable';
   templateUrl: './show-timetable.component.html',
   styleUrls: ['./show-timetable.component.css']
 })
-export class ShowTimetableComponent implements OnInit,OnChanges {
+export class ShowTimetableComponent implements OnChanges {
 
   hours:string [];
   minutes: string[];
 
   @Input() timetable:TimeTable
-
-  constructor() {}
-
-  ngOnInit() {}
 
   ngOnChanges(){
     this.onShow();

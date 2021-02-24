@@ -4,7 +4,9 @@ import { TimeTable } from 'src/app/shared/classes/TimeTable';
 export const SET_TIMETABLES='[Timetables] Set Timetables';
 export const FETCH_TIMETABLES = '[Timetables] Fetch Timetables';
 
-export const SELECTED_TIMETABLE='[Timetable] Selected Timetable'
+export const SELECTED_TIMETABLE='[Timetable] Selected Timetable';
+export const UNSELECT_TIMETABLE='[Timetable] UnSelect Timetable';
+
 export const RESET_VALUES = '[Timetable] Reset Values';
 
 export const ADD_TIMETABLE='[Timetable] Add Timetable';
@@ -91,6 +93,10 @@ export class DeleteTimetableFailed implements Action {
   
     constructor(public payload: TimeTable) {}
   }
+
+  export class UnSelectTimetable implements Action {
+    readonly type = UNSELECT_TIMETABLE;
+  }
   
   export class ResetValues implements Action {
     readonly type = RESET_VALUES;
@@ -108,4 +114,5 @@ export type TimetableActions =
       | DeleteTimetableSuccess
       | DeleteTimetableFailed
       | ResetValues
-      | SelectedTimetable; //union type
+      | SelectedTimetable
+      | UnSelectTimetable; //union type

@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { TimetableComponent } from 'src/app/shared/timetable/timetable.component';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
 import * as fromApp from 'src/app/store/app.reducer';
 import { Subscription } from 'rxjs';
 
@@ -20,14 +19,11 @@ export class TimetableAdminComponent implements OnInit,OnDestroy {
   timetables: TimeTable[];
   subscription:Subscription;
 
-  constructor(private timetableService:TimetableService,private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.timetable=new TimeTable();
-
-    this.timetableService.Show.subscribe(data=>{
-      this.show=data;
-    })
+    this.show=false;
 
     setTimeout(()=>{
       this.subscription=this.store.select('timetable').subscribe(data=>{
@@ -36,9 +32,13 @@ export class TimetableAdminComponent implements OnInit,OnDestroy {
         
         if(data.selectedTimetable!=null)
         {
+          this.show=true;
           this.timetable=data.selectedTimetable;
           this.childTimetable.timetableForAdmin=data.selectedTimetable;
         }
+        else
+          this.show=false;
+
 
         this.childTimetable.timetables=data.timetables;
       })

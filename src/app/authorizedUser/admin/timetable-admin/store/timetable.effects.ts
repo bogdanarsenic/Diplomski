@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, EffectsFeatureModule, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as TimetableActions from './timetable.actions';
-import { switchMap, catchError, map, tap, exhaustMap} from 'rxjs/operators';
+import { switchMap, catchError, map} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import { of } from 'rxjs';

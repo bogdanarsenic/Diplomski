@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import * as fromApp from 'src/app/store/app.reducer';
 import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-timetable',

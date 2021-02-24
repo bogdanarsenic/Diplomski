@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { TimeTable } from '../classes/TimeTable';
-import { TimetableService } from './timetable.service';
 import { Line } from '../classes/Line';
 import { LinesService } from '../lines/lines.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -30,7 +29,6 @@ export class TimetableComponent implements OnInit,OnDestroy {
  timetableForAdmin:TimeTable
 
   constructor(
-              private timetableService:TimetableService,
               private lineService:LinesService, 
               private authService:AuthService, 
               private store: Store<fromApp.AppState>
@@ -47,7 +45,8 @@ export class TimetableComponent implements OnInit,OnDestroy {
       });
 
     this.admin=this.authService.getRole()=='Admin'?true:false
-    this.callGetTimetables();
+
+    this.store.dispatch(new TimetableActions.FetchTimetables());
     this.callGetLines();
     this.timetables=[];
     this.day="Weekday";
@@ -57,11 +56,6 @@ export class TimetableComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(){
     this.store.dispatch(new TimetableActions.ResetValues());
-  }
-
-    callGetTimetables()
-  {
-      this.store.dispatch(new TimetableActions.FetchTimetables());
   }
 
   callGetLines()
@@ -100,7 +94,7 @@ export class TimetableComponent implements OnInit,OnDestroy {
   {
     this.showTT=false;
     this.line="";
-    this.timetableService.Show.emit(this.showTT);
+    this.store.dispatch(new TimetableActions.UnSelectTimetable());
   }
 
   onChangeLine(line)
@@ -150,17 +144,13 @@ export class TimetableComponent implements OnInit,OnDestroy {
   findTimeForAdmin()
   {
     var t=this.timetables.findIndex(item=>item.Day==this.day && item.LineId==this.line) 
-    this.showTT=true;
 
     if(t!=-1) 
     {
-      this.timetableService.Show.emit(this.showTT);
       this.store.dispatch(new TimetableActions.SelectedTimetable({...this.timetables[t]}));
     }       
     else
     {
-
-      this.timetableService.Show.emit(this.showTT);
       var timetable={...this.timetableForAdmin};
       timetable.Id="";
       timetable.Day=this.day;

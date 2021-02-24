@@ -83,6 +83,14 @@ export function timetableReducer(state=initialState,action:TimetableActions.Time
                 timetables:[...state.timetables],
                 selectedTimetable:action.payload
             };
+            
+        case TimetableActions.UNSELECT_TIMETABLE:
+            
+                return {
+                    ...state,
+                    timetables:[...state.timetables],
+                    selectedTimetable:null
+                };
 
         case TimetableActions.SET_TIMETABLES:
 
