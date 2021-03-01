@@ -6,7 +6,7 @@ export interface State {
     selectedTimetable:TimeTable;
 }
 
-const initialState:State={
+export const initialState:State={
     timetables:[],
     selectedTimetable:null
 }
@@ -102,7 +102,7 @@ export function timetableReducer(state=initialState,action:TimetableActions.Time
 
        
                 
-            case TimetableActions.RESET_VALUES:
+        case TimetableActions.RESET_VALUES:
                 return {
                 ...state,
                 timetables:[],

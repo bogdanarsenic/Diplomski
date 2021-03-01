@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class NavigationComponent implements OnInit {
   role:string;
   tokenExpirationTimer:any;
 
-  constructor(private authService:AuthService, private router:Router){}
+  constructor(private authService:AuthService){}
 
   ngOnInit(){
 

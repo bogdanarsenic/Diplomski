@@ -9,7 +9,6 @@ import { StationLine } from '../../classes/StationLine';
 import { Input } from '@angular/core';
 import { LinesService } from '../lines.service';
 import { LinesAdminService } from 'src/app/authorizedUser/admin/lines-admin/lines-admin.service';
-import { NotificationService } from 'src/app/services/notification.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
 
@@ -21,6 +20,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class MapComponent implements OnInit, OnDestroy {
 
+  
   markerInfo: MarkerInfo;
   polyline: Polyline;
   public zoom: number;
@@ -47,7 +47,7 @@ constructor(private lineService:LinesService, private lineAdminService:LinesAdmi
   }
 
   ngOnInit() {
-    
+    var google: any;
     this.showAdmin=this.authService.getRole()=="Admin"?true:false
     this.stationClicked=new Station();
     this.setVehicleMarker();

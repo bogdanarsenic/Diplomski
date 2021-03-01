@@ -1,25 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { provideMockStore } from '@ngrx/store/testing';
+// import { SharedModule } from 'src/app/shared/shared.module';
 
-import { EditTimetableComponent } from './edit-timetable.component';
 
-describe('EditTimetableComponent', () => {
-  let component: EditTimetableComponent;
-  let fixture: ComponentFixture<EditTimetableComponent>;
+// import { EditTimetableComponent } from './edit-timetable.component';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EditTimetableComponent ]
-    })
-    .compileComponents();
-  }));
+// describe('EditTimetableComponent', () => {
+//   let component: EditTimetableComponent;
+//   let fixture: ComponentFixture<EditTimetableComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EditTimetableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+      
+//       imports:[SharedModule],
+
+//       declarations: [ EditTimetableComponent ],
+//       providers: [provideMockStore({})],
+//     })
+//     .compileComponents();
+//   }));
+
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(EditTimetableComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
+  
+
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -105,11 +105,12 @@ export class DeleteTimetableFailed implements Action {
 export type TimetableActions = 
       | AddTimetable
       | AddTimetableSuccess
+      | AddTimetableFailed
       | SetTimetables
       | FetchTimetables
       | EditTimetable
-      | EditTimetableFailed
       | EditTimetableSuccess
+      | EditTimetableFailed
       | DeleteTimetable
       | DeleteTimetableSuccess
       | DeleteTimetableFailed

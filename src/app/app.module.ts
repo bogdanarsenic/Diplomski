@@ -13,7 +13,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
-import { createEffect, EffectsModule } from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { TimetableEffects } from './authorizedUser/admin/timetable-admin/store/timetable.effects';
 
 @NgModule({

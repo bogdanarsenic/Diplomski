@@ -38,15 +38,16 @@ export class TimetableComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(){
-    
+  
     this.store.select('timetable').subscribe(x=>
       {
           this.timetables=x.timetables;
       });
-
+      
     this.admin=this.authService.getRole()=='Admin'?true:false
 
     this.store.dispatch(new TimetableActions.FetchTimetables());
+    
     this.callGetLines();
     this.timetables=[];
     this.day="Weekday";

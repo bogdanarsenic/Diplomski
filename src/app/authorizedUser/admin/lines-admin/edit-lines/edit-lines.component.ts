@@ -4,8 +4,6 @@ import { Line } from 'src/app/shared/classes/Line';
 import { Station } from 'src/app/shared/classes/Station';
 import { LinesService } from 'src/app/shared/lines/lines.service';
 import { LinesAdminService } from '../lines-admin.service';
-import { SharedModule } from 'src/app/shared/shared.module';
-
 
 @Component({
   selector: 'app-edit-lines',

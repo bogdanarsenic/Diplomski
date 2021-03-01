@@ -9,14 +9,12 @@ import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/
   templateUrl: './add-timetable.component.html',
   styleUrls: ['./add-timetable.component.css']
 })
-export class AddTimetableComponent implements OnInit {
+export class AddTimetableComponent {
 
   @Input() timetable:TimeTable
 
   constructor(private store: Store<fromApp.AppState>) 
   {}
-
-  ngOnInit(){}
 
   onSubmit()
   {

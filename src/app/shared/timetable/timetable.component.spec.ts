@@ -1,25 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { HttpClientTestingModule } from '@angular/common/http/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+// import { RouterTestingModule } from '@angular/router/testing';
 
-import { TimetableComponent } from './timetable.component';
+// import { TimetableComponent } from './timetable.component';
+// import { provideMockStore } from '@ngrx/store/testing';
+// import { SharedModule } from '../shared.module';
 
-describe('TimetableComponent', () => {
-  let component: TimetableComponent;
-  let fixture: ComponentFixture<TimetableComponent>;
+// describe('TimetableComponent', () => {
+//   let component: TimetableComponent;
+//   let fixture: ComponentFixture<TimetableComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TimetableComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       imports: [ HttpClientTestingModule,RouterTestingModule, SharedModule ],
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TimetableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//       declarations: [ TimetableComponent ],
+//       providers:[JwtHelperService,  { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },provideMockStore({})]
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//     })
+//     .compileComponents();
+//   }));
+
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(TimetableComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
+
+//   it('should create', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

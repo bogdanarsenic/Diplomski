@@ -38,8 +38,7 @@ export class TimetableAdminComponent implements OnInit,OnDestroy {
         }
         else
           this.show=false;
-
-
+          
         this.childTimetable.timetables=data.timetables;
       })
     })
