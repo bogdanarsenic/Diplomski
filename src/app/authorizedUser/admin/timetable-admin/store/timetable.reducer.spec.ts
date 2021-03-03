@@ -2,7 +2,7 @@ import * as fromReducer from './timetable.reducer';
 import * as TimetableActions from './timetable.actions';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 
-describe('timetableReducer',()=>{
+describe('Timetable Reducer',()=>{
 
     describe('SET_TIMETABLES',()=>
     {

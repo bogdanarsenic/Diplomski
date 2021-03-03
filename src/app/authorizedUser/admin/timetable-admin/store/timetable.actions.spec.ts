@@ -1,7 +1,8 @@
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import * as timetableAction from './timetable.actions';
 
-describe('SET_TIMETABLES', () => {
+describe('Timetable Actions',()=>{
+  describe('SET_TIMETABLES', () => {
     it('should create an action', () => {
 
         const payload:TimeTable[]=[{ Id:"", Type:"", Day:"", LineId:"",Times:"" }]
@@ -120,3 +121,6 @@ describe('SET_TIMETABLES', () => {
         expect({...action}).toEqual({type:timetableAction.RESET_VALUES});
     });
   });
+
+})
+
