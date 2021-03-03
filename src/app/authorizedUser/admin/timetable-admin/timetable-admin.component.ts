@@ -19,12 +19,16 @@ export class TimetableAdminComponent implements OnInit,OnDestroy {
   timetables: TimeTable[];
   subscription:Subscription;
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(public store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
     this.timetable=new TimeTable();
     this.show=false;
+    this.setTimetables();
+  }
 
+  setTimetables()
+  {
     setTimeout(()=>{
       this.subscription=this.store.select('timetable').subscribe(data=>{
 
