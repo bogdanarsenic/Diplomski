@@ -4,7 +4,7 @@ import { Line } from '../classes/Line';
 import { LinesService } from '../lines/lines.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import * as fromApp from 'src/app/store/app.reducer';
-import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
+import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/actionsTmt';
 import { Store } from '@ngrx/store';
 
 @Component({

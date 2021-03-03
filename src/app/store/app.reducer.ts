@@ -1,6 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store'; 
 //import * as fromAuth from '../auth/store/auth.reducer';
-import * as fromTimetable from '../authorizedUser/admin/timetable-admin/store/timetable.reducer';
+import * as fromTimetable from '../authorizedUser/admin/timetable-admin/store/reducerTmt';
 
 
 export interface AppState {

@@ -1,5 +1,5 @@
-import * as fromReducer from './timetable.reducer';
-import * as TimetableActions from './timetable.actions';
+import * as fromReducer from './reducerTmt';
+import * as TimetableActions from './actionsTmt';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 
 describe('Timetable Reducer',()=>{

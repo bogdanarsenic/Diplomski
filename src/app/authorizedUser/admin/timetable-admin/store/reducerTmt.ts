@@ -1,5 +1,5 @@
 import { TimeTable } from "src/app/shared/classes/TimeTable";
-import * as TimetableActions from "./timetable.actions";
+import * as TimetableActions from "./actionsTmt";
 
 export interface State {
     timetables:TimeTable[];

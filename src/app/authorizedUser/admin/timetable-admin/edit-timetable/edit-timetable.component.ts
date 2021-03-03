@@ -2,7 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
 import * as fromApp from 'src/app/store/app.reducer';
-import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/timetable.actions';
+import * as TimetableActions from 'src/app/authorizedUser/admin/timetable-admin/store/actionsTmt';
 
 @Component({
   selector: 'app-edit-timetable',

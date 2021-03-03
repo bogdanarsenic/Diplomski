@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 import { StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { TimetableEffects } from './authorizedUser/admin/timetable-admin/store/timetable.effects';
+import { TimetableEffects } from './authorizedUser/admin/timetable-admin/store/effectsTmt';
 
 @NgModule({
   declarations: [

@@ -2,14 +2,10 @@ import { Action } from "@ngrx/store";
 import { Observable, of, throwError } from "rxjs";
 import { provideMockActions } from '@ngrx/effects/testing';
 import { TestBed } from "@angular/core/testing";
-import { TimetableEffects } from './timetable.effects';
+import { TimetableEffects } from './effectsTmt';
 import { TimetableService } from "src/app/shared/timetable/timetable.service";
 import { TimeTable } from "src/app/shared/classes/TimeTable";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ResetValues } from "./timetable.actions";
-
-
-
 
 describe('Timetable Effects',()=>{
     let effects:TimetableEffects;
@@ -143,7 +139,7 @@ describe('Timetable Effects',()=>{
             let index=0
     
             actions$=of({type:'[Timetable] Delete Timetable',payload:{index:index,selectedTimetable:selectedTimetable}});
-            
+
             timetableServiceSpy.deleteTimeTable.and.returnValue(throwError({status: 404}));
     
             effects.timetableDelete$.subscribe(action => {

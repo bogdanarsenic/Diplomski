@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import * as TimetableActions from './timetable.actions';
+import * as TimetableActions from './actionsTmt';
 import { catchError, map, mergeMap} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';

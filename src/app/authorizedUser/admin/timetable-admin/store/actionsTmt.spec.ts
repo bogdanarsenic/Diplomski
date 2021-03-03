@@ -1,5 +1,5 @@
 import { TimeTable } from 'src/app/shared/classes/TimeTable';
-import * as timetableAction from './timetable.actions';
+import * as timetableAction from './actionsTmt';
 
 describe('Timetable Actions',()=>{
   describe('SET_TIMETABLES', () => {
