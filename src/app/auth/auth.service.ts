@@ -2,10 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from '../shared/classes/User';
-import * as fromApp from '../store/app.reducer';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -23,8 +21,7 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient, 
     private jwtHelper: JwtHelperService, 
-    private router:Router,
-    private store: Store<fromApp.AppState>) { }
+    private router:Router) { }
   
    getRole():string
     {
