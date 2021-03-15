@@ -24,6 +24,7 @@ namespace WebApp.Controllers
 		[ResponseType(typeof(StationLine))]
         public IHttpActionResult PostStationLine(StationLine stationLine)
         {
+			stationLine.Id = stationLine.StationId;
 
             if (!ModelState.IsValid)
             {

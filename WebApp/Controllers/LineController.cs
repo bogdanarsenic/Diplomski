@@ -34,6 +34,7 @@ namespace WebApp.Controllers
 		[ResponseType(typeof(Line))]
         public IHttpActionResult PostLine(Line line)
         {
+			line.Id = Convert.ToInt32(line.Name);
 
             if (!ModelState.IsValid)
             {

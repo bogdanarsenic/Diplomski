@@ -35,7 +35,10 @@ namespace WebApp.Controllers
         public IHttpActionResult PostStation(Station station)
         {
 
-            if (!ModelState.IsValid)
+			byte[] gb = Guid.NewGuid().ToByteArray();
+			station.Id =BitConverter.ToInt32(gb, 0);
+
+			if (!ModelState.IsValid)
             {
 				log.Error("Station can't be added! ");
                 return BadRequest(ModelState);

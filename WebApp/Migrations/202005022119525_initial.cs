@@ -11,7 +11,7 @@ namespace WebApp.Migrations
                 "dbo.Lines",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Name = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -52,7 +52,7 @@ namespace WebApp.Migrations
                 "dbo.StationLines",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         StationId = c.Int(nullable: false),
                         LineId = c.Int(nullable: false),
                     })
@@ -62,7 +62,7 @@ namespace WebApp.Migrations
                 "dbo.Stations",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: false),
                         Name = c.String(),
                         Address = c.String(),
                         CoordinateX = c.Double(nullable: false),

@@ -427,6 +427,14 @@
     <Compile Include="Migrations\202011031135347_lineId1.Designer.cs">
       <DependentUpon>202011031135347_lineId1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202103151418328_nesto.cs" />
+    <Compile Include="Migrations\202103151418328_nesto.Designer.cs">
+      <DependentUpon>202103151418328_nesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103151429390_rpb.cs" />
+    <Compile Include="Migrations\202103151429390_rpb.Designer.cs">
+      <DependentUpon>202103151429390_rpb.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -575,6 +583,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011031135347_lineId1.resx">
       <DependentUpon>202011031135347_lineId1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103151418328_nesto.resx">
+      <DependentUpon>202103151418328_nesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103151429390_rpb.resx">
+      <DependentUpon>202103151429390_rpb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
