@@ -14,7 +14,7 @@
       <jw-modal id="custom-modal-2">
             <div class="backgroundJw">
                 <h4>Creating new line</h4>   
-                <p>Name:  <input type="text" [(ngModel)]="bodyText1" />
+                <p>Name:  <input type="number" min="0" max="60" [(ngModel)]="bodyText1" />
                 </p>
                 <button class="btn btn-success" (click)="createLine()"><i class="fas fa-check"> Create </i></button>
                 <button class="btn btn-danger" (click)="closeModal('custom-modal-2');"><i class="fas fa-window-close"> Close</i></button>

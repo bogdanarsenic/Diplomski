@@ -16,7 +16,7 @@ import { LinesAdminService } from '../lines-admin.service';
 export class AddLinesComponent implements OnInit {
 
   bodyText:string;
-  bodyText1:string;
+  bodyText1:number;
   station:Station;
   stationLine:StationLine;
 
@@ -31,11 +31,14 @@ export class AddLinesComponent implements OnInit {
   constructor(private modalService: ModalService,private lineAdminService:LinesAdminService,private lineService:LinesService)
   { }
 
-  ngOnInit(){}
+  ngOnInit(){
+    this.bodyText1=0;
+  }
 
   save()
   {
-    if(this.bodyText!="")
+    var i=this.stations.findIndex(x=>x.Name===this.bodyText);
+    if(this.bodyText!="" && i==-1)
     {
         this.station=new Station();
         this.stationLine = new StationLine();
@@ -49,9 +52,13 @@ export class AddLinesComponent implements OnInit {
         this.bodyText = '';
         this.postStation();
     }
-  else{
-    alert("You need to put station name");
-  }
+    else if(i!=-1){
+      alert("There is already station with that name");
+    }
+    else
+    {
+      alert("You need to put the name of a station");
+    }
   }
 
   postStation(){
@@ -104,14 +111,14 @@ export class AddLinesComponent implements OnInit {
 
   createLine(){
 
-    var i=this.lines.findIndex(x=>x.Name===this.bodyText1);
+    var i=this.lines.findIndex(x=>x.Id===this.bodyText1);
 
-    if(this.bodyText1!="" && i==-1){
+    if(this.bodyText1!=0 && i==-1){
 
       this.line = new Line();
-      this.line.Name = this.bodyText1;
+      this.line.Name = (String)(this.bodyText1);
       this.modalService.close('custom-modal-2');
-      this.bodyText1 = "";
+      this.bodyText1 = 0;
       this.postLine();
     }
     else if(i!=-1){
@@ -119,7 +126,7 @@ export class AddLinesComponent implements OnInit {
     }
     else
     {
-      alert("You need to put the name of a line");
+      alert("Line can't be 0");
     }
   }
 }
