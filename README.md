@@ -18,3 +18,9 @@ The project has two branches. "Diplomski-master" is written in c# web api with E
 <li> Open "Diplomski-Front" </li>
 <li> Enter "ng serve" in terminal </li>
 </ol>
+
+<h5> Login credentials: </h5>
+<ol>
+  <li> For <i> User (Buyer) ---> </i> Email = "appu@yahoo.com", Password="Appu123!", PhoneNumber="111111" </li>
+  <li> For <i> Admin </i> ---> Email = "admin@yahoo.com", Password="Admin123!" </li>
+  <li> For <i> Controller </i> --->  Email = "controller@yahoo.com", Password="Controller123!" </li> 
