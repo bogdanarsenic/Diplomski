@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TimeTable } from '../classes/TimeTable';
+import { TimeTable } from 'src/app/shared/classes/TimeTable';
 
 @Injectable({
   providedIn: 'root'

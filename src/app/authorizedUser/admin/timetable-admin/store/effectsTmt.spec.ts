@@ -3,7 +3,7 @@ import { Observable, of, throwError } from "rxjs";
 import { provideMockActions } from '@ngrx/effects/testing';
 import { TestBed } from "@angular/core/testing";
 import { TimetableEffects } from './effectsTmt';
-import { TimetableService } from "src/app/shared/timetable/timetable.service";
+import { TimetableService } from 'src/app/authorizedUser/admin/timetable-admin/timetable.service';
 import { TimeTable } from "src/app/shared/classes/TimeTable";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 

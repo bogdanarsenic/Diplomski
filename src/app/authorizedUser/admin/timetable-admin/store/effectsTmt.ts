@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as TimetableActions from './actionsTmt';
 import { catchError, map, mergeMap} from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
 import { of } from 'rxjs';
-import { TimetableService } from 'src/app/shared/timetable/timetable.service';
+import { TimetableService } from 'src/app/authorizedUser/admin/timetable-admin/timetable.service';
 
 @Injectable()
 
